@@ -1,0 +1,163 @@
+# EMPIRE STORIES — Operations Manual (master backup)
+
+*The stories behind global empires.*
+Version 1.0 · 21 Nov 2026 · Owner: Ghazanfar Abbas (Karachi) · Maintained by the channel's AI production agent
+
+This document is the single source of truth for running the channel. If the current AI account, membership or automation is lost, a new AI agent (Claude, ChatGPT, Gemini or a human editor) can read this file and continue the channel with the same look, voice, quality and workflow. **Read it top to bottom before producing anything.**
+
+---
+
+## 0. Where everything lives (backup map)
+
+| What | Primary location | Backup copies |
+|---|---|---|
+| Production code (renderer, sound, voice, Shorts, thumbnails) | GitHub `GhazanfarGw/empire-stories` (public) | `E:\Empire Stories\_backup\empire-stories-full-backup.zip`, Google Drive folder **EMPIRE STORIES** |
+| Voice engine model files (too big for git) | `E:\Empire Stories\_backup\` inside the full-backup zip (`kok/`) | Re-downloadable (see §6) |
+| This manual | `docs/EMPIRE_STORIES_OPERATIONS_MANUAL.md` in the repo | `E:\Empire Stories\_backup\`, Google Drive (Google Doc), Claude Project "Empire Stories" |
+| Finished episodes, Shorts, thumbnails, SRT, descriptions | `E:\Empire Stories\EpXX - <title>\final\` | YouTube (originals downloadable from Studio) |
+| Product photos + credits | `es/assets/` + `es/assets/CREDITS.txt` | Episode folder `assets\photos_products\` |
+| Founder illustrations | `es/assets/people/<first-last>.png` | Episode folder `assets\photos_people\` |
+| Brand files (banner, icon/watermark) | `E:\Empire Stories\_brand\` | — |
+| Master creative brief | `docs/MASTER_BRIEF.txt` | Claude Project doc `claude/empire-stories-master-brief.txt` |
+
+**Accounts used** (owner holds all passwords; never store passwords in files):
+- YouTube channel **Empire Stories Documentary** · handle `@EmpireStoriesDocumentary` · channel ID `UCjzZkbXiGjlBgK1EGjJws7A` · owned by the owner's Google account.
+- GitHub `GhazanfarGw` (code).
+- Zapier (YouTube + Google Drive connections, used for automatic upload/scheduling/localization).
+- Google Drive folder "EMPIRE STORIES" (id `1BjQCsO4Bvex2ZHB2B-S1l0r09s0FW7Dr`).
+- Google Gemini (owner's account) for founder illustrations.
+
+**Security checklist for the owner:** 2-step verification on the Google account that owns the channel; save Google backup codes offline; add a second trusted *Manager* to the channel (Studio → Settings → Permissions) so the channel is never tied to one login; keep the `E:\Empire Stories\_backup` folder also on an external drive.
+
+---
+
+## 1. Channel identity (locked)
+
+- **What we are:** an international *business documentary* channel. Company stories only: origins, history, case studies, rise of empires, rise and fall, rivalries, innovation. Founders appear only where their decisions matter to the company story. No motivational content, no billionaire biographies, no fiction.
+- **Promise to the viewer:** a premium, cinematic, accurate explanation of *why* a company became what it is — Netflix-style story, Vox-style visual explanation.
+- **Global coverage:** USA, Europe, China, Japan, Korea, India, Pakistan, the Gulf, Brazil, Africa. Pakistani and Indian companies are a deliberate differentiator.
+- **Every episode answers one central question** and ends with **OUR TAKE**: the business lesson.
+- **Length:** long-form 8–15 min; Shorts 40–60 s.
+
+## 2. Brand system (locked — do not redesign per episode)
+
+| Token | Value | Use |
+|---|---|---|
+| Navy | `#0A3161` (RGB 10,49,97) | Primary: labels, numbers going up, end screen, ident background |
+| Navy 2 | `#1C4A84` | Secondary panels |
+| Red | `#B31942` (RGB 179,25,66) | Accent: losses, highlights, active timeline pin, stamps, underline swipes |
+| Ivory | `#F4F1EA` | Text on navy |
+| Ink | dark navy-black (from toolkit `INK`) | Body text on paper |
+| Page grey | `#D6D5D1` textured paper | Background of every story scene |
+
+Gold is **retired** (old palette). No dollar-bill watermark. No burnt-in subtitles on long-form (YouTube CC uses our SRT / published captions).
+
+**Fonts:** Inter Display Bold (big numbers, display), Inter Bold/Medium (labels, UI), Crimson Text SemiBold / SemiBold Italic (headlines, quotes), Cardo Bold (EMPIRE STORIES wordmark).
+
+**Visual grammar (every episode):**
+1. **Cold open** (~45 s): the most surprising fact/quote, counting numbers, a question → no logo yet.
+2. **Ident** (7.8 s, navy): emblem (columned temple in red ring) → "EMPIRE STORIES" → tagline → "PRESENTS" → red label "EPISODE NN" → episode title in serif.
+3. **Composed timeline**: horizontal axis at the bottom; year changes roll like an odometer with "+N YEARS", a red travel line runs to the next pin, the pin lands with a shockwave; every panel element is connected to its pin by an elbow branch line. Past pins stay visible.
+4. **Elements**: illustration cards (navy frame, red border, "AI ILLUSTRATION" tag), product photos with **thin torn-paper edges hugging the image's shape**, label boxes (navy/red with traced outline), big counting numbers (count up/down with calculator ticks), red rubber stamps, quote cards with a big red “ and red highlighter swipe, bar charts, 2×2 grids, chain diagrams.
+5. **Map scene** for geography (Albers projection, US Census / world-atlas boundaries), pins + arcs.
+6. **OUR TAKE** section: red label, serif headline, the lesson in one big word (e.g. FOCUS.).
+7. **End screen** (14 s navy): emblem + wordmark + subscribe circle (left), two video boxes "WATCH NEXT" / "MORE STORIES" (right). Add YouTube end-screen elements on top after publishing.
+8. Subtle grain + vignette on every frame. 1920×1080, 30 fps.
+
+**Panels rule:** a beat with many sentences is split into panels; elements leave (fade up) when the narration moves on; nothing ever overlaps. Before every full render, render QC contact sheets of the busiest moment of every panel and fix overlaps.
+
+## 3. Thumbnail standard (locked: "PRO" style, approved 21 Nov 2026)
+
+File: `es/ep01/thumb_pro.py` (reference output `thumbs/thumb_PRO_A.jpg`).
+- Dark navy gradient background with faint paper grain; strong red glow behind the subject.
+- Large founder **illustration** cut out (background removed), red rim light, small "AI ILLUSTRATION" tag; or a key product cut-out when no person fits.
+- **Two huge words** max (Inter Display Bold ~230 px at 1920 wide): first word ivory, second red (e.g. "ALMOST / FINISHED"). Small ivory pill with "COMPANY · YEAR".
+- A simple data line: red line crashing to a red dot labelled with the low number, then a white line + arrow rising to the high number (or the reverse for "fall" stories).
+- Export 1280×720 JPG < 2 MB. Always make **A** (matches title) and **B** (alternative hook) for YouTube Test & Compare.
+
+## 4. Narration voice (locked)
+
+- Engine: **Kokoro TTS** (`kokoro-onnx 0.6.1`, model `kokoro-v1.0.int8.onnx` + `voices-v1.0.bin`), language `en-gb`.
+- Voice: **blend 75 % `bm_lewis` + 25 % `bm_george`** saved as `es/vt/lewis_blend.npy` (shape 510×1×256). Recreate: `np.load` style vectors from `voices-v1.0.bin` and compute `0.75*lewis + 0.25*george`.
+- Generate one WAV per sentence; speed = per-sentence value (0.82–0.9) **+ 0.07**. Slower on money, decisions and turning points; pauses 0.3–1.0 s after sentences (stored in the script).
+- Numbers are written out in the spoken text ("nineteen ninety-seven"); the caption text keeps digits ("1997").
+- Post-processing (ffmpeg, deep British documentary tone):
+  `asetrate=24000*0.96,aresample=48000,atempo=1.0417,highpass=f=50,lowshelf=f=120:g=4.5,equalizer=f=260:t=q:w=1:g=-1.5,equalizer=f=3200:t=q:w=1.2:g=2,acompressor=threshold=-18dB:ratio=3:attack=5:release=80`
+- If Kokoro is unavailable: use any deep British male narrator (e.g. ElevenLabs "documentary British male"), same pacing and pauses. Keep it consistent from then on.
+
+## 5. Sound design (locked)
+
+All synthesized in code (`es/ep01/audio.py`), no licensed music:
+- Signature ident: noise swell → low drone → warm pad → 3-note bell chime (E5, B5, E6) → sub boom.
+- Ambient bed: 4-chord pad cycle, very quiet, under the whole story.
+- Micro-SFX on everything: pop (images/cards), small pop + swish (labels), zip (branch lines/arcs), thud (stamps, pin landings), odometer ticks on year changes, **calculator ticks with a final lock chime on every counting number** (pitch rises going up, falls going down).
+- Mix: music ducked under voice with sidechain compression; final loudness **−14 LUFS**, true peak −1.5 dB, AAC 160 kbps 48 kHz.
+
+## 6. Tools and environment
+
+- Python 3.13, numpy, scipy, Pillow, soundfile, onnxruntime, kokoro-onnx; ffmpeg 6.1 with libx264 + libass.
+- The workspace was a Linux cloud container (Claude). Everything also runs on any Linux/Mac/WSL machine.
+- Kokoro files: in the backup zip `kok/` (model + wheels for offline install). Public source: the `kokoro-onnx` project releases (`kokoro-v1.0.int8.onnx`, `voices-v1.0.bin`).
+- Rebuild: `git clone https://github.com/GhazanfarGw/empire-stories && bash empire-stories/setup.sh`, copy `kok/` to `/home/claude/kok/` (or edit the path in `gen.py`).
+- Founder illustrations: Google Gemini (owner's account) — prompt style: *"flat editorial vector portrait of [person], head and shoulders, navy (#0A3161) and red (#B31942) palette on light grey, no text, not photorealistic"*. Always label "AI ILLUSTRATION". Never present as a photograph.
+- Upload automation: Zapier MCP → YouTube "Upload Video" (needs a public file URL), "Update Video Thumbnail", "Make API Mutating Request" (localizations, status). Files are staged temporarily on a throwaway GitHub branch (raw.githubusercontent URL), then the branch is deleted.
+- Browser automation (Claude in Chrome) for YouTube Studio pages that the API can't reach (Languages page, settings).
+
+## 7. Episode production pipeline (step by step)
+
+Folder per episode in the repo: `es/epNN/` (copy `es/ep01/` as the template).
+
+1. **Pick the topic** from the Season slate (§10). Write the central question + lesson.
+2. **Research fact sheet**: every number, date and quote with a source (annual reports, SEC filings, official press releases, reputable press). Mark estimates as estimates.
+3. **Script** (`script.py`): list of `(beat, spoken text, caption text, pause, speed)`. Beats: `hook` → `y0..y7` (timeline pins) → map/deal beats → `lesson` → `outro`. ~1,400–1,600 words ≈ 10 min.
+4. **Fact-check the script against sources before voicing.** (Ep01 lesson: two errors were caught — "worst quarter ever" and "3,000 layoffs" were wrong; corrected to "$708M in a single quarter" and "about 2,700 employees".)
+5. **Voice**: `python3 gen.py` (per-sentence WAVs + `voice/meta.json`).
+6. **Visual plan**: edit the element list in `epNN.py` (`el(beat, kind, x, y, payload, t_in, branch, t_out)`), years/labels of the 8 timeline pins, map scene.
+7. **QC stills**: `python3 qc.py` → contact sheets in `qc/`; fix overlaps/cut-offs; re-check.
+8. **Render**: `./run.sh` → parallel 60 s parts → concat → `audio.py` → mix/duck/loudnorm → final MP4 (CRF 24 slow, tune animation, hqdn3d; keeps the file < 100 MB) + `EMPIRE_STORIES_EpNN.srt`. ~35–45 min on 2 CPUs.
+9. **Check final**: duration, −14 LUFS, 48 kHz audio, 6 sample frames.
+10. **Thumbnails** A + B (`thumb_pro.py`), **Shorts** ×3 (`shorts.py`: 1080×1920, navy header with hook title, story crop in the middle, big captions below, footer "FULL STORY · EPISODE NN ON THE CHANNEL").
+11. **Description** (`description.txt`): hook paragraph, "EMPIRE STORIES · Episode NN · Company", CHAPTERS, SOURCES, PHOTO CREDITS, AI-illustration note, narration note, tagline, 3 hashtags.
+12. **Upload + schedule** (§8), **localize** (§9), copy finals to `E:\…\EpNN…\final\`, commit code to GitHub.
+
+## 8. Publishing standard
+
+- Title: curiosity + company, ≤ 60 characters (Ep01: "Apple Was Almost Finished. Here's How It Survived").
+- Category Education (27), not made for kids, Standard licence, embedding on, language en, 12–15 tags (company, founders, "business documentary", "company history", "business case study", topic words, "empire stories").
+- **Publish time: 14:30 UTC** (7:30 PM Pakistan · 9:30 AM New York · 2:30 PM London).
+- **Cadence (CEO decision, 21 Nov 2026): 3 full documentaries per week (Mon / Wed / Fri) + 1 Short every day.** Move to 4–5 per week only once research + fact-check keeps up — accuracy is the brand and YouTube's inauthentic/mass-produced content policy punishes templated volume.
+- After publishing: add end-screen (subscribe + "best for viewer" video), pin a comment with a question, add to a playlist, reply to early comments.
+
+## 9. Localization (every video)
+
+- Studio → Settings → Channel → Advanced: **Automatic dubbing ON, manual review OFF** (dubs publish automatically). YouTube auto-dubs English into ~20 languages (incl. Hindi, Spanish, Portuguese, French, German, Japanese, Korean, Indonesian, Bengali).
+- English captions: Studio → video → Languages → English → publish the auto captions (check names/numbers) or upload the SRT. Viewers can auto-translate captions to any language.
+- **Titles + descriptions in 6 priority languages: Hindi (hi), Urdu (ur), Arabic (ar), Chinese Simplified (zh-Hans), Russian (ru), Turkish (tr)** — via Studio Languages page or the API (`PUT videos?part=localizations` with the full localizations map; include `en`).
+- Translate hook paragraph + chapters; point to the English description for sources.
+
+## 10. Content plan — Season 1 slate
+
+01 Apple (1997 turnaround) ✔ published · 02 McDonald's (burger or property company?) · 03 Nokia (rise and fall) · 04 Toyota (production system) · 05 Coca-Cola vs Pepsi · 06 Tata Group · 07 Engro (Pakistan) · 08 Samsung · 09 Netflix vs Blockbuster · 10 Nike · 11 Alibaba · 12 IKEA. Next season ideas: Reliance, Huawei, BYD, Zara, Toyota vs Tesla, Starbucks, Jazz, HBL, Emirates, Aramco.
+
+## 11. Channel settings (as configured 21 Nov 2026)
+
+Country Pakistan; 10 channel keywords; audience "not made for kids"; interest-based ads ON; third-party AI training OFF; auto-dubbing ON (no manual review); upload defaults: Private, Education, English (UK), caption certification "never aired on US TV", comments ON (Basic), description template; community moderation: 12 blocked scam phrases (whatsapp me, telegram me, crypto/forex signals, investment manager, bitcoin giveaway, sub4sub…), hold comments with links/hashtags; channel guidelines (welcome + 3 rules); banner, icon, watermark uploaded; contact email set; phone verified (intermediate features); video verification submitted for advanced features (A/B tests, description links, monetization application).
+
+## 12. Monetization roadmap
+
+YPP: 1,000 subscribers + 4,000 public watch hours (12 months) or 10 M Shorts views (90 days). Fan funding tier: 500 subs + 3 uploads + 3,000 hours. Weekly KPIs: subscribers, watch hours, CTR (target 6 %+), average view duration (45 %+), top countries/languages. Weak thumbnail → replace within 48 h.
+
+## 13. Rules that never change
+
+- Never invent figures, quotes or events. Distinguish facts / estimates / interpretation. Sources in every description.
+- AI-generated portraits are always labelled "AI ILLUSTRATION"; never realistic depictions of real people.
+- Only licensed photos (Wikimedia Commons CC / public domain) with credits.
+- Quality over upload frequency. Protect existing approved work: change only what is asked; show short demos of changes.
+
+## 14. Emergency: moving the channel to a new AI or account
+
+1. Download the backup zip from `E:\Empire Stories\_backup\` (or clone the GitHub repo + copy `kok/`).
+2. Give the new agent this manual + `MASTER_BRIEF.txt` + the Claude Project instructions text.
+3. Install Python deps + ffmpeg; run `setup.sh`; test with `python3 es/ep01/ep01.py info` and a 10-second render.
+4. Reconnect upload automation (Zapier YouTube, or manual Studio upload). Keep the publish time, cadence, localization and thumbnail standard.
+5. If the YouTube login is compromised: Google account recovery → remove unknown managers → change password → re-enable 2-step verification.
