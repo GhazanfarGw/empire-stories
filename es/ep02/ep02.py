@@ -16,7 +16,7 @@ D = "/home/claude/es/ep02"
 META = json.load(open(os.environ.get("EP_META", f"{D}/voice/meta.json")))
 
 # ---------------- timing ----------------
-IDENT_DUR = 7.8; TRAVEL = 1.5; XF = 0.6; ENDSCREEN = 14.0
+IDENT_DUR = 7.8; REWIND = 3.6; REW_T = None; TRAVEL = 1.5; XF = 0.6; ENDSCREEN = 14.0
 YB = ["y0", "y1", "y2", "y3", "y4", "y5", "y6", "y7"]
 from collections import defaultdict
 SENT = {}; TR = defaultdict(lambda: 1e9); BEATS = []; t = 0.9; prev = None; IDENT_T = None; OUTRO = None
@@ -24,6 +24,7 @@ for m in META:
     b = m["beat"]
     if b != prev:
         if prev == "hook": IDENT_T = t - 0.2; t = IDENT_T + IDENT_DUR + 0.2
+        if b == "y0": REW_T = t - 0.2; t += REWIND - 0.2          # cinematic time travel 2026 -> 1948 before the first pin
         if b in YB: TR[b] = t; t += TRAVEL
         elif b in ("map", "deal"): TR[b] = t; t += XF + 0.3
         elif b == "y4b": TR[b] = t; t += 0.4
@@ -82,14 +83,15 @@ def count_frac(ti): return eo(r(ti, 0.0, COUNT_DUR))
 EL = []
 def el(b, kind, x, y, pay, tin, branch=True, tout=None):
     EL.append(dict(b=b, kind=kind, x=x, y=y, pay=pay, tin=tin, tout=tout or NEXT_TR[b], branch=branch))
-L, R_ = 640, 1280          # left / right columns of the stage
+L, R_ = 600, 1320          # left / right columns of the stage (widened 21 Nov: use the full screen)
 CR = {"hq": "Apple HQ, Cupertino · Photo: Joe Ravi, CC BY-SA 3.0", "next": "NeXTcube · Wikimedia Commons, CC BY-SA 3.0",
       "newton": "Newton MessagePad · Felix Winkelnkemper, CC BY-SA 4.0", "imac": "iMac G3 · Rama / David Fuchs, CC BY-SA 4.0",
       "ipod": "iPod (1st gen) · Rjcflyer, CC BY 2.5", "iphone": "iPhone (1st gen) · Carl Berkeley, CC BY-SA 2.0",
       "clone": "Power Computing Mac clone · Angelgreat, CC BY-SA 4.0", "pm": "Power Macintosh G3 · Klodo6975, public domain",
       "be": "BeBox · Josh Carlson, CC BY 2.0", "lineup": "iMac G3 colours · Stephen Hackett, CC BY-SA 4.0"}
 
-CR.update({"downey": "Oldest operating McDonald's, Downey CA · Photo: Northwalker, CC0", "sign": "Speedee sign, Downey CA · Photo: Northwalker, CC0",
+CR.update({"valley": "San Bernardino Valley · Photo: Doc Searls, CC BY-SA 2.0", "motel": "Route 66, San Bernardino · Photo: John Margolies, Library of Congress (public domain)",
+           "downey": "Oldest operating McDonald's, Downey CA · Photo: Northwalker, CC0", "sign": "Speedee sign, Downey CA · Photo: Northwalker, CC0",
            "sbd": "Site of the first McDonald's, San Bernardino · Photo: Cogart Strangehill, CC BY-SA 2.0",
            "desplaines": "McDonald's #1 Store Museum, Des Plaines · Photo: Jerry Huddleston, CC BY 2.0"})
 # --- cold open: a simple question, turned upside down
@@ -111,12 +113,13 @@ el(h, "person", L, 540, ("Harry Sonneborn", "McDonald's first president"), st(h,
 el(h, "quote", R_ + 40, 510, ("“We are not technically in the food business. We are in the real estate business.”", "Harry Sonneborn, as recounted in McDonald's: Behind the Arches", 48, (12, 13, 14)), st(h, 9, 0.0), False, tout=P(h, 10))
 el(h, "words", 960, 460, ("A burger company…", 104, "serif", INK, (), 1600), st(h, 10, 0.1), False, tout=P(h, 12))
 el(h, "words", 960, 630, ("…or a landlord that sells burgers?", 80, "serifi", INK, (3,), 1600), st(h, 11, 0.0), False, tout=P(h, 12))
-el(h, "lab", 960, 540, ("SAN BERNARDINO, CALIFORNIA", NAVY_US), st(h, 12, 1.2), False)
+el(h, "place", 960, 500, ("sb_valley.jpg", 1460, "SAN BERNARDINO, CALIFORNIA", "the valley today, from the air", CR["valley"]), st(h, 12, 0.2), False)
 # --- 1948: the Speedee Service System
 b = "y0"
-el(b, "person", L, 420, ("Dick & Mac McDonald", "San Bernardino, 1948"), st(b, 0, 0.8))
-el(b, "photo", R_ + 20, 380, ("mcd_sanbernardino_site.jpg", 600, CR["sbd"]), mid(b, 0, 0.6), False, tout=P(b, 1))
-el(b, "lab", R_ + 20, 660, ("THE ORIGINAL SITE, TODAY A MUSEUM", MUTE), mid(b, 0, 0.85), False, tout=P(b, 1))
+el(b, "place", 960, 420, ("sb_motel66.jpg", 1120, "SAN BERNARDINO · ROUTE 66", "a car town on America's main road", CR["motel"], 0.42), st(b, 0, -0.3), False, tout=mid(b, 0, 0.55))
+el(b, "person", L, 420, ("Dick & Mac McDonald", "San Bernardino, 1948"), mid(b, 0, 0.55))
+el(b, "photo", R_ + 20, 380, ("mcd_sanbernardino_site.jpg", 720, CR["sbd"]), mid(b, 0, 0.7), False, tout=P(b, 1))
+el(b, "lab", R_ + 20, 700, ("THE ORIGINAL SITE, TODAY A MUSEUM", MUTE), mid(b, 0, 0.9), False, tout=P(b, 1))
 el(b, "lab", R_ + 20, 230, ("9 MENU ITEMS", NAVY_US), mid(b, 1, 0.45), False, tout=P(b, 2))
 el(b, "lab", R_ + 20, 330, ("NO CARHOPS", RED), mid(b, 1, 0.62), False, tout=P(b, 2))
 el(b, "big", R_ + 20, 480, ("15¢", NAVY_US, 150), mid(b, 1, 0.8), False, tout=P(b, 2))
@@ -133,7 +136,7 @@ el(b, "words", R_ + 20, 420, ("A system that could be copied anywhere.", 62, "se
 
 
 # ---------------- hero portraits: a new person first fills the centre, big, then slides to their slot ----------------
-HERO_SCALE = 1.45
+HERO_SCALE = 1.4; PS = 1.4          # PS: person cards 30% bigger (owner, 21 Nov)
 def _set_hero():
     for e in EL:
         if e["kind"] != "person" or e.get("hero") is False: continue
@@ -170,6 +173,76 @@ def today(im, x, y, p, t, t0, a):
         place(lay, txt(sub, "sansm", 19, MUTE), cx, cy + 92, alpha=q)
     if p.get("foot"): place(lay, txt(p["foot"], "serifi", 28, MUTE), x, y + 190, alpha=r(t, t0 + 2.4, t0 + 3.0))
     im.alpha_composite(lay_alpha(lay, a))
+
+
+# ---------------- PLACE card (locked 21 Nov): every city/country named gets a real photo, big, framed, caption underneath ----------------
+@functools.lru_cache(None)
+def place_card(name, w, title, sub, crop_top=None):
+    src = Image.open(f"/home/claude/es/assets/{name}").convert("RGB")
+    if crop_top is not None:                       # tall photo -> wide strip around a chosen height
+        bw_ = int(src.width * 0.92); x0 = (src.width - bw_) // 2; hh = int(bw_ / 1.9); y0 = int((src.height - hh) * crop_top)
+        src = src.crop((x0, y0, x0 + bw_, y0 + hh))
+    h = int(w * src.height / src.width); h = min(h, 760); ph = src.resize((w, int(w * src.height / src.width)), Image.LANCZOS).crop((0, 0, w, h))
+    bd, cap = 14, 104; im = Image.new("RGBA", (w + 2 * bd, h + 2 * bd + cap), IVORY + (255,))
+    im.paste(ph, (bd, bd)); d = ImageDraw.Draw(im)
+    d.rectangle([0, 0, im.width - 1, im.height - 1], outline=NAVY_US + (255,), width=3)
+    d.rectangle([bd, h + bd + 10, im.width - bd, im.height - bd], fill=NAVY_US + (255,))
+    t1 = txt(title, "sansb", 40, IVORY, 4); t2 = txt(sub, "serifi", 26, SOFT)
+    top = h + bd + 10; gap_ = 6; blk = t1.height + gap_ + t2.height; y_ = top + (cap - 10 - blk) / 2
+    im.alpha_composite(t1, (int(im.width / 2 - t1.width / 2), int(y_))); im.alpha_composite(t2, (int(im.width / 2 - t2.width / 2), int(y_ + t1.height + gap_)))
+    return im, h
+def place_el(im, x, y, p, t, t0, a):
+    name, w, title, sub, cr = p[:5]; crop = p[5] if len(p) > 5 else None
+    c, h = place_card(name, w, title, sub, crop); ti = t - t0; s = eo(a)
+    z = 1.0 + 0.035 * cl(ti / 10)                    # slow Ken Burns push-in
+    place(im, V.shadowed(c, 22, (10, 18), 0.25), x, y + (1 - s) * 30, scale=z * (0.97 + 0.03 * s), alpha=eio(cl(a)))
+    if a > 0.5: V.credit(im, cr, a)
+    return y + c.height / 2
+
+# ---------------- TIME TRAVEL (locked 21 Nov): from today back to the first year, like a film rewinding ----------------
+REW_IMGS = ["sb_valley.jpg", "mcd_desplaines_museum.jpg", "mcd_downey_museum.jpg", "mcd_downey_sign.jpg", "mcd_sanbernardino_site.jpg", "sb_motel66.jpg"]
+@functools.lru_cache(None)
+def rew_frame(name, sep):
+    im = Image.open(f"/home/claude/es/assets/{name}").convert("RGB"); w, h = 300, 210
+    s = max(w / im.width, h / im.height); im = im.resize((int(im.width * s) + 1, int(im.height * s) + 1)); x0 = (im.width - w) // 2; y0 = (im.height - h) // 2
+    im = im.crop((x0, y0, x0 + w, y0 + h))
+    if sep:
+        from PIL import ImageOps
+        im = ImageOps.colorize(im.convert("L"), black=(40, 28, 18), mid=(140, 112, 80), white=(244, 232, 205))
+    return im
+def rewind(t):
+    u = r(t, REW_T, REW_T + REWIND); sp = eio(r(u, 0.05, 0.85))          # 0..1 along the journey
+    year = 2026 - (2026 - YEARS[0]) * sp
+    im = V.bg(); age = sp                                                 # the paper slowly turns sepia as we go back
+    if age > 0:
+        tint = Image.new("RGBA", (W, H), (150, 112, 60, int(70 * age * (1 - r(u, 0.88, 1.0))))); im.alpha_composite(tint)
+    speed = math.sin(math.pi * r(u, 0.05, 0.85))                         # 0 -> fast -> 0
+    strip = Image.new("RGBA", (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(strip)
+    band = 300; by = 760; a_strip = eio(r(u, 0.0, 0.12)) * (1 - eio(r(u, 0.8, 0.95)))
+    if a_strip > 0:
+        d.rectangle([0, by - band / 2, W, by + band / 2], fill=(18, 16, 14, 235))
+        pos = 3800 * (sp + 0.15 * u)                                       # film runs to the right = going back in time
+        fw = 340
+        for k in range(-2, 9):
+            fx = (k * fw + pos) % (fw * 8) - fw
+            for hx in range(int(fx) + 14, int(fx) + fw, 34):              # sprocket holes
+                d.rounded_rectangle([hx, by - band / 2 + 10, hx + 18, by - band / 2 + 26], 3, fill=(230, 225, 215, 255))
+                d.rounded_rectangle([hx, by + band / 2 - 26, hx + 18, by + band / 2 - 10], 3, fill=(230, 225, 215, 255))
+            idx = int((k * fw + pos) // (fw * 8) * 8 + k) % len(REW_IMGS)
+            strip.paste(rew_frame(REW_IMGS[idx], age > 0.45), (int(fx + 20), int(by - 105)))
+        if speed > 0.2:                                                    # motion blur when the reel spins fast
+            strip = strip.filter(ImageFilter.BoxBlur(int(2 + 10 * speed))) if False else strip.transform(strip.size, Image.AFFINE, (1, 0, 0, 0, 1, 0)).filter(ImageFilter.GaussianBlur(1.5 * speed))
+        im.alpha_composite(lay_alpha(strip, a_strip))
+        dd = ImageDraw.Draw(im)
+        for j in range(14):                                                # light streaks rushing right
+            sx = (j * 263 + (t - REW_T) * 2600 * (0.4 + speed)) % (W + 600) - 300; sy = 90 + (j * 71) % 360
+            dd.line([(sx, sy), (sx + 220 * speed, sy)], fill=(255, 250, 235, int(90 * speed)), width=2)
+    lab = r(u, 0.02, 0.15) * (1 - r(u, 0.8, 0.9))
+    if lab > 0: place(im, txt("GOING BACK IN TIME", "sansb", 30, RED, 8), W / 2, 210, alpha=lab)
+    odometer(im, year, W / 2, 430, 230, NAVY if u < 0.9 else NAVY, 1.0, 1.0)
+    fl = math.exp(-((u - 0.86) / 0.035) ** 2)                            # soft flash when we arrive
+    if fl > 0.02: im.alpha_composite(Image.new("RGBA", (W, H), (255, 252, 240, int(150 * fl))))
+    return im
 
 # ---------------- drawing ----------------
 def lay_alpha(lay, a):
@@ -257,9 +330,9 @@ def el_draw(im, e, t, a):
         if he:
             m = eio(r(t, he, he + 0.6)); cx, cy = 960, (470 if PIN_OF.get(e["b"]) is not None else 540)
             hx, hy, hs = cx + (x - cx) * m, cy + (y - cy) * m, HERO_SCALE + (1 - HERO_SCALE) * m
-        c = person_card(*p); place(im, c, hx, hy + (1 - s) * 30, scale=hs * (0.86 + 0.14 * back(a)), alpha=min(1, a * 1.5))
-        if not he or t >= he + 0.6: trace(im, (x - 144, y - 179, x + 144, y + 179), t, (he + 0.6 if he else e["tin"]) + 0.25, RED, 3, loop=False)
-        return y + 185
+        c = person_card(*p); place(im, c, hx, hy + (1 - s) * 30, scale=PS * hs * (0.86 + 0.14 * back(a)), alpha=min(1, a * 1.5))
+        if not he or t >= he + 0.6: trace(im, (x - 144 * PS, y - 179 * PS, x + 144 * PS, y + 179 * PS), t, (he + 0.6 if he else e["tin"]) + 0.25, RED, 3, loop=False)
+        return y + 185 * PS
     if k == "cut":
         c = cutimg(p[0], p[1]); place(im, c, x, y + (1 - s) * 34, scale=0.84 + 0.16 * back(a), alpha=min(1, a * 1.5))
         if a > 0.5: V.credit(im, p[2], a)
@@ -284,11 +357,12 @@ def el_draw(im, e, t, a):
     if k == "words": words(im, x, y, p, t, e["tin"], a); return y + p[1]
     if k == "quote":
         text, attr, size, gold = p
-        mw = e.get("mw") or (860 if size < 50 else 1000)
+        mw = e.get("mw") or (940 if size < 50 else 1060)
         place(im, quote_mark(), x - mw / 2 - 30, y - size * 0.9, alpha=a * r(ti, 0, 0.3))
         words(im, x, y, (text, size, "serifi", INK, gold, mw), t, e["tin"], a)
         nl = math.ceil(txt(text, "serifi", size).width / mw); place(im, txt("— " + attr, "sansm", 26, MUTE), x, y + nl * size * 0.62 + 30, alpha=a * r(ti, 0.8, 1.2))
         return y + 120
+    if k == "place": return place_el(im, x, y, p, t, e["tin"], a)
     if k == "today": today(im, x, y, p, t, e["tin"], a); return y + 200
     if k == "grid": grid(im, x, y, p, t, e["tin"], a); return y + 200
     if k == "bars": bars(im, x, y, p, t, e["tin"], a); return y + 40
@@ -388,7 +462,7 @@ def draw_travel(im, t):
     for i in range(8):
         a = TR[YB[i]]
         if not (a <= t < a + TRAVEL + 0.15): continue
-        y0 = YEARS[i - 1] if i else 1925; y1 = YEARS[i]; tt = t - a
+        y0 = YEARS[i - 1] if i else YEARS[0]; y1 = YEARS[i]; tt = t - a
         roll = r(tt, 0.05, 0.95); v = y0 + (y1 - y0) * (1 - (1 - roll) ** 2.2)
         if roll >= 1: v = y1
         fly = eio(r(tt, 0.95, 1.45)); cx = W / 2 + (PX[i] - W / 2) * fly; cy = 430 + (AX_Y + 50 - 430) * fly
@@ -432,8 +506,9 @@ def frame_rgba(t):
     if IDENT_T - 0.5 <= t < IDENT_T + IDENT_DUR:
         b = ident(t, IDENT_T)
         if t < IDENT_T + 0.1: return Image.blend(stage(t), b, eio(r(t, IDENT_T - 0.5, IDENT_T + 0.1)))
-        if t >= IDENT_T + IDENT_DUR - 0.7: return Image.blend(b, stage(t), eio(r(t, IDENT_T + IDENT_DUR - 0.7, IDENT_T + IDENT_DUR)))
+        if t >= IDENT_T + IDENT_DUR - 0.7: return Image.blend(b, rewind(t) if REW_T else stage(t), eio(r(t, IDENT_T + IDENT_DUR - 0.7, IDENT_T + IDENT_DUR)))
         return b
+    if REW_T and REW_T <= t < REW_T + REWIND: return rewind(t)
     if TR["map"] <= t < TR["deal"] + XF:
         m = scene_map(t)
         if t < TR["map"] + XF: return Image.blend(stage(t), m, eio(r(t, TR["map"], TR["map"] + XF)))

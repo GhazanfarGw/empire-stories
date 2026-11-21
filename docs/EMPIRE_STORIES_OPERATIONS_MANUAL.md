@@ -113,6 +113,12 @@ The description always has a CHAPTERS block: first line `00:00`, at least 3 chap
 
 **Shorts = native mobile video (owner rule, 21 Nov 2026; `es/vshort.py`; same badges, motion and v3 sound as the episodes):** never a desktop video placed in a vertical frame. Full-screen 1080×1920 on the paper background, **no subtitles**, no letterbox bands. Small brand mark + one-line title + red year badge at the top; the story fills the screen. Every scene is re-laid out for the phone: whatever is on screen is stacked top-to-bottom, **picture first and its text underneath**, scaled to fill the width; when something arrives or leaves the others slide smoothly. Quotes and headlines re-wrap at phone width. Map scenes are framed for the phone. The previous scene holds through short narration gaps (no empty screens). Same timing as the episode so voice and sound line up. Segments in `<episode>/shorts_v2.json`. Zapier free plan = **max 5 uploads per day**: plan uploads (episode + Shorts) across days.
 
+## 5e. Places, big images, time travel (locked 21 Nov 2026 — owner feedback #3)
+- **Every city or country the narration names gets a real photo, never just a text label** (`place` element): the photo big and centred (≈1100–1460 px wide), ivory border with a thin navy frame, slow push-in, and a navy caption band **under** the photo (place name + one short line). Licensed photos only (Wikimedia Commons / Library of Congress), credited.
+- **Use the full screen width.** Columns at x = 600 / 1320; person cards 40 % bigger (`PS = 1.4`); a single person or a single key image is shown big in the centre. Quotes get wider lines.
+- **More real images for every era**: period photos, places, products, buildings. Text supports the picture, never replaces it.
+- **Open in the present, then travel back** (`rewind` scene, 3.6 s, before the first year): the cold open shows the empire as it is today; after the ident a cinematic time-travel takes us back. A big year counter rolls back from 2026 to the first year, a film reel of the story's photos races past (turning sepia as we go back), light streaks, a soft flash on arrival, and the counter lands as the first timeline year. It is a designed sequence; we never play the finished video backwards. Sound: tonal film-reel spin that speeds up and slows down, then a soft arrival (thud + bell + pad), with no hiss.
+
 ## 6. Tools and environment
 
 - Python 3.13, numpy, scipy, Pillow, soundfile, onnxruntime, kokoro-onnx; ffmpeg 6.1 with libx264 + libass.

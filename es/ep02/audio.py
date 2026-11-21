@@ -63,11 +63,28 @@ def ident(t0):
     SFX.add(t0 + 2.4, sub(), 0.9)
 if T.IDENT_T: ident(T.IDENT_T + 0.4)
 
+# ---------- time travel (rewind 2026 -> first year): film-reel spin, tonal only, soft arrival ----------
+def rewind_sfx(t0, d):
+    x = k(d); u = x / d
+    sp = np.sin(np.pi * np.clip((u - 0.05) / 0.8, 0, 1))                       # reel speed 0 -> fast -> 0
+    f = 180 + 700 * sp                                                           # pitch follows the speed (tape spin)
+    flutter = 1 + 0.06 * np.sin(2 * np.pi * np.cumsum(6 + 26 * sp) / SR)       # wobble gets faster with speed
+    s_ = np.sin(2 * np.pi * np.cumsum(f * flutter) / SR) + 0.35 * np.sin(2 * np.pi * np.cumsum(f * 1.5 * flutter) / SR)
+    s_ = lp(s_ * (0.15 + 0.85 * sp) * np.minimum(1, x / 0.25) * np.clip((d - x) / 0.3, 0, 1), 1800)
+    SFX.add(t0, s_, 0.55)
+    # click-free reel 'whirr' = amplitude-modulated low tone
+    wh = np.sin(2 * np.pi * 95 * x) * (0.5 + 0.5 * np.sin(2 * np.pi * np.cumsum(4 + 30 * sp) / SR)) * sp
+    SFX.add(t0, lp(wh, 900), 0.45)
+    arr = t0 + 0.86 * d
+    SFX.add(arr - 0.05, thud(), 0.5); SFX.add(arr, bell(523.25, 3.0), 0.35); SFX.add(arr + 0.05, pad([130.81, 196.0, 261.63], 3.0, 0.05, 2.5), 0.5)
+if getattr(T, "REW_T", None): rewind_sfx(T.REW_T, T.REWIND)
+
 # ---------- background: felt piano over warm pad, A minor -> F -> C -> G ----------
 PROG = [[55.0, 110.0, 130.81, 164.81], [43.65, 87.31, 110.0, 130.81], [65.41, 98.0, 130.81, 164.81], [49.0, 98.0, 123.47, 146.83]]
 q, j = 0.4, 0
 while q < min(END, T.OUTRO + 1.0) - 1.0:
     if T.IDENT_T and T.IDENT_T - 0.6 < q < T.IDENT_T + T.IDENT_DUR - 0.8: q = T.IDENT_T + T.IDENT_DUR - 0.8; continue
+    if getattr(T, "REW_T", None) and T.REW_T - 2.0 < q < T.REW_T + T.REWIND: q = T.REW_T + T.REWIND; continue
     ch = PROG[j % 4]; BED.add(q, pad([c * 2 for c in ch[:3]], 12.4, 4.0, 4.5), 0.30)
     for s_, note in enumerate([ch[2] * 2, ch[3] * 2, ch[2] * 4, ch[3] * 2]):            # meditative: one soft note every ~2.7 s
         BED.add(q + 0.6 + s_ * 2.7, piano(note, 6.0, 0.8 - 0.1 * (s_ % 2)), 0.55, pan=0.2 * np.sin(s_ * 1.7))
@@ -77,7 +94,7 @@ while q < min(END, T.OUTRO + 1.0) - 1.0:
 for e in T.EL:
     tin, kd = e["tin"], e["kind"]; pan = (e["x"] - 960) / 1800
     if tin > min(END, T.OUTRO): continue
-    if kd in ("cut", "person", "photo", "screen"): SFX.add(tin, pop(440), 0.8, pan=pan)
+    if kd in ("cut", "person", "photo", "screen", "place"): SFX.add(tin, pop(440), 0.8, pan=pan)
     elif kd == "lab": SFX.add(tin, pop(620), 0.45, pan=pan)
     elif kd == "stamp": SFX.add(tin, thud(), 0.6); SFX.add(tin, pop(330), 0.4)
     elif kd in ("words", "quote"): SFX.add(tin, piano(784, 1.6, 0.6), 0.35, pan=pan)
