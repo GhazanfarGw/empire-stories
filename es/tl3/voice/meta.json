@@ -1,0 +1,205 @@
+[
+ {
+  "i": 0,
+  "beat": "hook",
+  "text": "Now, here's something surprising.",
+  "dur": 2.1973333333333334,
+  "pause": 0.55
+ },
+ {
+  "i": 1,
+  "beat": "hook",
+  "text": "In nineteen ninety-seven, Apple was in serious trouble.",
+  "dur": 3.6906666666666665,
+  "pause": 0.35
+ },
+ {
+  "i": 2,
+  "beat": "hook",
+  "text": "Steve Jobs later said the company was about ninety days from going broke.",
+  "dur": 5.1626666666666665,
+  "pause": 0.7
+ },
+ {
+  "i": 3,
+  "beat": "hook",
+  "text": "So how did it survive?",
+  "dur": 1.6213333333333333,
+  "pause": 0.4
+ },
+ {
+  "i": 4,
+  "beat": "hook",
+  "text": "To understand that, we need to go back to the beginning.",
+  "dur": 3.328,
+  "pause": 0.6
+ },
+ {
+  "i": 5,
+  "beat": "y0",
+  "text": "In nineteen seventy-six, Steve Jobs and Steve Wozniak start a small company.",
+  "dur": 5.546666666666667,
+  "pause": 0.25
+ },
+ {
+  "i": 6,
+  "beat": "y0",
+  "text": "They call it Apple.",
+  "dur": 1.2586666666666666,
+  "pause": 0.7
+ },
+ {
+  "i": 7,
+  "beat": "y1",
+  "text": "But in nineteen eighty-five, after a fight with Apple's board, Jobs is pushed out of his own company.",
+  "dur": 6.165333333333334,
+  "pause": 0.4
+ },
+ {
+  "i": 8,
+  "beat": "y1",
+  "text": "So he starts again. A new company, called NeXT.",
+  "dur": 3.6906666666666665,
+  "pause": 0.7
+ },
+ {
+  "i": 9,
+  "beat": "y2",
+  "text": "Meanwhile, Apple keeps growing.",
+  "dur": 2.005333333333333,
+  "pause": 0.25
+ },
+ {
+  "i": 10,
+  "beat": "y2",
+  "text": "By nineteen ninety-five, its sales reach eleven billion dollars.",
+  "dur": 4.309333333333333,
+  "pause": 0.45
+ },
+ {
+  "i": 11,
+  "beat": "y2",
+  "text": "But here's the problem. The company is about to fall.",
+  "dur": 3.264,
+  "pause": 0.7
+ },
+ {
+  "i": 12,
+  "beat": "y3",
+  "text": "One year later, Apple loses more than eight hundred million dollars.",
+  "dur": 4.096,
+  "pause": 0.4
+ },
+ {
+  "i": 13,
+  "beat": "y3",
+  "text": "It badly needs a modern operating system. So it buys NeXT, for four hundred million.",
+  "dur": 6.144,
+  "pause": 0.35
+ },
+ {
+  "i": 14,
+  "beat": "y3",
+  "text": "And that deal brings Steve Jobs back.",
+  "dur": 2.3466666666666667,
+  "pause": 0.7
+ },
+ {
+  "i": 15,
+  "beat": "y4",
+  "text": "By nineteen ninety-seven, Jobs is running Apple again. And his first move surprises everyone.",
+  "dur": 6.506666666666667,
+  "pause": 0.6
+ },
+ {
+  "i": 16,
+  "beat": "map",
+  "text": "He makes peace with his biggest rival.",
+  "dur": 2.56,
+  "pause": 0.35
+ },
+ {
+  "i": 17,
+  "beat": "map",
+  "text": "Microsoft, up in Redmond, agrees to invest a hundred and fifty million dollars in Apple.",
+  "dur": 6.421333333333333,
+  "pause": 0.4
+ },
+ {
+  "i": 18,
+  "beat": "map",
+  "text": "Jobs announces the deal on stage, at Macworld in Boston.",
+  "dur": 4.096,
+  "pause": 0.7
+ },
+ {
+  "i": 19,
+  "beat": "y4b",
+  "text": "Then he cuts about seventy percent of Apple's products.",
+  "dur": 3.6906666666666665,
+  "pause": 0.3
+ },
+ {
+  "i": 20,
+  "beat": "y4b",
+  "text": "Fewer products. But better ones.",
+  "dur": 2.3253333333333335,
+  "pause": 0.7
+ },
+ {
+  "i": 21,
+  "beat": "y5",
+  "text": "In nineteen ninety-eight, the iMac arrives.",
+  "dur": 2.965333333333333,
+  "pause": 0.3
+ },
+ {
+  "i": 22,
+  "beat": "y5",
+  "text": "And Apple makes its first yearly profit since nineteen ninety-five.",
+  "dur": 4.309333333333333,
+  "pause": 0.7
+ },
+ {
+  "i": 23,
+  "beat": "y6",
+  "text": "In two thousand one, the iPod puts a thousand songs in your pocket.",
+  "dur": 4.394666666666667,
+  "pause": 0.7
+ },
+ {
+  "i": 24,
+  "beat": "y7",
+  "text": "And in two thousand seven, the iPhone.",
+  "dur": 2.6666666666666665,
+  "pause": 0.35
+ },
+ {
+  "i": 25,
+  "beat": "y7",
+  "text": "That year, Apple earns three and a half billion dollars.",
+  "dur": 3.648,
+  "pause": 0.8
+ },
+ {
+  "i": 26,
+  "beat": "lesson",
+  "text": "So what really saved Apple?",
+  "dur": 1.856,
+  "pause": 0.5
+ },
+ {
+  "i": 27,
+  "beat": "lesson",
+  "text": "Not one product. It was focus.",
+  "dur": 2.453333333333333,
+  "pause": 0.4
+ },
+ {
+  "i": 28,
+  "beat": "lesson",
+  "text": "Saying no to almost everything, so the few things that mattered could be great.",
+  "dur": 4.864,
+  "pause": 1.0
+ }
+]

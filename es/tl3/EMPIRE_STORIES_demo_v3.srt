@@ -1,0 +1,115 @@
+1
+00:00:00,900 --> 00:00:03,217
+Now, here's something surprising.
+
+2
+00:00:03,647 --> 00:00:07,458
+In 1997, Apple was in serious trouble.
+
+3
+00:00:07,688 --> 00:00:12,970
+Steve Jobs later said the company was about 90 days from going broke.
+
+4
+00:00:13,550 --> 00:00:15,292
+So how did it survive?
+
+5
+00:00:23,672 --> 00:00:27,120
+To understand that, we need to go back to the beginning.
+
+6
+00:00:29,100 --> 00:00:34,766
+In 1976, Steve Jobs and Steve Wozniak start a small company.
+
+7
+00:00:34,896 --> 00:00:36,275
+They call it Apple.
+
+8
+00:00:38,355 --> 00:00:44,640
+But in 1985, after a fight with Apple's board, Jobs is pushed out of his own company.
+
+9
+00:00:44,920 --> 00:00:48,731
+So he starts again. A new company, called NeXT.
+
+10
+00:00:50,811 --> 00:00:52,936
+Meanwhile, Apple keeps growing.
+
+11
+00:00:53,066 --> 00:00:57,496
+By 1995, its sales reach $11 billion.
+
+12
+00:00:57,826 --> 00:01:01,210
+But here's the problem. The company is about to fall.
+
+13
+00:01:03,290 --> 00:01:07,506
+One year later, Apple loses more than $800 million.
+
+14
+00:01:07,786 --> 00:01:14,050
+It badly needs a modern operating system. So it buys NeXT, for $400 million.
+
+15
+00:01:14,280 --> 00:01:16,746
+And that deal brings Steve Jobs back.
+
+16
+00:01:18,826 --> 00:01:25,453
+By 1997, Jobs is running Apple again. And his first move surprises everyone.
+
+17
+00:01:26,733 --> 00:01:29,413
+He makes peace with his biggest rival.
+
+18
+00:01:29,643 --> 00:01:36,184
+Microsoft, up in Redmond, agrees to invest $150 million in Apple.
+
+19
+00:01:36,464 --> 00:01:40,680
+Jobs announces the deal on stage, at Macworld in Boston.
+
+20
+00:01:42,060 --> 00:01:45,871
+Then he cuts about 70% of Apple's products.
+
+21
+00:01:46,051 --> 00:01:48,496
+Fewer products. But better ones.
+
+22
+00:01:50,576 --> 00:01:53,662
+In 1998, the iMac arrives.
+
+23
+00:01:53,842 --> 00:01:58,271
+And Apple makes its first yearly profit since 1995.
+
+24
+00:02:00,351 --> 00:02:04,866
+In 2001, the iPod puts 1,000 songs in your pocket.
+
+25
+00:02:06,946 --> 00:02:09,732
+And in 2007, the iPhone.
+
+26
+00:02:09,962 --> 00:02:13,730
+That year, Apple earns $3.5 billion.
+
+27
+00:02:15,810 --> 00:02:17,786
+So what really saved Apple?
+
+28
+00:02:18,166 --> 00:02:20,740
+Not one product. It was focus.
+
+29
+00:02:21,020 --> 00:02:26,004
+Saying no to almost everything, so the few things that mattered could be great.
