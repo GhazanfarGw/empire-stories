@@ -6,7 +6,7 @@
   "b": 40.87733333333333,
   "video": "/home/claude/es/ep01/short1_hero_src.mp4",
   "v_off": 0.0,
-  "audio": "/home/claude/es/ep01/EMPIRE_STORIES_Ep01_Apple_Was_Almost_Finished.mp4"
+  "audio": "/home/claude/es/ep01/audio_v3.m4a"
  },
  {
   "name": "short2_four_boxes",
@@ -14,7 +14,7 @@
   "a": 319.89933333333323,
   "b": 373.91999999999996,
   "video": "/home/claude/es/ep01/EMPIRE_STORIES_Ep01_Apple_Was_Almost_Finished.mp4",
-  "audio": "/home/claude/es/ep01/EMPIRE_STORIES_Ep01_Apple_Was_Almost_Finished.mp4"
+  "audio": "/home/claude/es/ep01/audio_v3.m4a"
  },
  {
   "name": "short3_microsoft_deal",
@@ -22,6 +22,6 @@
   "a": 221.80666666666664,
   "b": 282.19599999999997,
   "video": "/home/claude/es/ep01/EMPIRE_STORIES_Ep01_Apple_Was_Almost_Finished.mp4",
-  "audio": "/home/claude/es/ep01/EMPIRE_STORIES_Ep01_Apple_Was_Almost_Finished.mp4"
+  "audio": "/home/claude/es/ep01/audio_v3.m4a"
  }
 ]

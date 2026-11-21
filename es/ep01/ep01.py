@@ -252,6 +252,16 @@ def _set_hero():
         e["hero"] = he if he - e["tin"] >= 1.1 else None
 _set_hero()
 
+
+# ---------------- badge (locked 21 Nov): label box + red frame baked into ONE image, so frame and box always line up ----------------
+@functools.lru_cache(None)
+def badge(text, col, size=28):
+    lb = label_box(text, size, col, IVORY); g, w = 6, 3
+    im = Image.new("RGBA", (lb.width + 2 * (g + w), lb.height + 2 * (g + w)), (0, 0, 0, 0))
+    im.alpha_composite(lb, (g + w, g + w))
+    ImageDraw.Draw(im).rectangle([0, 0, im.width - 1, im.height - 1], outline=RED + (215,), width=w)
+    return im
+
 # ---------------- drawing ----------------
 def lay_alpha(lay, a):
     if a < 1: lay.putalpha(lay.getchannel("A").point(lambda v: int(v * a)))
@@ -346,19 +356,18 @@ def el_draw(im, e, t, a):
         if a > 0.5: V.credit(im, p[2], a)
         return y + p[1] / 2 + 10
     if k == "photo":
-        c = photocard(p[0], p[1]); z = 1.0 + 0.03 * cl(ti / 12); place(im, c, x, y, scale=z * (0.95 + 0.05 * s), alpha=a)
+        c = photocard(p[0], p[1]); z = 1.0 + 0.03 * cl(ti / 12); place(im, c, x, y + (1 - s) * 26, scale=z * (0.97 + 0.03 * s), alpha=eio(cl(a)))
         if a > 0.5: V.credit(im, p[2], a)
         return y + c.height / 2
     if k == "lab":
-        lb = label_box(p[0], 28, p[1], IVORY); place(im, lb, x + (1 - s) * 24, y, alpha=a)
-        trace(im, (x - lb.width / 2 - 6, y - lb.height / 2 - 6, x + lb.width / 2 + 6, y + lb.height / 2 + 6), t, e["tin"] + 0.2, RED, 3, loop=False)
-        return y + lb.height / 2 + 8
+        lb = badge(p[0], p[1]); place(im, lb, x, y + (1 - s) * 26, alpha=eio(cl(a)))      # one unit: box + aligned frame, fades up
+        return y + lb.height / 2 + 2
     if k == "big":
-        place(im, txt(counted(p[0], count_frac(ti)), "disp", p[2], p[1]), x, y, scale=1.12 - 0.12 * eo5(a) + 0.05 * (1 - r(ti, COUNT_DUR, COUNT_DUR + 0.25)) * r(ti, COUNT_DUR - 0.05, COUNT_DUR), alpha=a); return y + p[2] * 0.55
+        place(im, txt(counted(p[0], count_frac(ti)), "disp", p[2], p[1]), x, y + (1 - s) * 22, scale=1.12 - 0.12 * eo5(a) + 0.05 * (1 - r(ti, COUNT_DUR, COUNT_DUR + 0.25)) * r(ti, COUNT_DUR - 0.05, COUNT_DUR), alpha=a); return y + p[2] * 0.55
     if k == "count":
         v = int(round(p[0] * count_frac(ti))); place(im, txt(str(v), "disp", 230, p[1]), x, y, alpha=a); return y + 120
     if k == "note":
-        place(im, txt("— " + p, "serifi", 30, MUTE), x, y, alpha=a); return y + 20
+        place(im, txt("— " + p, "serifi", 30, MUTE), x, y + (1 - s) * 18, alpha=eio(cl(a))); return y + 20
     if k == "stamp":
         lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); V.stamp(lay, p[0], x, y, t, e["tin"], 58, -8, p[1]); im.alpha_composite(lay_alpha(lay, cl(a))); return y + 40
     if k == "chart":
@@ -422,7 +431,7 @@ def scene_stage(t):
     im = V.bg(); draw_axis(im, t)
     for e in EL:
         if t < e["tin"] - 0.6 or t > e["tout"] + 0.05: continue
-        aout = 1 - r(t, e["tout"] - 0.45, e["tout"]); ain = eio(r(t, e["tin"], e["tin"] + 0.4)); a = ain * aout
+        aout = eio(1 - r(t, e["tout"] - 0.5, e["tout"])); ain = eio(r(t, e["tin"], e["tin"] + 0.6)); a = ain * aout
         pin = PIN_OF.get(e["b"])
         if pin is not None and e["branch"]:
             tb = (e["hero"] + 1.1) if e.get("hero") else e["tin"]; bp = eo(r(t, tb - 0.55, tb)); ey = ANCH.get(id(e), e["y"] + 150)

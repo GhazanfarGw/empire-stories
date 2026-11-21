@@ -1,11 +1,16 @@
-"""EMPIRE STORIES sound v2 (locked 21 Nov 2026, owner feedback):
+"""EMPIRE STORIES sound v3 (locked 21 Nov 2026, owner feedback #2) — supersedes v2:
+- bed: deep, slow, meditative felt piano (one soft note every ~2.7 s, low register, long reverb tail) over a warm low pad
+- every pop/click is soft: 20-40 ms fade-in, smooth fade-out tail, low-passed, room reverb; nothing sharp
+- no ticking counters, no timeline sound, no noise sounds (v2 rules still hold)
+- effects bus ~12-15% of voice, bed lower still and ducked; voice always clear
+(v2 notes:)
 - NO sound when the timeline travels / branch lines draw (no odometer ticks, no zips, no whooshes)
 - NO noise-based 'shh' sounds at all (no swish, swell, hiss): every effect is tonal and soft
 - effects bus sits at ~20-25% of the voice; background bed very low, smooth, ducked under the voice
 - bed: slow felt-piano arpeggios over a warm pad (documentary tone)
 Writes three stems: voice.wav, sfx.wav, bed.wav -> mixed in run.sh."""
 import sys, os, numpy as np, soundfile as sf, scipy.signal as ss
-sys.argv = ["x", "q"]; D = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, D)
+sys.argv = ["x", "q"]; D = os.environ.get("EP_DIR") or os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, D)
 import importlib; T = importlib.import_module(os.environ.get("EP_MODULE", "ep02"))
 SR = 48000; END = T.END; n = int(END * SR)
 rng = np.random.default_rng(11)
@@ -26,7 +31,7 @@ def piano(f, d=3.0, vel=1.0):
     x = k(d); s = np.zeros_like(x)
     for h, a in [(1, 1.0), (2, 0.45), (3, 0.22), (4, 0.12), (5, 0.06)]:
         s += a * np.sin(2 * np.pi * f * h * x * (1 + 0.0004 * h * h)) * np.exp(-x * (1.6 + 0.9 * h))
-    return lp(s * np.minimum(1, x / 0.006), 2600) * vel
+    return lp(s * np.minimum(1, x / 0.018), 1500) * vel          # felt: slow hammer, dark tone
 def pad(freqs, d, att=2.0, rel=2.5, g=1.0):
     x = k(d); s = np.zeros_like(x)
     for j, f in enumerate(freqs):
@@ -34,20 +39,22 @@ def pad(freqs, d, att=2.0, rel=2.5, g=1.0):
     return lp(s, 900) * env(x, att, rel) * g
 def bell(f, d=2.2):
     x = k(d); return (np.sin(2 * np.pi * f * x) + 0.3 * np.sin(2 * np.pi * f * 2.76 * x) * np.exp(-x * 4)) * np.exp(-x * 1.9) * np.minimum(1, x / 0.004)
-def pop(f0=520, d=0.12):                     # soft round 'bloop'
-    x = k(d); f = f0 * (1 + 0.6 * np.exp(-x * 40)); return lp(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-x * 32), 2200)
+def pop(f0=520, d=0.45):                     # soft round 'bloop': fades in, fades out, no click
+    x = k(d); f = f0 * 0.75 * (1 + 0.25 * np.exp(-x * 30))
+    e = np.minimum(1, x / 0.03) * np.exp(-x * 9) * np.clip((d - x) / 0.15, 0, 1)
+    return lp(np.sin(2 * np.pi * np.cumsum(f) / SR) * e, 1300)
 def tick(f=1150): x = k(0.03); return lp(np.sin(2 * np.pi * f * x) * np.exp(-x * 150), 3000)
 def chime(up=True):
     x = k(0.6); f1, f2 = (1046.5, 1568) if up else (880, 659.3)
     return np.sin(2 * np.pi * f1 * x) * np.exp(-x * 9) * 0.5 + np.sin(2 * np.pi * f2 * x) * np.exp(-np.maximum(x - 0.08, 0) * 7) * (x > 0.08) * 0.45
-def thud(): x = k(0.45); return np.sin(2 * np.pi * 70 * x * (1 + 0.5 * np.exp(-x * 25))) * np.exp(-x * 11)
+def thud(): x = k(0.7); return np.sin(2 * np.pi * 62 * x) * np.minimum(1, x / 0.03) * np.exp(-x * 7) * 0.7
 def sub(d=2.2): x = k(d); return np.sin(2 * np.pi * 49 * x * (1 + 0.2 * np.exp(-x * 5))) * np.exp(-x * 2.0)
 def riser(d=1.4): x = k(d); return np.sin(2 * np.pi * np.cumsum(220 + 440 * (x / d) ** 2) / SR) * (x / d) ** 2 * 0.25
+def swell(d, up=True):                      # a soft tonal glide that fades in and out (replaces ticking counters)
+    x = k(d); f = (392 + 130 * (x / d)) if up else (523 - 130 * (x / d))
+    return lp(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * x / d) ** 2, 1200)
 def counter(t0, dur, up=True, n_=18, g=0.5):
-    for j in range(1, n_ + 1):
-        fr = j / n_; tx = 1 - (1 - fr) ** (1 / 3); f = (900 + 700 * fr) if up else (1500 - 600 * fr)
-        SFX.add(t0 + dur * tx, tick(f), g * (0.7 + 0.3 * fr), pan=0.1 * (1 if j % 2 else -1))
-    SFX.add(t0 + dur + 0.02, chime(up), g * 1.1)
+    SFX.add(t0, swell(dur + 0.3, up), g * 0.5); SFX.add(t0 + dur, bell(784 if up else 587, 2.0), g * 0.35)
 
 # ---------- signature ident (tonal riser instead of the old noise swell) ----------
 def ident(t0):
@@ -57,40 +64,45 @@ def ident(t0):
 if T.IDENT_T: ident(T.IDENT_T + 0.4)
 
 # ---------- background: felt piano over warm pad, A minor -> F -> C -> G ----------
-PROG = [[110.0, 220.0, 261.63, 329.63], [87.31, 174.61, 220.0, 261.63], [130.81, 196.0, 261.63, 329.63], [98.0, 196.0, 246.94, 293.66]]
+PROG = [[55.0, 110.0, 130.81, 164.81], [43.65, 87.31, 110.0, 130.81], [65.41, 98.0, 130.81, 164.81], [49.0, 98.0, 123.47, 146.83]]
 q, j = 0.4, 0
 while q < min(END, T.OUTRO + 1.0) - 1.0:
     if T.IDENT_T and T.IDENT_T - 0.6 < q < T.IDENT_T + T.IDENT_DUR - 0.8: q = T.IDENT_T + T.IDENT_DUR - 0.8; continue
-    ch = PROG[j % 4]; BED.add(q, pad(ch[:3], 8.6, 2.5, 3.0), 0.35)
-    for s_, note in enumerate([ch[1], ch[2], ch[3], ch[2] * 2, ch[3], ch[2]]):        # gentle arpeggio, one note every ~1.3 s
-        BED.add(q + 0.3 + s_ * 1.33, piano(note, 3.2, 0.9 - 0.08 * (s_ % 3)), 0.5, pan=0.25 * np.sin(s_))
-    q += 8.0; j += 1
+    ch = PROG[j % 4]; BED.add(q, pad([c * 2 for c in ch[:3]], 12.4, 4.0, 4.5), 0.30)
+    for s_, note in enumerate([ch[2] * 2, ch[3] * 2, ch[2] * 4, ch[3] * 2]):            # meditative: one soft note every ~2.7 s
+        BED.add(q + 0.6 + s_ * 2.7, piano(note, 6.0, 0.8 - 0.1 * (s_ % 2)), 0.55, pan=0.2 * np.sin(s_ * 1.7))
+    q += 10.8; j += 1
 
 # ---------- element sounds: soft, tonal, quiet (no sound for timeline travel or branch lines) ----------
 for e in T.EL:
     tin, kd = e["tin"], e["kind"]; pan = (e["x"] - 960) / 1800
     if tin > min(END, T.OUTRO): continue
     if kd in ("cut", "person", "photo", "screen"): SFX.add(tin, pop(440), 0.8, pan=pan)
-    elif kd == "lab": SFX.add(tin, pop(660, 0.09), 0.55, pan=pan)
-    elif kd == "stamp": SFX.add(tin, thud(), 0.8); SFX.add(tin, pop(330), 0.5)
+    elif kd == "lab": SFX.add(tin, pop(620), 0.45, pan=pan)
+    elif kd == "stamp": SFX.add(tin, thud(), 0.6); SFX.add(tin, pop(330), 0.4)
     elif kd in ("words", "quote"): SFX.add(tin, piano(784, 1.6, 0.6), 0.35, pan=pan)
-    elif kd == "focus": SFX.add(tin, thud(), 0.8); SFX.add(tin + 0.02, bell(784), 0.5)
+    elif kd == "focus": SFX.add(tin, thud(), 0.6); SFX.add(tin + 0.02, bell(784), 0.35)
     elif kd == "bars":
-        for j_, tk in enumerate(e["pay"]["t"]): SFX.add(tk, pop(520), 0.6, pan=-0.3 + 0.3 * j_); counter(tk, 0.7, e["pay"]["data"][j_][1] >= 0, 10, 0.35)
+        for j_, tk in enumerate(e["pay"]["t"]): SFX.add(tk, pop(520), 0.6, pan=-0.3 + 0.3 * j_); counter(tk, 0.7, e["pay"]["data"][j_][1] >= 0, 10, 0.3)
     elif kd == "chain":
         for j_, it in enumerate(e["pay"]): SFX.add(it[2], pop(500), 0.7, pan=-0.45 + 0.3 * j_)
     elif kd in ("big", "count"):
         txt_ = str(e["pay"][0]); SFX.add(tin, pop(480), 0.6)
-        if kd == "count" or T.parse_num(txt_): counter(tin, T.COUNT_DUR, not txt_.startswith(("−", "-")), 18, 0.5)
+        if kd == "count" or T.parse_num(txt_): counter(tin, T.COUNT_DUR, not txt_.startswith(("−", "-")), 18, 0.4)
     elif kd == "grid": SFX.add(tin, pop(500), 0.5)
 
 # ---------- end screen ----------
-if not T.DEMO:
+if not getattr(T, "DEMO", False):
     BED.add(T.OUTRO + 0.3, pad([130.81, 164.81, 196.0, 246.94, 293.66], T.ENDSCREEN, 1.2, 3.0), 0.8)
     for j_, f in enumerate([659.25, 987.77, 1318.5]): SFX.add(T.OUTRO + 0.6 + j_ * 0.2, bell(f), 0.55, pan=(j_ - 1) * 0.3)
     SFX.add(T.OUTRO + 1.0, sub(), 0.8)
 
 fade = np.clip((END - 0.2 - np.arange(n) / SR) / 1.6, 0, 1)[:, None]; SFX.m *= fade; BED.m *= fade
+def room(bus, sec, wet):
+    x = k(sec); ir = lp(rng.standard_normal(len(x)), 2500) * np.exp(-x * 6.9 / sec); ir /= np.abs(ir).sum() ** 0.5 * 8
+    for c in range(2): bus.m[:, c] = bus.m[:, c] * (1 - wet) + ss.fftconvolve(bus.m[:, c], ir)[:n] * wet * 4
+room(BED, 3.5, 0.45); room(SFX, 1.6, 0.3)
+SFX.m *= fade; BED.m *= fade
 SFX.save(f"{D}/sfx.wav"); BED.save(f"{D}/bed.wav")
 v = np.zeros(int(END * 24000), np.float32)
 for m in T.META:

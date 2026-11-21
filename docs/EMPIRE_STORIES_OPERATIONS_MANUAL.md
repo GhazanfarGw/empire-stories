@@ -85,15 +85,25 @@ File: `es/ep01/thumb_pro.py` (reference output `thumbs/thumb_PRO_A.jpg`).
   `asetrate=24000*0.96,aresample=48000,atempo=1.0417,highpass=f=50,lowshelf=f=120:g=4.5,equalizer=f=260:t=q:w=1:g=-1.5,equalizer=f=3200:t=q:w=1.2:g=2,acompressor=threshold=-18dB:ratio=3:attack=5:release=80`
 - If Kokoro is unavailable: use any deep British male narrator (e.g. ElevenLabs "documentary British male"), same pacing and pauses. Keep it consistent from then on.
 
-## 5. Sound design (locked v2, 21 Nov 2026 — owner feedback)
+## 5. Sound design (locked v3, 21 Nov 2026 — owner feedback #2; replaces v2)
 
-Code: `es/ep02/audio.py` (writes three stems: voice, sfx, bed). Rules:
-- **No sound when the timeline travels or branch lines draw** (no odometer ticks, no zips, no whooshes).
-- **No noise-based "shh/snake" sounds at all** (no swish, swell, hiss). Every effect is tonal and soft: round pops for cards/labels, soft calculator ticks + small chime on counting numbers, low thud for stamps, a soft piano note for headline words/quotes.
-- **Levels:** effects bus at ~20–25 % of the voice (`volume=0.18` on the sfx stem); background bed very low (`volume=0.16`) and side-chain ducked hard under the voice (threshold 0.015, ratio 8, release 700 ms). Voice is always the clearest element.
-- **Background bed:** slow felt-piano arpeggios (one note ~every 1.3 s) over a warm pad, A minor → F → C → G.
-- Signature ident: tonal riser → pad → 3-note bell chime (E5, B5, E6) → sine sub boom (no noise).
-- Final mix −14 LUFS, true peak −1.5 dB, AAC 160 kbps 48 kHz.
+Code: `es/ep02/audio.py` (stems: voice, sfx, bed; works for any episode with `EP_DIR=… EP_MODULE=…`) + `es/ep02/mix.sh`. **Same sound in episodes AND Shorts** (Shorts take their audio from the v3 mix, never from an older episode mix). Rules:
+- **Voice first.** The narration is always the clearest thing; everything else sits underneath it like a calm history documentary.
+- **Background bed = deep, slow, meditative felt piano**: one soft low note every ~2.7 s over a warm low pad (A minor → F → C → G, 10.8 s per chord), long room reverb. Low volume (`volume=0.14`), side-chain ducked hard under the voice (threshold 0.012, ratio 10, attack 60 ms, release 1.2 s).
+- **Every pop/click/appear sound is soft:** 30 ms fade-in, smooth fade-out tail, low-passed (≈1.3 kHz), small room reverb. Effects bus `volume=0.12` (peaks stay below the voice). No ticking counters: numbers get one soft tonal glide + a quiet bell.
+- **No sound when the timeline travels or branch lines draw. No noise-based "shh/snake" sounds anywhere** (v2 rules kept).
+- Signature ident: tonal riser → pad → 3-note bell chime → soft sub (no noise).
+- Final mix −14 LUFS, true peak −1.5 dB, AAC 192 kbps 48 kHz.
+
+## 5b. Motion and badges (locked 21 Nov 2026 — owner feedback #2)
+- **Everything enters by fading UP smoothly** (0.6 s ease, ~26 px rise) and leaves with a 0.5 s fade. No sideways slides for text/labels.
+- **Badges** (`badge()` in the engine): the coloured label box and its thin red frame are ONE image, so the frame always lines up with the box. The identical badge style is used in episodes and Shorts.
+
+## 5c. Story scope: journey to TODAY (locked 21 Nov 2026)
+Every documentary carries the story from the beginning **up to the present year (2026)**, then shows an **"<COMPANY> TODAY · 2026" status card** (`today` element): 3–4 tiles such as restaurants/stores/users, latest annual revenue or sales, global brand rank (Kantar BrandZ / Interbrand), stock-market value with month, plus the next stated goal. Every tile carries its source and date. When a founder/leader in the story is alive, show their current role and **net worth from Forbes real-time (with date)**; when they have died, say so with the year. Reputation is shown only with a named source (rankings, surveys, awards, major controversies reported by reputable press) — never our opinion stated as fact.
+
+## 5d. YouTube chapters (every long video)
+The description always has a CHAPTERS block: first line `00:00`, at least 3 chapters, each ≥ 10 s, one per story section (cold open, each year/turning point, today, our take). This gives the clickable key-moments bar on the timeline. Generated with `python3 epNN.py chapters` from the real scene start times. Ep01 has 9 live chapters.
 
 **Hooks (owner rule):** the cold open must force the viewer to stay: open on a simple question everyone thinks they can answer, flip it with one verified, surprising number, add a quote, end on the central question. 45–55 s max.
 
@@ -101,7 +111,7 @@ Code: `es/ep02/audio.py` (writes three stems: voice, sfx, bed). Rules:
 
 **Hero portraits (engine feature, `HERO_SCALE = 1.45`):** every new person card first appears big in the centre of the screen for ~2 s (or until the next element arrives), then slides into its timeline slot and the branch line draws to it.
 
-**Shorts = native mobile video (owner rule, 21 Nov 2026; `es/vshort.py`):** never a desktop video placed in a vertical frame. Full-screen 1080×1920 on the paper background, **no subtitles**, no letterbox bands. Small brand mark + one-line title + red year badge at the top; the story fills the screen. Every scene is re-laid out for the phone: whatever is on screen is stacked top-to-bottom, **picture first and its text underneath**, scaled to fill the width; when something arrives or leaves the others slide smoothly. Quotes and headlines re-wrap at phone width. Map scenes are framed for the phone. The previous scene holds through short narration gaps (no empty screens). Same timing as the episode so voice and sound line up. Segments in `<episode>/shorts_v2.json`. Zapier free plan = **max 5 uploads per day**: plan uploads (episode + Shorts) across days.
+**Shorts = native mobile video (owner rule, 21 Nov 2026; `es/vshort.py`; same badges, motion and v3 sound as the episodes):** never a desktop video placed in a vertical frame. Full-screen 1080×1920 on the paper background, **no subtitles**, no letterbox bands. Small brand mark + one-line title + red year badge at the top; the story fills the screen. Every scene is re-laid out for the phone: whatever is on screen is stacked top-to-bottom, **picture first and its text underneath**, scaled to fill the width; when something arrives or leaves the others slide smoothly. Quotes and headlines re-wrap at phone width. Map scenes are framed for the phone. The previous scene holds through short narration gaps (no empty screens). Same timing as the episode so voice and sound line up. Segments in `<episode>/shorts_v2.json`. Zapier free plan = **max 5 uploads per day**: plan uploads (episode + Shorts) across days.
 
 ## 6. Tools and environment
 
