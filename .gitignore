@@ -7,5 +7,5 @@ es/tl3/p_*
 es/tl3/*.wav
 es/tl3/l.txt
 es/tl3/s*.txt
-es/assets/people/*
+es/assets/people/*.jpg
 !es/assets/people/.gitkeep

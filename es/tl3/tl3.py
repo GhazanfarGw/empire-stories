@@ -118,7 +118,14 @@ def person_card(name, role, w=280, h=350):
     if ph:
         k = 2; im = Image.new("RGBA", (w * k, h * k), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
         mask = Image.new("L", im.size, 0); ImageDraw.Draw(mask).rounded_rectangle([0, 0, w * k - 1, h * k - 1], 18 * k, fill=255)
-        body = Image.new("RGBA", im.size, NAVY + (255,)); body.alpha_composite(duotone(Image.open(ph), w * k, int(h * k * 0.79)), (0, 0)); im.paste(body, (0, 0), mask); d = ImageDraw.Draw(im)
+        illus = ph.endswith(".png")   # Gemini illustrations are kept in their own colours and tagged
+        if illus:
+            src = Image.open(ph).convert("RGBA"); ww, hh = w * k, int(h * k * 0.79); sc = max(ww / src.width, hh / src.height); src = src.resize((int(src.width * sc + 1), int(src.height * sc + 1)), Image.LANCZOS)
+            x0 = (src.width - ww) // 2; art = src.crop((x0, 0, x0 + ww, hh))
+        else: art = duotone(Image.open(ph), w * k, int(h * k * 0.79))
+        body = Image.new("RGBA", im.size, NAVY + (255,)); body.alpha_composite(art, (0, 0)); im.paste(body, (0, 0), mask); d = ImageDraw.Draw(im)
+        if illus:
+            tg = font("sansb", 11 * k); tw = d.textlength("AI ILLUSTRATION", font=tg); d.rounded_rectangle([12 * k, 12 * k, 12 * k + tw + 16 * k, 32 * k], 4 * k, fill=NAVY + (220,)); d.text((20 * k, 22 * k), "AI ILLUSTRATION", font=tg, fill=IVORY, anchor="lm")
         d.line([(w * k * 0.12, h * k * 0.79), (w * k * 0.88, h * k * 0.79)], fill=RED + (255,), width=2 * k)
         d.text((w * k / 2, h * k * 0.855), name.upper(), font=font("sansb", 23 * k), fill=IVORY, anchor="mm")
         d.text((w * k / 2, h * k * 0.935), role, font=font("sansm", 17 * k), fill=SOFT, anchor="mm")
