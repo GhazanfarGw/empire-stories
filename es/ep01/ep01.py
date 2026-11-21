@@ -366,7 +366,7 @@ def el_draw(im, e, t, a):
     if k == "words": words(im, x, y, p, t, e["tin"], a); return y + p[1]
     if k == "quote":
         text, attr, size, gold = p
-        mw = 860 if size < 50 else 1000
+        mw = e.get("mw") or (860 if size < 50 else 1000)
         place(im, quote_mark(), x - mw / 2 - 30, y - size * 0.9, alpha=a * r(ti, 0, 0.3))
         words(im, x, y, (text, size, "serifi", INK, gold, mw), t, e["tin"], a)
         nl = math.ceil(txt(text, "serifi", size).width / mw); place(im, txt("— " + attr, "sansm", 26, MUTE), x, y + nl * size * 0.62 + 30, alpha=a * r(ti, 0.8, 1.2))
