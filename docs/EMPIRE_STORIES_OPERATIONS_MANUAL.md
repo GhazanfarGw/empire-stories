@@ -7,6 +7,8 @@ This document is the single source of truth for running the channel. If the curr
 
 ---
 
+> **APPROVED SYSTEM — locked by the owner on 21 Nov 2026 (20:11 PKT).** Everything in this manual up to and including §5i (sound v3, motion and badges, journey to today + TODAY card, chapters, place photos and big images, time-travel rewind, torn-paper image frame, cinematic `cine` scenes with archive footage and ambience, centre-first layout, sound moments, punchy cold open, vertical centring) is the **approved house style** for every future episode and Short. Reference render: `Ep02 DEMO v8`. Git tag: `approved-2026-11-21`. Do not change any of it without the owner's approval.
+
 ## 0. Where everything lives (backup map)
 
 | What | Primary location | Backup copies |
@@ -140,6 +142,12 @@ The description always has a CHAPTERS block: first line `00:00`, at least 3 chap
 - **Sound moments on film:** when archive film or a full-screen shot plays, give it a moment of its own: the narration pauses ~2–2.5 s (a longer pause after the sentence), the music stays low, and the film's ambience (car passing, crowd, kitchen…) rises so it is clearly heard, then fades out as the voice returns. Ambience stem `volume=0.36`, light ducking (ratio 3); effects bus `volume=0.16`.
 - **Cold open = short and punchy (~40–50 s), then the ident.** Question → one surprising number → the twist → one quote → the central question → a cinematic location shot → ident. Short sentences, short pauses, faster delivery, a soft low heartbeat pulse under it (stops at the ident). After the ident the calm documentary pace begins.
 - **Everything sits on the screen's middle line.** Whatever its size, content is vertically centred in the stage area above the timeline (≈ y 465 on timeline scenes, ≈ 500–540 on scenes without the timeline). Two items side by side share the same centre line and the same height (their widths may differ), placed symmetrically around the centre (x ≈ 600 / 1320). A label belongs directly under its picture. Nothing drifts to the top or bottom edge.
+
+## 5j. MOODS — emotional sound + camera (PENDING OWNER APPROVAL, not locked yet)
+Built 21 Nov 2026 after owner feedback #7; reference render `Ep02 DEMO v9`. Until the owner approves it, treat this as experimental.
+- Script moments are tagged with a mood: **tension** (slow push-in, darkening vignette; low drone + rising tone), **impact** (music drops out 0.7 s before, then a sub-boom + dark low piano cluster, camera punch-in + short shake, soft flash), **danger** (red vignette, pulsing low alarm drone), **triumph** (bright warm swell + bells), **sad** (slow minor piano).
+- The voice keeps the same narrator but changes pace with the mood: slower delivery and a longer pause after an impact line, so the hit can land.
+- Engine: `mood(kind, t0, t1)` in the episode file; sounds in their own `mood` stem (`volume=0.42`).
 
 ## 6. Tools and environment
 
