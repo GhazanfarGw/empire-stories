@@ -98,7 +98,7 @@ def active_pin(t):
 def label_box(text, size, bgc, fg):
     ti = txt(text, "sansb", size, fg, 3); im = Image.new("RGBA", (ti.width + 32, ti.height + 16), bgc + (255,)); im.alpha_composite(ti, (16, 8)); return im
 
-PEOPLE = next((p for p in ["/mnt/user-data/uploads/e/Empire Stories/Ep001 - How Steve Jobs Helped Save Apple/assets/photos_people", "/home/claude/es/assets/people"] if os.path.isdir(p)), "/home/claude/es/assets/people")
+PEOPLE = next((p for p in ["/mnt/user-data/uploads/e/Empire Stories/Ep01 - How Steve Jobs Helped Save Apple/assets/photos_people", "/home/claude/es/assets/people"] if os.path.isdir(p)), "/home/claude/es/assets/people")
 def person_photo(name):
     base = name.lower().replace(".", "")
     for slug in (base.replace(" ", "-"), base.replace(" ", "_")):
@@ -453,7 +453,7 @@ def ident(t, t0):
         if g1 < 1: lay.putalpha(lay.getchannel("A").point(lambda v: int(v * g1)))
         im.alpha_composite(lay, (0, int(-40 * out)))
     if tt > 4.7:
-        place(im, label_box("EPISODE 001", 26, RED, IVORY), W / 2, 380, alpha=eio(r(tt, 4.8, 5.2)))
+        place(im, label_box("EPISODE 01", 26, RED, IVORY), W / 2, 380, alpha=eio(r(tt, 4.8, 5.2)))
         E.words_in(im, W / 2, 520, ["How", "Steve", "Jobs"], tt, 5.0, 104, "serif", IVORY, 0.1)
         E.words_in(im, W / 2, 650, ["Helped", "Save", "Apple"], tt, 5.3, 104, "serif", IVORY, 0.1)
         V.gl(im, W / 2 - 260 * eo(r(tt, 5.6, 6.3)), 745, W / 2 + 260 * eo(r(tt, 5.6, 6.3)), 1, 3, RED)

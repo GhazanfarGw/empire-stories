@@ -28,7 +28,7 @@ python3 tl3.py part 0 40            # render a part (run parts in parallel), the
 | `es/tl3/gen3.py` | Narration: Kokoro British blend (75% bm_lewis + 25% bm_george), one wav per sentence |
 | `es/tl3/audio4.py` | Sound design: signature ident chime, quiet ambient bed, micro-SFX (pops, zips, counter ticks, thumps) |
 | `es/vt/lewis_blend.npy` | The channel voice |
-| `docs/` | Master brief, Ep001 description/sources |
+| `docs/` | Master brief, Ep01 description/sources |
 
 ## Brand (current)
 - Navy `#0A3161` · Red `#B31942` · page grey `#D6D5D1` · ivory `#F4F1EA`
