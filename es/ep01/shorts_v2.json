@@ -1,0 +1,27 @@
+[
+ {
+  "name": "short1_shut_it_down",
+  "title": "Dell said: shut Apple down",
+  "a": 0.6,
+  "b": 40.87733333333333,
+  "video": "/home/claude/es/ep01/short1_hero_src.mp4",
+  "v_off": 0.0,
+  "audio": "/home/claude/es/ep01/EMPIRE_STORIES_Ep01_Apple_Was_Almost_Finished.mp4"
+ },
+ {
+  "name": "short2_four_boxes",
+  "title": "Saved Apple with FOUR BOXES",
+  "a": 319.89933333333323,
+  "b": 373.91999999999996,
+  "video": "/home/claude/es/ep01/EMPIRE_STORIES_Ep01_Apple_Was_Almost_Finished.mp4",
+  "audio": "/home/claude/es/ep01/EMPIRE_STORIES_Ep01_Apple_Was_Almost_Finished.mp4"
+ },
+ {
+  "name": "short3_microsoft_deal",
+  "title": "Why Apple took Microsoft's money",
+  "a": 221.80666666666664,
+  "b": 282.19599999999997,
+  "video": "/home/claude/es/ep01/EMPIRE_STORIES_Ep01_Apple_Was_Almost_Finished.mp4",
+  "audio": "/home/claude/es/ep01/EMPIRE_STORIES_Ep01_Apple_Was_Almost_Finished.mp4"
+ }
+]

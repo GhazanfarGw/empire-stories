@@ -97,6 +97,12 @@ Code: `es/ep02/audio.py` (writes three stems: voice, sfx, bed). Rules:
 
 **Hooks (owner rule):** the cold open must force the viewer to stay: open on a simple question everyone thinks they can answer, flip it with one verified, surprising number, add a quote, end on the central question. 45–55 s max.
 
+**Visual-first rule (owner feedback, 21 Nov 2026):** a viewer with the sound off, or who doesn't speak English, must still follow the story from the pictures. Prefer photos, illustrations, maps, charts and simple diagrams over text labels; keep labels to a few words; never fill the screen with text.
+
+**Hero portraits (engine feature, `HERO_SCALE = 1.45`):** every new person card first appears big in the centre of the screen for ~2 s (or until the next element arrives), then slides into its timeline slot and the branch line draws to it.
+
+**Shorts layout v3 (`es/shorts3.py`):** 1080×1920. Thin navy header (brand + one-line hook title), thin footer ("FULL STORY · EPISODE NN ON THE CHANNEL"), big story window in the middle, large centred captions underneath. Smart reframe: each frame the window follows the elements on screen (from the episode's element list); a newly arrived portrait/photo/quote/chart gets a 2.5 s close-up spotlight; neighbours are either fully in frame or fully out, never cut. Segments are listed in `<episode>/shorts_v2.json`. Zapier free plan = **max 5 uploads per day**: plan uploads (episode + Shorts) across days.
+
 ## 6. Tools and environment
 
 - Python 3.13, numpy, scipy, Pillow, soundfile, onnxruntime, kokoro-onnx; ffmpeg 6.1 with libx264 + libass.

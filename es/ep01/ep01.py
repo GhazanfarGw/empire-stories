@@ -242,6 +242,16 @@ el(b, "words", 960, 640, ("It's what to stop doing.", 54, "serifi", INK, (3, 4, 
 el(b, "words", 960, 240, ("Every empire has a turning point.", 80, "serif", INK, (4,), 1600), st(b, 10, 0.0), False)
 el(b, "grid", 960, 520, dict(lab=1e9, fill=1e9, rule=1e9, pulse=1e9, small=True), st(b, 11, 0.4), False)
 
+# ---------------- hero portraits: a new person first fills the centre, big, then slides to their slot ----------------
+HERO_SCALE = 1.45
+def _set_hero():
+    for e in EL:
+        if e["kind"] != "person" or e.get("hero") is False: continue
+        later = [o["tin"] for o in EL if o is not e and o["b"] == e["b"] and e["tin"] < o["tin"] < e["tin"] + 3.0]
+        he = min([e["tin"] + 2.4] + [x - 0.15 for x in later])
+        e["hero"] = he if he - e["tin"] >= 1.1 else None
+_set_hero()
+
 # ---------------- drawing ----------------
 def lay_alpha(lay, a):
     if a < 1: lay.putalpha(lay.getchannel("A").point(lambda v: int(v * a)))
@@ -324,8 +334,13 @@ def el_draw(im, e, t, a):
     """draw one element; returns the bottom anchor for its branch"""
     k, x, y, p = e["kind"], e["x"], e["y"], e["pay"]; ti = t - e["tin"]; s = eo(a)
     if k == "person":
-        c = person_card(*p); place(im, c, x, y + (1 - s) * 30, scale=0.86 + 0.14 * back(a), alpha=min(1, a * 1.5))
-        trace(im, (x - 144, y - 179, x + 144, y + 179), t, e["tin"] + 0.25, RED, 3, loop=False); return y + 185
+        hx, hy, hs, he = x, y, 1.0, e.get("hero")
+        if he:
+            m = eio(r(t, he, he + 0.6)); cx, cy = 960, (470 if PIN_OF.get(e["b"]) is not None else 540)
+            hx, hy, hs = cx + (x - cx) * m, cy + (y - cy) * m, HERO_SCALE + (1 - HERO_SCALE) * m
+        c = person_card(*p); place(im, c, hx, hy + (1 - s) * 30, scale=hs * (0.86 + 0.14 * back(a)), alpha=min(1, a * 1.5))
+        if not he or t >= he + 0.6: trace(im, (x - 144, y - 179, x + 144, y + 179), t, (he + 0.6 if he else e["tin"]) + 0.25, RED, 3, loop=False)
+        return y + 185
     if k == "cut":
         c = cutimg(p[0], p[1]); place(im, c, x, y + (1 - s) * 34, scale=0.84 + 0.16 * back(a), alpha=min(1, a * 1.5))
         if a > 0.5: V.credit(im, p[2], a)
@@ -410,7 +425,7 @@ def scene_stage(t):
         aout = 1 - r(t, e["tout"] - 0.45, e["tout"]); ain = eio(r(t, e["tin"], e["tin"] + 0.4)); a = ain * aout
         pin = PIN_OF.get(e["b"])
         if pin is not None and e["branch"]:
-            bp = eo(r(t, e["tin"] - 0.55, e["tin"])); ey = ANCH.get(id(e), e["y"] + 150)
+            tb = (e["hero"] + 1.1) if e.get("hero") else e["tin"]; bp = eo(r(t, tb - 0.55, tb)); ey = ANCH.get(id(e), e["y"] + 150)
             if bp > 0 and aout > 0:
                 lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); branch(ImageDraw.Draw(lay), PX[pin], e["x"], ey, bp); im.alpha_composite(lay_alpha(lay, aout))
         if a > 0:
