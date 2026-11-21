@@ -1,0 +1,455 @@
+1
+00:00:00,900 --> 00:00:03,217
+Now, here's something surprising.
+
+2
+00:00:03,597 --> 00:00:11,760
+In October 1997, someone asked Michael Dell, one of the most powerful men in computers, a simple question.
+
+3
+00:00:11,890 --> 00:00:13,780
+What would he do with Apple?
+
+4
+00:00:14,260 --> 00:00:16,322
+His answer became famous.
+
+5
+00:00:16,502 --> 00:00:20,163
+He'd shut it down, and give the money back to the shareholders.
+
+6
+00:00:20,843 --> 00:00:23,971
+And honestly? It wasn't a crazy thing to say.
+
+7
+00:00:24,251 --> 00:00:26,952
+That year, Apple lost $1 billion.
+
+8
+00:00:27,182 --> 00:00:31,932
+Its share of the world's computer market had shrunk to about 3%.
+
+9
+00:00:32,512 --> 00:00:38,797
+But ten years later, the same company earned $3.5 billion in a single year.
+
+10
+00:00:39,477 --> 00:00:40,898
+So what changed?
+
+11
+00:00:41,178 --> 00:00:43,837
+And how much of it was really one man?
+
+12
+00:00:44,217 --> 00:00:45,468
+Let's find out.
+
+13
+00:00:55,247 --> 00:00:59,079
+To understand the rescue, we first need to understand the fall.
+
+14
+00:00:59,359 --> 00:01:07,970
+Apple began in 1976, when Steve Jobs and Steve Wozniak started a small computer company in California.
+
+15
+00:01:10,050 --> 00:01:15,375
+In 1985, after a fight in the boardroom, Steve Jobs left Apple.
+
+16
+00:01:15,606 --> 00:01:20,014
+He started again, with a new computer company called NeXT.
+
+17
+00:01:22,094 --> 00:01:25,030
+And for a while, Apple did fine without him.
+
+18
+00:01:25,210 --> 00:01:29,703
+In 1995, it brought in about $11 billion.
+
+19
+00:01:30,083 --> 00:01:32,720
+Then the floor gave way. Here's why.
+
+20
+00:01:33,200 --> 00:01:37,203
+Windows PCs were getting cheaper and better every year.
+
+21
+00:01:37,433 --> 00:01:43,974
+Apple had let other companies build cheaper Mac clones, and those clones chased Apple's own customers.
+
+22
+00:01:44,204 --> 00:01:49,594
+Its product line had turned into a maze of models, with numbers instead of names.
+
+23
+00:01:49,824 --> 00:01:54,509
+And the new operating system meant to keep the Mac modern was falling apart.
+
+24
+00:01:56,589 --> 00:02:01,573
+In 1996, Apple lost $816 million.
+
+25
+00:02:01,853 --> 00:02:05,578
+Customers hesitated. Developers drifted away.
+
+26
+00:02:05,808 --> 00:02:09,768
+The newspapers kept using one word for Apple: beleaguered.
+
+27
+00:02:10,348 --> 00:02:13,625
+Apple's CEO, Gil Amelio, had a problem.
+
+28
+00:02:13,805 --> 00:02:17,702
+He needed a modern operating system, and he needed it fast.
+
+29
+00:02:17,881 --> 00:02:21,010
+Building one had failed. So Apple went shopping.
+
+30
+00:02:21,489 --> 00:02:25,492
+Most people expected Apple to buy a startup called Be.
+
+31
+00:02:25,722 --> 00:02:30,471
+Instead, Apple looked at the company Steve Jobs had built after leaving.
+
+32
+00:02:30,701 --> 00:02:37,136
+NeXT's computers had never sold well. But its software was years ahead of its time.
+
+33
+00:02:37,616 --> 00:02:45,352
+On December 20th, 1996, Apple announced it would buy NeXT for $400 million.
+
+34
+00:02:45,582 --> 00:02:49,414
+Jobs would come back. Officially, just as an adviser.
+
+35
+00:02:49,894 --> 00:02:53,790
+Apple thought it was buying an operating system. And it was.
+
+36
+00:02:53,970 --> 00:02:58,144
+NeXT's software became the base of Mac OS X.
+
+37
+00:02:58,424 --> 00:03:02,362
+But Apple was also buying something nobody had put a price on.
+
+38
+00:03:02,842 --> 00:03:04,114
+Steve Jobs.
+
+39
+00:03:06,394 --> 00:03:09,672
+In early 1997, things got worse.
+
+40
+00:03:09,852 --> 00:03:17,929
+Apple lost $708 million in a single quarter, and laid off about 2,700 employees.
+
+41
+00:03:18,309 --> 00:03:23,613
+On July 9th, Gil Amelio resigned, about 17 months into the job.
+
+42
+00:03:23,843 --> 00:03:30,022
+Officially, Jobs was still just an adviser. In practice, he was already steering the company.
+
+43
+00:03:30,402 --> 00:03:36,218
+On September 16th, it became official. Steve Jobs was interim CEO.
+
+44
+00:03:36,447 --> 00:03:41,026
+And he kept the word "interim" in his title until the year 2000.
+
+45
+00:03:42,506 --> 00:03:47,277
+But weeks before that, Jobs made the most surprising move of his return.
+
+46
+00:03:47,457 --> 00:03:50,116
+He made peace with his biggest rival.
+
+47
+00:03:50,596 --> 00:03:57,734
+August 6th, 1997. Macworld Expo, Boston. A hall full of Apple's most loyal fans.
+
+48
+00:03:58,114 --> 00:04:01,434
+Jobs announced a partnership. With Microsoft.
+
+49
+00:04:01,814 --> 00:04:10,425
+Microsoft would buy $150 million of Apple shares. Non-voting shares, so Microsoft got no control.
+
+50
+00:04:11,705 --> 00:04:16,603
+It promised to keep making Microsoft Office for the Mac for at least five years.
+
+51
+00:04:16,784 --> 00:04:21,128
+In return, Internet Explorer became the Mac's default browser.
+
+52
+00:04:21,308 --> 00:04:27,337
+And the two companies settled their long-running legal disputes, with a patent cross-licence.
+
+53
+00:04:27,817 --> 00:04:32,182
+Then Bill Gates appeared on the giant screen behind Jobs, live.
+
+54
+00:04:32,462 --> 00:04:34,289
+Parts of the crowd booed.
+
+55
+00:04:34,669 --> 00:04:41,616
+Jobs answered them. Apple had to let go of the idea that for Apple to win, Microsoft had to lose.
+
+56
+00:04:42,195 --> 00:04:48,438
+Now here's the important part. The money wasn't what mattered most. What mattered was the signal.
+
+57
+00:04:48,718 --> 00:04:53,724
+Without Office, many businesses and schools had little reason to buy a Mac.
+
+58
+00:04:53,904 --> 00:04:56,178
+With it, the Mac had a future.
+
+59
+00:04:57,258 --> 00:05:01,730
+Two months later came Michael Dell's line about shutting Apple down.
+
+60
+00:05:01,910 --> 00:05:07,235
+And when Apple closed its books for 1997, the numbers seemed to prove him right.
+
+61
+00:05:07,515 --> 00:05:12,393
+Revenue fell 28%, to $7.1 billion.
+
+62
+00:05:12,623 --> 00:05:19,719
+Apple lost $1 billion, though about two-thirds of that came from one-time costs, like buying NeXT.
+
+63
+00:05:20,199 --> 00:05:24,073
+So what did Jobs do? He didn't add. He subtracted.
+
+64
+00:05:24,553 --> 00:05:28,983
+Going through Apple's products, he kept asking one simple question.
+
+65
+00:05:29,163 --> 00:05:31,843
+Which ones should I tell my friends to buy?
+
+66
+00:05:32,223 --> 00:05:34,967
+Nobody could give him a simple answer.
+
+67
+00:05:35,447 --> 00:05:41,967
+So he cut. Roughly 70% of Apple's products were cancelled, including the Newton handheld.
+
+68
+00:05:42,197 --> 00:05:44,471
+He ended the clone program too.
+
+69
+00:05:44,951 --> 00:05:47,631
+Then, at a whiteboard, he drew a grid.
+
+70
+00:05:47,811 --> 00:05:52,710
+Two columns: consumer and pro. Two rows: desktop and portable.
+
+71
+00:05:52,940 --> 00:05:55,193
+Four boxes. Four products.
+
+72
+00:05:55,423 --> 00:05:58,679
+If it didn't fit in a box, Apple wouldn't make it.
+
+73
+00:05:59,159 --> 00:06:05,914
+It sounds obvious now. In 1997, it meant betting the whole company on four machines.
+
+74
+00:06:06,194 --> 00:06:13,439
+And the consumer boxes were still empty. The first to fill would be a computer for ordinary people, at home.
+
+75
+00:06:15,619 --> 00:06:20,582
+On May 6th, 1998, Jobs filled the first empty box.
+
+76
+00:06:20,862 --> 00:06:24,758
+The iMac looked like no other computer on the market.
+
+77
+00:06:24,938 --> 00:06:30,135
+An all-in-one machine in see-through blue-green plastic, with a handle on top.
+
+78
+00:06:30,316 --> 00:06:33,486
+The "i", Jobs explained, stood for internet.
+
+79
+00:06:33,866 --> 00:06:41,666
+It made bold bets, too. No floppy disk drive. New USB ports instead of Apple's old connectors.
+
+80
+00:06:41,896 --> 00:06:48,117
+It went on sale on August 15th, 1998, for $1,299.
+
+81
+00:06:48,497 --> 00:06:54,057
+In its first six weeks, Apple shipped 278,000 iMacs.
+
+82
+00:06:54,237 --> 00:06:57,109
+The fastest-selling Mac it had ever made.
+
+83
+00:06:57,489 --> 00:07:04,031
+And when 1998 closed, Apple reported a profit of $309 million.
+
+84
+00:07:04,211 --> 00:07:07,893
+Its first profitable year since 1995.
+
+85
+00:07:08,474 --> 00:07:13,436
+Here's the part people often miss. The turnaround went deeper than design.
+
+86
+00:07:13,716 --> 00:07:18,679
+Apple had cut the stock sitting in its warehouses to about six days' worth.
+
+87
+00:07:18,859 --> 00:07:23,992
+And it boasted that it was now ahead of Dell, the company famous for running lean.
+
+88
+00:07:24,272 --> 00:07:30,856
+A year after Michael Dell said Apple should be shut down, Apple was claiming to beat Dell at his own game.
+
+89
+00:07:33,036 --> 00:07:42,756
+The profits kept coming: $601 million in 1999, $786 million in 2000.
+
+90
+00:07:42,986 --> 00:07:48,760
+Then the tech industry slumped, and in 2001 Apple slipped back to a small loss.
+
+91
+00:07:49,240 --> 00:07:53,754
+The lesson was clear. The Mac alone wasn't going to build an empire.
+
+92
+00:07:53,984 --> 00:07:56,899
+Apple needed something beyond the computer.
+
+93
+00:07:57,379 --> 00:08:03,707
+On October 23rd, 2001, Jobs pulled a small white device out of his pocket.
+
+94
+00:08:03,937 --> 00:08:09,732
+The iPod: 1,000 songs in your pocket, for $399.
+
+95
+00:08:10,012 --> 00:08:14,462
+Slowly, a computer company became a consumer electronics company.
+
+96
+00:08:16,542 --> 00:08:22,934
+Then, on January 9th, 2007, in San Francisco, Jobs introduced three products.
+
+97
+00:08:23,114 --> 00:08:28,290
+A widescreen iPod. A mobile phone. And an internet communicator.
+
+98
+00:08:28,570 --> 00:08:31,549
+Except they weren't three products. They were one.
+
+99
+00:08:31,829 --> 00:08:33,613
+He called it iPhone.
+
+100
+00:08:34,193 --> 00:08:38,793
+In 2007, Apple earned $3.5 billion.
+
+101
+00:08:39,023 --> 00:08:41,639
+Ten years after losing a billion.
+
+102
+00:08:43,819 --> 00:08:46,200
+So, did Steve Jobs save Apple?
+
+103
+00:08:46,580 --> 00:08:51,927
+He was the decisive leader. But the rescue was a chain, and every link mattered.
+
+104
+00:08:52,307 --> 00:08:58,059
+The NeXT deal brought him back, along with the software that became Mac OS X.
+
+105
+00:08:58,239 --> 00:09:02,732
+The Microsoft deal bought time and trust, when Apple had little of either.
+
+106
+00:09:02,912 --> 00:09:09,048
+Four products instead of dozens gave a struggling company the chance to do a few things well.
+
+107
+00:09:09,228 --> 00:09:13,487
+And the iMac proved people could still want an Apple computer.
+
+108
+00:09:14,067 --> 00:09:19,776
+Jobs later said that when he came back, Apple was about 90 days from going broke.
+
+109
+00:09:20,056 --> 00:09:24,912
+Whether it was 90 days or 190, the lesson is the same.
+
+110
+00:09:25,492 --> 00:09:31,052
+When a company is running out of time, the hardest decision is rarely what to build.
+
+111
+00:09:31,332 --> 00:09:33,223
+It's what to stop doing.
+
+112
+00:09:34,103 --> 00:09:36,570
+Every empire has a turning point.
+
+113
+00:09:36,850 --> 00:09:40,532
+For Apple, it was a whiteboard with four empty boxes.
+
+114
+00:09:43,412 --> 00:09:47,927
+This has been EMPIRE STORIES. If you want the next story, subscribe.
