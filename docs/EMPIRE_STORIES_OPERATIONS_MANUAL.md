@@ -58,7 +58,7 @@ Gold is **retired** (old palette). No dollar-bill watermark. No burnt-in subtitl
 1. **Cold open** (~45 s): the most surprising fact/quote, counting numbers, a question → no logo yet.
 2. **Ident** (7.8 s, navy): emblem (columned temple in red ring) → "EMPIRE STORIES" → tagline → "PRESENTS" → red label "EPISODE NN" → episode title in serif.
 3. **Composed timeline**: horizontal axis at the bottom; year changes roll like an odometer with "+N YEARS", a red travel line runs to the next pin, the pin lands with a shockwave; every panel element is connected to its pin by an elbow branch line. Past pins stay visible.
-4. **Elements**: illustration cards (navy frame, red border, "AI ILLUSTRATION" tag), product photos with **thin torn-paper edges hugging the image's shape**, label boxes (navy/red with traced outline), big counting numbers (count up/down with calculator ticks), red rubber stamps, quote cards with a big red “ and red highlighter swipe, bar charts, 2×2 grids, chain diagrams.
+4. **Elements**: illustration cards (torn-paper frame, navy name band, "AI ILLUSTRATION" tag; no red borders), product photos with **thin torn-paper edges hugging the image's shape**, label boxes (navy/red with traced outline), big counting numbers (count up/down with calculator ticks), red rubber stamps, quote cards with a big red “ and red highlighter swipe, bar charts, 2×2 grids, chain diagrams.
 5. **Map scene** for geography (Albers projection, US Census / world-atlas boundaries), pins + arcs.
 6. **OUR TAKE** section: red label, serif headline, the lesson in one big word (e.g. FOCUS.).
 7. **End screen** (14 s navy): emblem + wordmark + subscribe circle (left), two video boxes "WATCH NEXT" / "MORE STORIES" (right). Add YouTube end-screen elements on top after publishing.
@@ -118,6 +118,9 @@ The description always has a CHAPTERS block: first line `00:00`, at least 3 chap
 - **Use the full screen width.** Columns at x = 600 / 1320; person cards 40 % bigger (`PS = 1.4`); a single person or a single key image is shown big in the centre. Quotes get wider lines.
 - **More real images for every era**: period photos, places, products, buildings. Text supports the picture, never replaces it.
 - **Open in the present, then travel back** (`rewind` scene, 3.6 s, before the first year): the cold open shows the empire as it is today; after the ident a cinematic time-travel takes us back. A big year counter rolls back from 2026 to the first year, a film reel of the story's photos races past (turning sepia as we go back), light streaks, a soft flash on arrival, and the counter lands as the first timeline year. It is a designed sequence; we never play the finished video backwards. Sound: tonal film-reel spin that speeds up and slows down, then a soft arrival (thud + bell + pad), with no hiss.
+
+## 5f. Image frame (locked 21 Nov 2026 — owner: "this is our design")
+**Every image uses the torn-paper frame**: product photos, place photos, founder/illustration cards and any other picture get the thin torn white-paper rim that follows the image's shape, with a soft drop shadow (`paper.torn_image()` / `edge_card()`). **No red outline, no traced red line, no second border around images, ever** (that looked amateur). Founder cards are square-cornered illustrations with the navy name band inside the torn rim; long names shrink to fit. Place cards: photo + navy caption band inside one torn-paper card. Episodes and Shorts use the same frame.
 
 ## 6. Tools and environment
 

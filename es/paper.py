@@ -222,3 +222,13 @@ def edge_card(name, w, seed=None):
     rm = Image.new("L", (Wc, Hc), 0); ImageDraw.Draw(rm).rectangle([pad - rim, pad - rim, Wc - pad + rim, Hc - pad + rim], fill=255)
     pm = Image.new("L", (Wc, Hc), 0); ImageDraw.Draw(pm).rectangle([pad + 2, pad + 2, Wc - pad - 2, Hc - pad - 2], fill=255)
     return _thin_assemble(content, _thin_torn(rm, seed, 1.0), _thin_torn(pm, seed + 1, 0.6), seed)
+
+
+def torn_image(im, seed=7):
+    """LOCKED HOUSE FRAME (owner, 21 Nov 2026): any image (photo, illustration card, place card) gets the thin torn white-paper rim
+    that follows its shape, with a soft shadow. No red lines, no double borders."""
+    im = im.convert("RGBA"); pad, rim = 40, 9; Wc, Hc = im.width + 2 * pad, im.height + 2 * pad
+    content = Image.new("RGBA", (Wc, Hc), (0, 0, 0, 0)); content.paste(im, (pad, pad))
+    rm = Image.new("L", (Wc, Hc), 0); ImageDraw.Draw(rm).rectangle([pad - rim, pad - rim, Wc - pad + rim, Hc - pad + rim], fill=255)
+    pm = Image.new("L", (Wc, Hc), 0); ImageDraw.Draw(pm).rectangle([pad + 2, pad + 2, Wc - pad - 2, Hc - pad - 2], fill=255)
+    return _thin_assemble(content, _thin_torn(rm, seed, 1.0), _thin_torn(pm, seed + 1, 0.6), seed)

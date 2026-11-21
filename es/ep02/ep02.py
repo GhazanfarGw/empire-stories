@@ -183,19 +183,17 @@ def place_card(name, w, title, sub, crop_top=None):
         bw_ = int(src.width * 0.92); x0 = (src.width - bw_) // 2; hh = int(bw_ / 1.9); y0 = int((src.height - hh) * crop_top)
         src = src.crop((x0, y0, x0 + bw_, y0 + hh))
     h = int(w * src.height / src.width); h = min(h, 760); ph = src.resize((w, int(w * src.height / src.width)), Image.LANCZOS).crop((0, 0, w, h))
-    bd, cap = 14, 104; im = Image.new("RGBA", (w + 2 * bd, h + 2 * bd + cap), IVORY + (255,))
-    im.paste(ph, (bd, bd)); d = ImageDraw.Draw(im)
-    d.rectangle([0, 0, im.width - 1, im.height - 1], outline=NAVY_US + (255,), width=3)
-    d.rectangle([bd, h + bd + 10, im.width - bd, im.height - bd], fill=NAVY_US + (255,))
+    bd, cap = 0, 96; im = Image.new("RGBA", (w, h + cap), NAVY_US + (255,))
+    im.paste(ph, (0, 0)); d = ImageDraw.Draw(im)
     t1 = txt(title, "sansb", 40, IVORY, 4); t2 = txt(sub, "serifi", 26, SOFT)
-    top = h + bd + 10; gap_ = 6; blk = t1.height + gap_ + t2.height; y_ = top + (cap - 10 - blk) / 2
+    top = h; gap_ = 6; blk = t1.height + gap_ + t2.height; y_ = top + (cap - blk) / 2
     im.alpha_composite(t1, (int(im.width / 2 - t1.width / 2), int(y_))); im.alpha_composite(t2, (int(im.width / 2 - t2.width / 2), int(y_ + t1.height + gap_)))
-    return im, h
+    return T0.PK.torn_image(im, sum(map(ord, name)) % 97), h
 def place_el(im, x, y, p, t, t0, a):
     name, w, title, sub, cr = p[:5]; crop = p[5] if len(p) > 5 else None
     c, h = place_card(name, w, title, sub, crop); ti = t - t0; s = eo(a)
     z = 1.0 + 0.035 * cl(ti / 10)                    # slow Ken Burns push-in
-    place(im, V.shadowed(c, 22, (10, 18), 0.25), x, y + (1 - s) * 30, scale=z * (0.97 + 0.03 * s), alpha=eio(cl(a)))
+    place(im, c, x, y + (1 - s) * 30, scale=z * (0.97 + 0.03 * s), alpha=eio(cl(a)))
     if a > 0.5: V.credit(im, cr, a)
     return y + c.height / 2
 
@@ -331,7 +329,6 @@ def el_draw(im, e, t, a):
             m = eio(r(t, he, he + 0.6)); cx, cy = 960, (470 if PIN_OF.get(e["b"]) is not None else 540)
             hx, hy, hs = cx + (x - cx) * m, cy + (y - cy) * m, HERO_SCALE + (1 - HERO_SCALE) * m
         c = person_card(*p); place(im, c, hx, hy + (1 - s) * 30, scale=PS * hs * (0.86 + 0.14 * back(a)), alpha=min(1, a * 1.5))
-        if not he or t >= he + 0.6: trace(im, (x - 144 * PS, y - 179 * PS, x + 144 * PS, y + 179 * PS), t, (he + 0.6 if he else e["tin"]) + 0.25, RED, 3, loop=False)
         return y + 185 * PS
     if k == "cut":
         c = cutimg(p[0], p[1]); place(im, c, x, y + (1 - s) * 34, scale=0.84 + 0.16 * back(a), alpha=min(1, a * 1.5))

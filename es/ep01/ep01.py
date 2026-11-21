@@ -349,7 +349,6 @@ def el_draw(im, e, t, a):
             m = eio(r(t, he, he + 0.6)); cx, cy = 960, (470 if PIN_OF.get(e["b"]) is not None else 540)
             hx, hy, hs = cx + (x - cx) * m, cy + (y - cy) * m, HERO_SCALE + (1 - HERO_SCALE) * m
         c = person_card(*p); place(im, c, hx, hy + (1 - s) * 30, scale=hs * (0.86 + 0.14 * back(a)), alpha=min(1, a * 1.5))
-        if not he or t >= he + 0.6: trace(im, (x - 144, y - 179, x + 144, y + 179), t, (he + 0.6 if he else e["tin"]) + 0.25, RED, 3, loop=False)
         return y + 185
     if k == "cut":
         c = cutimg(p[0], p[1]); place(im, c, x, y + (1 - s) * 34, scale=0.84 + 0.16 * back(a), alpha=min(1, a * 1.5))
