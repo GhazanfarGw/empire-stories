@@ -130,6 +130,8 @@ Folder per episode in the repo: `es/epNN/` (copy `es/ep01/` as the template).
 
 ## 9. Localization (every video)
 
+**Dubbed audio is mandatory on every video (owner decision, 21 Nov 2026).** YouTube auto-dubs English into 20 languages: Arabic, Bengali, Dutch, French, German, Hebrew, Hindi, Indonesian, Italian, Japanese, Korean, Malayalam, Polish, Portuguese, Punjabi, Russian, Spanish, Tamil, Telugu, Ukrainian. Dubs start "Processing…" on the Languages page after upload and go live automatically. YouTube cannot dub English into **Urdu, Chinese or Turkish**: for Urdu (and Chinese) we generate our own track with Kokoro (Urdu: `lang="ur"`, voice `hm_omega`; Chinese: `lang="cmn"`, voice `zm_yunjian`; years written as words) and upload it in Studio → Languages → [language] → Audio → Add (file upload is manual from `E:\…\final\dubs\`).
+
 - Studio → Settings → Channel → Advanced: **Automatic dubbing ON, manual review OFF** (dubs publish automatically). YouTube auto-dubs English into ~20 languages (incl. Hindi, Spanish, Portuguese, French, German, Japanese, Korean, Indonesian, Bengali).
 - English captions: Studio → video → Languages → English → publish the auto captions (check names/numbers) or upload the SRT. Viewers can auto-translate captions to any language.
 - **Titles + descriptions in 6 priority languages: Hindi (hi), Urdu (ur), Arabic (ar), Chinese Simplified (zh-Hans), Russian (ru), Turkish (tr)** — via Studio Languages page or the API (`PUT videos?part=localizations` with the full localizations map; include `en`).
