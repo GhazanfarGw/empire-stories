@@ -85,13 +85,17 @@ File: `es/ep01/thumb_pro.py` (reference output `thumbs/thumb_PRO_A.jpg`).
   `asetrate=24000*0.96,aresample=48000,atempo=1.0417,highpass=f=50,lowshelf=f=120:g=4.5,equalizer=f=260:t=q:w=1:g=-1.5,equalizer=f=3200:t=q:w=1.2:g=2,acompressor=threshold=-18dB:ratio=3:attack=5:release=80`
 - If Kokoro is unavailable: use any deep British male narrator (e.g. ElevenLabs "documentary British male"), same pacing and pauses. Keep it consistent from then on.
 
-## 5. Sound design (locked)
+## 5. Sound design (locked v2, 21 Nov 2026 — owner feedback)
 
-All synthesized in code (`es/ep01/audio.py`), no licensed music:
-- Signature ident: noise swell → low drone → warm pad → 3-note bell chime (E5, B5, E6) → sub boom.
-- Ambient bed: 4-chord pad cycle, very quiet, under the whole story.
-- Micro-SFX on everything: pop (images/cards), small pop + swish (labels), zip (branch lines/arcs), thud (stamps, pin landings), odometer ticks on year changes, **calculator ticks with a final lock chime on every counting number** (pitch rises going up, falls going down).
-- Mix: music ducked under voice with sidechain compression; final loudness **−14 LUFS**, true peak −1.5 dB, AAC 160 kbps 48 kHz.
+Code: `es/ep02/audio.py` (writes three stems: voice, sfx, bed). Rules:
+- **No sound when the timeline travels or branch lines draw** (no odometer ticks, no zips, no whooshes).
+- **No noise-based "shh/snake" sounds at all** (no swish, swell, hiss). Every effect is tonal and soft: round pops for cards/labels, soft calculator ticks + small chime on counting numbers, low thud for stamps, a soft piano note for headline words/quotes.
+- **Levels:** effects bus at ~20–25 % of the voice (`volume=0.18` on the sfx stem); background bed very low (`volume=0.16`) and side-chain ducked hard under the voice (threshold 0.015, ratio 8, release 700 ms). Voice is always the clearest element.
+- **Background bed:** slow felt-piano arpeggios (one note ~every 1.3 s) over a warm pad, A minor → F → C → G.
+- Signature ident: tonal riser → pad → 3-note bell chime (E5, B5, E6) → sine sub boom (no noise).
+- Final mix −14 LUFS, true peak −1.5 dB, AAC 160 kbps 48 kHz.
+
+**Hooks (owner rule):** the cold open must force the viewer to stay: open on a simple question everyone thinks they can answer, flip it with one verified, surprising number, add a quote, end on the central question. 45–55 s max.
 
 ## 6. Tools and environment
 

@@ -1,0 +1,154 @@
+[
+ {
+  "i": 0,
+  "beat": "hook",
+  "text": "What does McDonald's sell?",
+  "cap": "What does McDonald's sell?",
+  "dur": 1.6,
+  "pause": 0.7
+ },
+ {
+  "i": 1,
+  "beat": "hook",
+  "text": "Burgers, obviously. Fries. Milkshakes.",
+  "cap": "Burgers, obviously. Fries. Milkshakes.",
+  "dur": 2.9013333333333335,
+  "pause": 0.5
+ },
+ {
+  "i": 2,
+  "beat": "hook",
+  "text": "Last year, the world spent one hundred and thirty-nine billion dollars at McDonald's.",
+  "cap": "Last year, the world spent $139 billion at McDonald's.",
+  "dur": 5.504,
+  "pause": 0.4
+ },
+ {
+  "i": 3,
+  "beat": "hook",
+  "text": "But ninety-five percent of those restaurants are run by franchisees, not by McDonald's.",
+  "cap": "But 95% of those restaurants are run by franchisees, not by McDonald's.",
+  "dur": 5.738666666666667,
+  "pause": 0.5
+ },
+ {
+  "i": 4,
+  "beat": "hook",
+  "text": "So of the money McDonald's itself collects, the biggest single line isn't food.",
+  "cap": "So of the money McDonald's itself collects, the biggest single line isn't food.",
+  "dur": 5.333333333333333,
+  "pause": 0.6
+ },
+ {
+  "i": 5,
+  "beat": "hook",
+  "text": "It's rent.",
+  "cap": "It's rent.",
+  "dur": 1.0026666666666666,
+  "pause": 0.8
+ },
+ {
+  "i": 6,
+  "beat": "hook",
+  "text": "Ten point four billion dollars of it, in a single year.",
+  "cap": "$10.4 billion of it, in a single year.",
+  "dur": 3.7546666666666666,
+  "pause": 0.35
+ },
+ {
+  "i": 7,
+  "beat": "hook",
+  "text": "More than all its royalties. More than all the food sold in its own restaurants.",
+  "cap": "More than all its royalties. More than all the food sold in its own restaurants.",
+  "dur": 4.693333333333333,
+  "pause": 0.6
+ },
+ {
+  "i": 8,
+  "beat": "hook",
+  "text": "Its first president put it bluntly.",
+  "cap": "Its first president put it bluntly.",
+  "dur": 2.176,
+  "pause": 0.4
+ },
+ {
+  "i": 9,
+  "beat": "hook",
+  "text": "We are not technically in the food business. We are in the real estate business.",
+  "cap": "We are not technically in the food business. We are in the real estate business.",
+  "dur": 5.077333333333334,
+  "pause": 0.9
+ },
+ {
+  "i": 10,
+  "beat": "hook",
+  "text": "So is McDonald's really a burger company?",
+  "cap": "So is McDonald's really a burger company?",
+  "dur": 3.072,
+  "pause": 0.4
+ },
+ {
+  "i": 11,
+  "beat": "hook",
+  "text": "Or a landlord that happens to sell burgers?",
+  "cap": "Or a landlord that happens to sell burgers?",
+  "dur": 2.986666666666667,
+  "pause": 0.6
+ },
+ {
+  "i": 12,
+  "beat": "hook",
+  "text": "To find out, we go back to one small drive-in, in California.",
+  "cap": "To find out, we go back to one small drive-in, in California.",
+  "dur": 4.266666666666667,
+  "pause": 0.5
+ },
+ {
+  "i": 13,
+  "beat": "y0",
+  "text": "In nineteen forty-eight, two brothers, Dick and Mac McDonald, closed their busy drive-in in San Bernardino, California.",
+  "cap": "In 1948, two brothers, Dick and Mac McDonald, closed their busy drive-in in San Bernardino, California.",
+  "dur": 7.978666666666666,
+  "pause": 0.4
+ },
+ {
+  "i": 14,
+  "beat": "y0",
+  "text": "When they reopened, most of the menu was gone. Nine items. No carhops. A fifteen-cent hamburger.",
+  "cap": "When they reopened, most of the menu was gone. Nine items. No carhops. A 15-cent hamburger.",
+  "dur": 6.890666666666666,
+  "pause": 0.4
+ },
+ {
+  "i": 15,
+  "beat": "y0",
+  "text": "They called it the Speedee Service System. A kitchen that worked like a factory line.",
+  "cap": "They called it the Speedee Service System. A kitchen that worked like a factory line.",
+  "dur": 5.290666666666667,
+  "pause": 0.7
+ },
+ {
+  "i": 16,
+  "beat": "y1",
+  "text": "Six years later, a milkshake-machine salesman noticed something odd. One small restaurant had bought eight of his mixers.",
+  "cap": "Six years later, a milkshake-machine salesman noticed something odd. One small restaurant had bought eight of his mixers.",
+  "dur": 7.786666666666667,
+  "pause": 0.4
+ },
+ {
+  "i": 17,
+  "beat": "y1",
+  "text": "His name was Ray Kroc. And in nineteen fifty-four, he drove out to San Bernardino to see why.",
+  "cap": "His name was Ray Kroc. And in 1954, he drove out to San Bernardino to see why.",
+  "dur": 6.592,
+  "pause": 0.4
+ },
+ {
+  "i": 18,
+  "beat": "y1",
+  "text": "What he found was a line of customers, and a system that could be copied anywhere.",
+  "cap": "What he found was a line of customers, and a system that could be copied anywhere.",
+  "dur": 4.928,
+  "pause": 0.9
+ }
+]
