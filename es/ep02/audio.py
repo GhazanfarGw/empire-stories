@@ -23,8 +23,8 @@ class Bus:
         i = int(at * SR)
         if i < 0 or i >= n: return
         x = sig[: n - i] * g; s.m[i:i + len(x), 0] += x * (1 - max(0, pan)); s.m[i:i + len(x), 1] += x * (1 + min(0, pan))
-    def save(s, path, peak=0.9): sf.write(path, s.m / max(1e-9, np.abs(s.m).max()) * peak, SR)
-SFX, BED = Bus(), Bus()
+    def save(s, path, peak=0.9): sf.write(path, s.m / max(1e-3, np.abs(s.m).max()) * peak, SR)
+SFX, BED, AMB = Bus(), Bus(), Bus()      # AMB: ambience/foley under archive film and cinematic shots
 
 # ---------- instruments (all tonal, no noise) ----------
 def piano(f, d=3.0, vel=1.0):
@@ -63,6 +63,24 @@ def ident(t0):
     SFX.add(t0 + 2.4, sub(), 0.9)
 if T.IDENT_T: ident(T.IDENT_T + 0.4)
 
+# ---------- ambience / foley for film shots (soft, low, under the voice; rumble only, never hiss) ----------
+def brown(d):
+    w = rng.standard_normal(int(d * SR)); b_ = np.cumsum(w); b_ -= np.convolve(b_, np.ones(4801) / 4801, "same"); return b_ / (np.abs(b_).max() + 1e-9)
+def car_pass(t0, d, pass_frac=0.75):
+    x = k(d); tp = d * pass_frac; dist = np.sqrt(((x - tp) * 14.0) ** 2 + 6.0 ** 2)             # car at ~14 m/s, 6 m from the camera
+    vel = -14.0 * 14.0 * (x - tp) / dist; dop = 343 / (343 - vel)                               # doppler: higher coming, lower going
+    f0 = 38 * dop * (1 + 0.02 * np.sin(2 * np.pi * 0.7 * x)); ph = 2 * np.pi * np.cumsum(f0) / SR
+    eng = sum(np.sin(h * ph + h) / h ** 0.9 for h in range(1, 9))
+    loud = (6.0 / dist) ** 1.6; fade = np.minimum(1, x / 0.6) * np.clip((d - x) / 0.6, 0, 1)
+    road = lp(brown(d), 260) * 0.9
+    sig = lp(eng * 0.35 + road, 700) * loud * fade
+    pan = np.clip((x - tp) / 2.5, -1, 1) * 0.7
+    i = int(t0 * SR); m = min(len(sig), n - i)
+    AMB.m[i:i + m, 0] += sig[:m] * (1 - np.maximum(0, pan[:m])); AMB.m[i:i + m, 1] += sig[:m] * (1 + np.minimum(0, pan[:m]))
+    AMB.add(t0, lp(brown(d), 180) * 0.12 * fade)                                                # distant traffic bed
+def town(t0, d):
+    x = k(d); fade = np.minimum(1, x / 1.0) * np.clip((d - x) / 1.0, 0, 1); AMB.add(t0, lp(brown(d), 220) * 0.25 * fade)
+
 # ---------- time travel (rewind 2026 -> first year): film-reel spin, tonal only, soft arrival ----------
 def rewind_sfx(t0, d):
     x = k(d); u = x / d
@@ -94,7 +112,12 @@ while q < min(END, T.OUTRO + 1.0) - 1.0:
 for e in T.EL:
     tin, kd = e["tin"], e["kind"]; pan = (e["x"] - 960) / 1800
     if tin > min(END, T.OUTRO): continue
-    if kd == "cine": BED.add(tin, pad([65.41, 98.0, 130.81], 5.0, 1.5, 2.5), 0.5); continue      # cinematic shots: a soft low swell, no pop
+    if kd == "cine":
+        BED.add(tin, pad([65.41, 98.0, 130.81], 5.0, 1.5, 2.5), 0.5)      # cinematic shots: a soft low swell, no pop
+        amb = e["pay"].get("amb"); dur_ = e["tout"] - tin
+        if amb == "car": car_pass(tin, dur_, e["pay"].get("passby", 0.75))
+        elif amb == "town": town(tin, dur_)
+        continue
     if kd in ("cut", "person", "photo", "screen", "place"): SFX.add(tin, pop(440), 0.8, pan=pan)
     elif kd == "lab": SFX.add(tin, pop(620), 0.45, pan=pan)
     elif kd == "stamp": SFX.add(tin, thud(), 0.6); SFX.add(tin, pop(330), 0.4)
@@ -120,8 +143,8 @@ def room(bus, sec, wet):
     x = k(sec); ir = lp(rng.standard_normal(len(x)), 2500) * np.exp(-x * 6.9 / sec); ir /= np.abs(ir).sum() ** 0.5 * 8
     for c in range(2): bus.m[:, c] = bus.m[:, c] * (1 - wet) + ss.fftconvolve(bus.m[:, c], ir)[:n] * wet * 4
 room(BED, 3.5, 0.45); room(SFX, 1.6, 0.3)
-SFX.m *= fade; BED.m *= fade
-SFX.save(f"{D}/sfx.wav"); BED.save(f"{D}/bed.wav")
+SFX.m *= fade; BED.m *= fade; AMB.m *= fade
+SFX.save(f"{D}/sfx.wav"); BED.save(f"{D}/bed.wav"); AMB.save(f"{D}/amb.wav")
 v = np.zeros(int(END * 24000), np.float32)
 for m in T.META:
     a, _ = sf.read(f"{D}/voice/s{m['i']:03d}.wav"); s0 = int(m["t"] * 24000); v[s0:s0 + len(a)] += a[: max(0, len(v) - s0)]

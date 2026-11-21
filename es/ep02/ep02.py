@@ -114,7 +114,7 @@ el(h, "person", L, 540, ("Harry Sonneborn", "McDonald's first president"), st(h,
 el(h, "quote", R_ + 40, 510, ("“We are not technically in the food business. We are in the real estate business.”", "Harry Sonneborn, as recounted in McDonald's: Behind the Arches", 48, (12, 13, 14)), st(h, 9, 0.0), False, tout=P(h, 10))
 el(h, "words", 960, 460, ("A burger company…", 104, "serif", INK, (), 1600), st(h, 10, 0.1), False, tout=P(h, 12))
 el(h, "words", 960, 630, ("…or a landlord that sells burgers?", 80, "serifi", INK, (3,), 1600), st(h, 11, 0.0), False, tout=P(h, 12))
-el(h, "cine", 960, 540, dict(img="sb_valley.jpg", z=(1.0, 1.14), pan=(0.45, 0.4), cap="SAN BERNARDINO, CALIFORNIA", sub="the valley today, from the air", cr=CR["valley"]), st(h, 12, 0.1), False)
+el(h, "cine", 960, 540, dict(img="sb_valley.jpg", z=(1.0, 1.14), amb="town", pan=(0.45, 0.4), cap="SAN BERNARDINO, CALIFORNIA", sub="the valley today, from the air", cr=CR["valley"]), st(h, 12, 0.1), False)
 # --- 1948: the Speedee Service System
 b = "y0"
 el(b, "place", 960, 420, ("sb_motel66.jpg", 1120, "SAN BERNARDINO · ROUTE 66", "a car town on America's main road", CR["motel"], 0.42), st(b, 0, -0.3), False, tout=mid(b, 0, 0.55))
@@ -132,7 +132,7 @@ b = "y1"
 el(b, "person", L, 420, ("Ray Kroc", "Milkshake-machine salesman"), st(b, 0, 0.5))
 el(b, "big", R_, 330, ("8", NAVY_US, 170), mid(b, 0, 0.82), False, tout=P(b, 2))
 el(b, "lab", R_, 460, ("MULTIMIXERS, ONE RESTAURANT", INK), mid(b, 0, 0.9), False, tout=P(b, 2))
-el(b, "cine", 960, 540, dict(vid="fr_road1", n=217, z=(1.0, 1.06), cap="1954 · KROC DRIVES WEST", sub="to see one small restaurant in San Bernardino", cr=CR["road"]), st(b, 1, 0.2), False, tout=P(b, 2) + 0.4)
+el(b, "cine", 960, 540, dict(vid="fr_road1", n=217, z=(1.0, 1.06), amb="car", passby=0.78, cap="1954 · KROC DRIVES WEST", sub="to see one small restaurant in San Bernardino", cr=CR["road"]), st(b, 1, 0.2), False, tout=P(b, 2) + 0.4)
 el(b, "words", R_ + 20, 420, ("A system that could be copied anywhere.", 62, "serif", INK, (4, 5, 6), 760), st(b, 2, 0.4), False)
 
 
@@ -380,10 +380,10 @@ def el_draw(im, e, t, a):
         if a > 0.5: V.credit(im, p[2], a)
         return y + c.height / 2
     if k == "lab":
-        lb = badge(p[0], p[1]); place(im, lb, x, y + (1 - s) * 26, alpha=eio(cl(a)))      # one unit: box + aligned frame, fades up
+        lb = badge(p[0], p[1]); place(im, lb, x, y + (1 - s) * 26, scale=e.get("sc", 1.0), alpha=eio(cl(a)))      # one unit: box + aligned frame, fades up
         return y + lb.height / 2 + 2
     if k == "big":
-        place(im, txt(counted(p[0], count_frac(ti)), "disp", p[2], p[1]), x, y + (1 - s) * 22, scale=1.12 - 0.12 * eo5(a) + 0.05 * (1 - r(ti, COUNT_DUR, COUNT_DUR + 0.25)) * r(ti, COUNT_DUR - 0.05, COUNT_DUR), alpha=a); return y + p[2] * 0.55
+        place(im, txt(counted(p[0], count_frac(ti)), "disp", p[2], p[1]), x, y + (1 - s) * 22, scale=e.get("sc", 1.0) * (1.12 - 0.12 * eo5(a)) + 0.05 * (1 - r(ti, COUNT_DUR, COUNT_DUR + 0.25)) * r(ti, COUNT_DUR - 0.05, COUNT_DUR), alpha=a); return y + p[2] * 0.55
     if k == "count":
         v = int(round(p[0] * count_frac(ti))); place(im, txt(str(v), "disp", 230, p[1]), x, y, alpha=a); return y + 120
     if k == "note":
@@ -449,6 +449,33 @@ def draw_axis(im, t):
             place(im, txt(str(YEARS[i]), "sansb", 30, INK, 2), px, AX_Y + 50, alpha=e)
         place(im, txt(DESC[i], "sansm", 21, INK if cur else MUTE), px, AX_Y + 92, alpha=r(tt, 0.3, 0.7))
 
+
+# ---------------- CENTRE-FIRST layout (locked 21 Nov, owner): new information appears in the centre of the screen;
+# when the next item of the same panel arrives, the first one glides left (and shrinks a little) to make room ----------------
+MOVABLE = {"big", "lab", "words", "count", "stamp", "note", "photo", "quote", "cut"}
+def _set_centre_first():
+    from collections import defaultdict as dd
+    panels = dd(list)
+    for e in EL:
+        if e["kind"] in ("cine", "place", "today", "bars", "chain", "grid", "chart", "focus", "screen"): continue
+        panels[(e["b"], round(e["tout"], 2))].append(e)
+    for es in panels.values():
+        cols = []
+        for e in sorted(es, key=lambda o: o["tin"]):
+            for c in cols:
+                if abs(c["x"] - e["x"]) < 200: c["els"].append(e); break
+            else: cols.append(dict(x=e["x"], t=e["tin"], els=[e]))
+        if len(cols) < 2: continue
+        first, nxt = cols[0], cols[1]
+        if any(o["kind"] == "person" or o["kind"] not in MOVABLE for o in first["els"]): continue
+        if abs(first["x"] - 960) < 60 or nxt["t"] - first["t"] < 0.8: continue
+        for o in first["els"]: o["cf"] = (960 - first["x"], nxt["t"] - 0.15)
+_set_centre_first()
+def centre_first(e, t):
+    cf = e.get("cf")
+    if not cf: return e
+    m = eio(r(t, cf[1], cf[1] + 0.7)); return dict(e, x=e["x"] + cf[0] * (1 - m), sc=1.12 - 0.12 * m)
+
 ANCH = {}
 def scene_stage(t):
     im = V.bg(); draw_axis(im, t)
@@ -461,7 +488,8 @@ def scene_stage(t):
             if bp > 0 and aout > 0:
                 lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); branch(ImageDraw.Draw(lay), PX[pin], e["x"], ey, bp); im.alpha_composite(lay_alpha(lay, aout))
         if a > 0:
-            e2 = e if aout >= 1 else dict(e, y=e["y"] - 60 * (1 - eo(aout)) ** 0.7)
+            e2 = centre_first(e, t)
+            if aout < 1: e2 = dict(e2, y=e["y"] - 60 * (1 - eo(aout)) ** 0.7)
             an = el_draw(im, e2, t, a)
             if aout >= 1: ANCH[id(e)] = an
     return im

@@ -130,6 +130,12 @@ The description always has a CHAPTERS block: first line `00:00`, at least 3 chap
 - Cinematic shots get a soft low swell instead of a pop.
 - **Voice chain:** the locked deep-voice filter (§4) is part of `mix.sh` for every episode.
 
+## 5h. Centre-first layout + film ambience (locked 21 Nov 2026 — owner feedback #5)
+**These rules are the house system for EVERY future episode and Short, not just one video.**
+- **Centre-first:** the viewer's eye is in the middle of the screen, so every new number, label, headline or picture first appears **in the centre**. When the next item of the same panel arrives, the first one glides smoothly to the left (0.7 s ease) and shrinks slightly (×1.12 → ×1.0), and the new item comes in beside it. Same idea as hero portraits (a person appears big in the centre, then moves to their slot). Nothing should ever start at the edge. Engine: `_set_centre_first()` / `centre_first()`; columns of a panel are detected automatically.
+- **Film ambience:** archive film and full-screen shots carry soft, real-sounding ambience under the narration: cars passing (engine + road rumble with doppler and stereo movement), town/traffic rumble, crowds, kitchens, etc. It sits in its own `amb` stem at `volume=0.22`, gently ducked under the voice (ratio 4). Rumble/tonal only, never hiss.
+- **More cinema, less text:** as much real footage and real photography as possible in every era; text only where a number needs it. Target length 15–25 minutes, covering the story properly.
+
 ## 6. Tools and environment
 
 - Python 3.13, numpy, scipy, Pillow, soundfile, onnxruntime, kokoro-onnx; ffmpeg 6.1 with libx264 + libass.
