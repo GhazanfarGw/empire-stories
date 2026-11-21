@@ -7,7 +7,7 @@ This document is the single source of truth for running the channel. If the curr
 
 ---
 
-> **APPROVED SYSTEM — locked by the owner on 21 Nov 2026 (20:11 PKT).** Everything in this manual up to and including §5j (sound v3, motion and badges, journey to today + TODAY card, chapters, place photos and big images, time-travel rewind, torn-paper image frame, cinematic `cine` scenes with archive footage and ambience, centre-first layout, sound moments, punchy cold open, vertical centring) is the **approved house style** for every future episode and Short. Reference render: `Ep02 DEMO v8` (+ §5j: `Ep02 DEMO v10`). Frozen copy: GitHub branch `approved-2026-11-21`. Do not change any of it without the owner's approval.
+> **APPROVED SYSTEM — locked by the owner on 21 Nov 2026 (20:11 PKT).** Everything in this manual up to and including §5j (sound v3, motion and badges, journey to today + TODAY card, chapters, place photos and big images, time-travel rewind, torn-paper image frame, cinematic `cine` scenes with archive footage and ambience, centre-first layout, sound moments, punchy cold open, vertical centring) is the **approved house style** for every future episode and Short. Reference render: `Ep02 DEMO v8` (+ §5j: `Ep02 DEMO v10`/`v11`). Frozen copy: GitHub branch `approved-2026-11-21`. Do not change any of it without the owner's approval.
 
 ## 0. Where everything lives (backup map)
 
@@ -152,7 +152,8 @@ The description always has a CHAPTERS block: first line `00:00`, at least 3 chap
   - *danger* (losses, near-bankruptcy, collapse): soft red edge tint + slow pulsing low drone. *sad*: slow minor piano. *triumph/happy*: warm swell + bells.
 - **The score follows the journey** at the same smooth, low volume: tense/minor for today's mystery and dark chapters, warm/nostalgic major for the founding years, brighter for growth, minor for decline. The level never jumps; only the colour changes.
 - **Voice emotion:** same narrator and tone; pace changes with the moment (slower, with a pause after a key line).
-- Motion stays calm: centre-first glides, hero portraits, slow pushes on photos/film, time-travel rewind. No jumpy zoom-in/zoom-out effects.
+- **SLAM on tension moments (owner feedback #9, reference `Ep02 DEMO v11`):** at the key tension line, the key words (a red stamp, e.g. "THEY PAY RENT") are thrown at the screen like a stone. They fly in ~3× size, land hard in 0.2 s with a tiny bounce, at full strength. **At that exact instant:** a hard low hit sound + the dark impact chord, the music drops out, and the screen gives one short jolt (≈0.35 s), then stillness. `el(..., "stamp", ...); EL[-1].update(slam=True)` + `mood("impact", t); MOODS[-1]["jolt"] = True`.
+- **Keep people awake:** we are telling a big story, not a lullaby. Calm passages stay calm, but every tension/danger/turning point gets motion + sound so viewers feel it and stay active. Ordinary appearances stay silent and smooth; no random zoom-in/zoom-out.
 
 ## 6. Tools and environment
 

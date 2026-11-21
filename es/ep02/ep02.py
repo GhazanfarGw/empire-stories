@@ -81,6 +81,7 @@ def count_frac(ti): return eo(r(ti, 0.0, COUNT_DUR))
 
 # ---------------- elements ----------------
 EL = []
+SLAM_T = 0.2
 YC_SHIFT = 45     # owner rule: content sits on the screen's middle line (timeline scenes were ~45 px too high)
 def el(b, kind, x, y, pay, tin, branch=True, tout=None):
     if b in YB and kind not in ("cine",): y = y + YC_SHIFT
@@ -106,7 +107,7 @@ el(h, "big", 580, 480, ("$139.4B", NAVY_US, 150), mid(h, 2, 0.55), False, tout=P
 el(h, "lab", 580, 600, ("SPENT AT McDONALD'S · 2025", INK), mid(h, 2, 0.8), False, tout=P(h, 5))
 el(h, "big", 1360, 480, ("95%", RED, 150), mid(h, 3, 0.4), False, tout=P(h, 5))
 el(h, "lab", 1360, 600, ("RUN BY FRANCHISEES", INK), mid(h, 3, 0.7), False, tout=P(h, 5))
-el(h, "stamp", 960, 780, ("THEY PAY RENT", RED), mid(h, 4, 0.82), False, tout=P(h, 5))
+el(h, "stamp", 960, 780, ("THEY PAY RENT", RED), mid(h, 4, 0.82) - SLAM_T, False, tout=P(h, 5) + 0.6); EL[-1].update(slam=True, size=74)
 el(h, "lab", 960, 200, ("WHAT McDONALD'S ITSELF COLLECTED · 2025", INK), st(h, 5, 0.1), False, tout=P(h, 7))
 el(h, "bars", 960, 730, dict(data=[("RENT", 10.442), ("FOOD SALES*", 9.690), ("ROYALTIES", 6.018)], sc=38, bw=230, gap=150,
                              labs=["$10.4B", "$9.7B", "$6.0B"], cols=[RED, NAVY_US, NAVY_US],
@@ -285,6 +286,11 @@ def cine(im, e, t, a):
     if p.get("cr") and a > 0.5: V.credit(im, p["cr"], a)
     return 0
 
+
+@functools.lru_cache(None)
+def _stamp_final(text, col, x, y, size):
+    lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); V.stamp(lay, text, x, y, 99.0, 0.0, size, -8, col); return lay
+
 # ---------------- drawing ----------------
 def lay_alpha(lay, a):
     if a < 1: lay.putalpha(lay.getchannel("A").point(lambda v: int(v * a)))
@@ -390,6 +396,12 @@ def el_draw(im, e, t, a):
         v = int(round(p[0] * count_frac(ti))); place(im, txt(str(v), "disp", 230, p[1]), x, y, alpha=a); return y + 120
     if k == "note":
         place(im, txt("— " + p, "serifi", 30, MUTE), x, y + (1 - s) * 18, alpha=eio(cl(a))); return y + 20
+    if k == "stamp" and e.get("slam"):          # SLAM (tension moments): thrown at the screen like a stone, lands hard at tin + SLAM_T
+        lay = _stamp_final(p[0], p[1], x, y, e.get("size", 58)); u = r(ti, 0, SLAM_T)
+        sc = 1 + 2.2 * (1 - u) ** 2 if u < 1 else 1 + 0.06 * math.exp(-(ti - SLAM_T) * 14) * math.cos((ti - SLAM_T) * 40)
+        al = (0.4 + 0.6 * u) * eio(1 - r(t, e["tout"] - 0.5, e["tout"]))      # lands at full strength
+        lay = lay if abs(sc - 1) < 0.002 else lay.transform((W, H), Image.AFFINE, (1 / sc, 0, x - x / sc, 0, 1 / sc, y - y / sc), Image.BICUBIC)
+        im.alpha_composite(lay_alpha(lay, al)); return y + 40
     if k == "stamp":
         lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); V.stamp(lay, p[0], x, y, t, e["tin"], 58, -8, p[1]); im.alpha_composite(lay_alpha(lay, cl(a))); return y + 40
     if k == "chart":
@@ -557,14 +569,16 @@ def cam_z(t):
 MOODS = []
 def mood(kind, t0, t1=None): MOODS.append(dict(kind=kind, t0=t0, t1=t1 if t1 is not None else t0 + 1.5))
 mood("tension", st("hook", 3, 0.0), mid("hook", 4, 0.82))
-mood("impact", mid("hook", 4, 0.82))
+mood("impact", mid("hook", 4, 0.82)); MOODS[-1]["jolt"] = True
 def mood_cam(t):
     """extra zoom factor and (dx, dy) shake from the active moods"""
     z, dx, dy = 1.0, 0.0, 0.0
     for m in MOODS:
         if m["kind"] in ("tension", "danger") and m["t0"] <= t < m["t1"] + 2.5:
             z *= 1 + 0.03 * eio(r(t, m["t0"], m["t1"])) * (1 - eio(r(t, m["t1"] + 1.0, m["t1"] + 2.5)))
-        # impact: no shake, no snap-zoom (owner: cinematic, not commercial) - the moment is carried by the sound and the stillness
+        if m["kind"] == "impact" and m.get("jolt") and m["t0"] <= t < m["t0"] + 0.4:   # slam landing: one short jolt, then stillness
+            u = t - m["t0"]; amp = 7 * math.exp(-u * 11); dx += amp * math.sin(u * 90); dy += amp * 0.6 * math.cos(u * 70)
+            z *= 1 + 0.025 * math.exp(-u * 10)
     return z, dx, dy
 def mood_grade(im, t):
     for m in MOODS:

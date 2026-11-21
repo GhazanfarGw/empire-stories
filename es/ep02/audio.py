@@ -98,6 +98,10 @@ def m_impact(t0):
     x = k(5.0); low = np.sin(2 * np.pi * 55 * x) * np.exp(-x * 0.9) * np.minimum(1, x / 0.05)          # one deep, held note
     chord = sum(piano(f, 5.0, 1.0) for f in (55.0, 110.0, 130.81, 164.81))                               # dark A-minor piano chord
     MOOD.add(t0, lp(low, 400), 0.7); MOOD.add(t0, chord * 0.45, 0.8)
+def m_slam(t0):                                             # the 'stone hits the screen' moment: a hard low hit (tonal body, no hiss)
+    x = k(1.2); hit = np.sin(2 * np.pi * 48 * x * (1 + 1.2 * np.exp(-x * 30))) * np.exp(-x * 5) * np.minimum(1, x / 0.002)
+    body = np.sin(2 * np.pi * 96 * x) * np.exp(-x * 14) * 0.6 + np.sin(2 * np.pi * 180 * x) * np.exp(-x * 30) * 0.35
+    MOOD.add(t0, lp(hit + body, 900), 1.0)
 def m_danger(t0, t1):
     d = max(1.0, t1 - t0); x = k(d); pulse = (0.5 + 0.5 * np.sin(2 * np.pi * 1.6 * x)) ** 3
     MOOD.add(t0, lp((np.sin(2 * np.pi * 73.4 * x) + np.sin(2 * np.pi * 77.8 * x)) * pulse * np.minimum(1, x / 1.0), 600), 0.8)
@@ -115,7 +119,9 @@ BED.pend = []
 for m_ in getattr(T, "MOODS", []):
     kd_ = m_["kind"]
     if kd_ == "tension": m_tension(m_["t0"], m_["t1"])
-    elif kd_ == "impact": m_impact(m_["t0"]); duck_bed(m_["t0"])
+    elif kd_ == "impact":
+        m_impact(m_["t0"]); duck_bed(m_["t0"])
+        if m_.get("jolt"): m_slam(m_["t0"])
     elif kd_ == "danger": m_danger(m_["t0"], m_["t1"])
     elif kd_ == "triumph": m_triumph(m_["t0"])
     elif kd_ == "sad": m_sad(m_["t0"])
