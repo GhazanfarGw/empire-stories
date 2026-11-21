@@ -558,27 +558,22 @@ MOODS = []
 def mood(kind, t0, t1=None): MOODS.append(dict(kind=kind, t0=t0, t1=t1 if t1 is not None else t0 + 1.5))
 mood("tension", st("hook", 3, 0.0), mid("hook", 4, 0.82))
 mood("impact", mid("hook", 4, 0.82))
-mood("impact", mid("hook", 8, 0.92))
-mood("tension", st("hook", 9, 0.0), P("hook", 10))
 def mood_cam(t):
     """extra zoom factor and (dx, dy) shake from the active moods"""
     z, dx, dy = 1.0, 0.0, 0.0
     for m in MOODS:
-        if m["kind"] in ("tension", "danger") and m["t0"] <= t < m["t1"] + 0.6:
-            z *= 1 + 0.05 * eio(r(t, m["t0"], m["t1"])) * (1 - eio(r(t, m["t1"], m["t1"] + 0.6)))
-        if m["kind"] == "impact" and m["t0"] - 0.05 <= t < m["t0"] + 1.4:
-            u = t - m["t0"]; z *= 1 + 0.07 * math.exp(-u * 3.2) * min(1, u / 0.06 + 0.001)
-            amp = 9 * math.exp(-u * 6); dx += amp * math.sin(u * 71); dy += amp * math.cos(u * 53)
+        if m["kind"] in ("tension", "danger") and m["t0"] <= t < m["t1"] + 2.5:
+            z *= 1 + 0.03 * eio(r(t, m["t0"], m["t1"])) * (1 - eio(r(t, m["t1"] + 1.0, m["t1"] + 2.5)))
+        # impact: no shake, no snap-zoom (owner: cinematic, not commercial) - the moment is carried by the sound and the stillness
     return z, dx, dy
 def mood_grade(im, t):
     for m in MOODS:
         k = m["kind"]
-        if k in ("tension", "danger") and m["t0"] <= t < m["t1"] + 0.6:
-            a = eio(r(t, m["t0"], m["t1"])) * (1 - eio(r(t, m["t1"], m["t1"] + 0.6)))
+        if k in ("tension", "danger") and m["t0"] <= t < m["t1"] + 2.5:
+            a = 0.7 * eio(r(t, m["t0"], m["t1"])) * (1 - eio(r(t, m["t1"] + 1.0, m["t1"] + 2.5)))
             col = (90, 0, 10) if k == "danger" else (6, 10, 24)
             im.alpha_composite(_mood_vig(col, int(150 if k == "danger" else 110), a))
-        if k == "impact" and m["t0"] <= t < m["t0"] + 0.5:
-            f = math.exp(-(t - m["t0"]) * 9); im.alpha_composite(Image.new("RGBA", (W, H), (255, 250, 240, int(70 * f))))
+
     return im
 @functools.lru_cache(maxsize=64)
 def _mood_vig_q(col, amax, q):

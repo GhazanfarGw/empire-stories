@@ -7,7 +7,7 @@ This document is the single source of truth for running the channel. If the curr
 
 ---
 
-> **APPROVED SYSTEM — locked by the owner on 21 Nov 2026 (20:11 PKT).** Everything in this manual up to and including §5i (sound v3, motion and badges, journey to today + TODAY card, chapters, place photos and big images, time-travel rewind, torn-paper image frame, cinematic `cine` scenes with archive footage and ambience, centre-first layout, sound moments, punchy cold open, vertical centring) is the **approved house style** for every future episode and Short. Reference render: `Ep02 DEMO v8`. Frozen copy: GitHub branch `approved-2026-11-21`. Do not change any of it without the owner's approval.
+> **APPROVED SYSTEM — locked by the owner on 21 Nov 2026 (20:11 PKT).** Everything in this manual up to and including §5j (sound v3, motion and badges, journey to today + TODAY card, chapters, place photos and big images, time-travel rewind, torn-paper image frame, cinematic `cine` scenes with archive footage and ambience, centre-first layout, sound moments, punchy cold open, vertical centring) is the **approved house style** for every future episode and Short. Reference render: `Ep02 DEMO v8` (+ §5j: `Ep02 DEMO v10`). Frozen copy: GitHub branch `approved-2026-11-21`. Do not change any of it without the owner's approval.
 
 ## 0. Where everything lives (backup map)
 
@@ -92,7 +92,7 @@ File: `es/ep01/thumb_pro.py` (reference output `thumbs/thumb_PRO_A.jpg`).
 Code: `es/ep02/audio.py` (stems: voice, sfx, bed; works for any episode with `EP_DIR=… EP_MODULE=…`) + `es/ep02/mix.sh`. **Same sound in episodes AND Shorts** (Shorts take their audio from the v3 mix, never from an older episode mix). Rules:
 - **Voice first.** The narration is always the clearest thing; everything else sits underneath it like a calm history documentary.
 - **Background bed = deep, slow, meditative felt piano**: one soft low note every ~2.7 s over a warm low pad (A minor → F → C → G, 10.8 s per chord), long room reverb. Low volume (`volume=0.14`), side-chain ducked hard under the voice (threshold 0.012, ratio 10, attack 60 ms, release 1.2 s).
-- **Every pop/click/appear sound is soft:** 30 ms fade-in, smooth fade-out tail, low-passed (≈1.3 kHz), small room reverb. Effects bus `volume=0.12` (peaks stay below the voice). No ticking counters: numbers get one soft tonal glide + a quiet bell.
+- *(Superseded by §5j: no appear sounds at all.)* Previously: **every pop/click/appear sound is soft:** 30 ms fade-in, smooth fade-out tail, low-passed (≈1.3 kHz), small room reverb. Effects bus `volume=0.12` (peaks stay below the voice). No ticking counters: numbers get one soft tonal glide + a quiet bell.
 - **No sound when the timeline travels or branch lines draw. No noise-based "shh/snake" sounds anywhere** (v2 rules kept).
 - Signature ident: tonal riser → pad → 3-note bell chime → soft sub (no noise).
 - Final mix −14 LUFS, true peak −1.5 dB, AAC 192 kbps 48 kHz.
@@ -143,11 +143,16 @@ The description always has a CHAPTERS block: first line `00:00`, at least 3 chap
 - **Cold open = short and punchy (~40–50 s), then the ident.** Question → one surprising number → the twist → one quote → the central question → a cinematic location shot → ident. Short sentences, short pauses, faster delivery, a soft low heartbeat pulse under it (stops at the ident). After the ident the calm documentary pace begins.
 - **Everything sits on the screen's middle line.** Whatever its size, content is vertically centred in the stage area above the timeline (≈ y 465 on timeline scenes, ≈ 500–540 on scenes without the timeline). Two items side by side share the same centre line and the same height (their widths may differ), placed symmetrically around the centre (x ≈ 600 / 1320). A label belongs directly under its picture. Nothing drifts to the top or bottom edge.
 
-## 5j. MOODS — emotional sound + camera (PENDING OWNER APPROVAL, not locked yet)
-Built 21 Nov 2026 after owner feedback #7; reference render `Ep02 DEMO v9`. Until the owner approves it, treat this as experimental.
-- Script moments are tagged with a mood: **tension** (slow push-in, darkening vignette; low drone + rising tone), **impact** (music drops out 0.7 s before, then a sub-boom + dark low piano cluster, camera punch-in + short shake, soft flash), **danger** (red vignette, pulsing low alarm drone), **triumph** (bright warm swell + bells), **sad** (slow minor piano).
-- The voice keeps the same narrator but changes pace with the mood: slower delivery and a longer pause after an impact line, so the hit can land.
-- Engine: `mood(kind, t0, t1)` in the episode file; sounds in their own `mood` stem (`volume=0.42`).
+## 5j. Story-driven sound only + moods (locked 21 Nov 2026 — owner feedback #7/#8; reference `Ep02 DEMO v10`)
+**Principle: cinematic, not commercial.** Sound and motion serve the story; nothing is added "just because something appears".
+- **No sound on ordinary appearances:** images, labels, numbers, charts and full-screen shots enter silently (no pops, clicks, ticks, whooms). What you hear is the voice, the music, the real ambience inside archive film, the ident, and the time-travel sequence.
+- **Mood moments only where the story truly turns** (usually 1–3 per episode, sometimes none): `mood(kind, t0, t1)`.
+  - *tension*: very slow push-in (+3 %) and a soft darkening of the edges; a low drone rising quietly underneath.
+  - *impact*: the music drops out just before, then one deep held note + a dark piano chord. **No camera shake, no snap-zoom, no flash.**
+  - *danger* (losses, near-bankruptcy, collapse): soft red edge tint + slow pulsing low drone. *sad*: slow minor piano. *triumph/happy*: warm swell + bells.
+- **The score follows the journey** at the same smooth, low volume: tense/minor for today's mystery and dark chapters, warm/nostalgic major for the founding years, brighter for growth, minor for decline. The level never jumps; only the colour changes.
+- **Voice emotion:** same narrator and tone; pace changes with the moment (slower, with a pause after a key line).
+- Motion stays calm: centre-first glides, hero portraits, slow pushes on photos/film, time-travel rewind. No jumpy zoom-in/zoom-out effects.
 
 ## 6. Tools and environment
 

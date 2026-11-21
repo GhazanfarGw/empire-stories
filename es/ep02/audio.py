@@ -93,11 +93,11 @@ def m_tension(t0, t1):
     d = max(0.8, t1 - t0); x = k(d); u = x / d
     dr = (np.sin(2 * np.pi * 55 * x) + 0.7 * np.sin(2 * np.pi * 58.27 * x) + 0.4 * np.sin(2 * np.pi * 110 * x)) * (0.6 + 0.4 * np.sin(2 * np.pi * (2 + 4 * u) * x))
     rise = np.sin(2 * np.pi * np.cumsum(330 + 330 * u ** 2) / SR) * 0.25 * u ** 2
-    MOOD.add(t0, lp((dr * 0.5 + rise) * u ** 1.3 * np.clip((d - x) / 0.08, 0, 1), 1500), 0.9)
+    MOOD.add(t0, lp((dr * 0.5 + rise * 0.5) * u ** 1.5 * np.clip((d - x) / 0.25, 0, 1), 1200), 0.7)
 def m_impact(t0):
-    x = k(3.5); boom = np.sin(2 * np.pi * 42 * x * (1 + 0.6 * np.exp(-x * 14))) * np.exp(-x * 1.6) * np.minimum(1, x / 0.004)
-    cl_ = sum(piano(f, 3.5, 1.0) for f in (27.5 * 2, 41.2 * 2, 55.0 * 2, 58.27 * 2))      # low dark piano cluster
-    MOOD.add(t0, boom, 1.0); MOOD.add(t0, cl_ * 0.5, 0.8); MOOD.add(t0 + 0.02, bell(220, 3.0), 0.25)
+    x = k(5.0); low = np.sin(2 * np.pi * 55 * x) * np.exp(-x * 0.9) * np.minimum(1, x / 0.05)          # one deep, held note
+    chord = sum(piano(f, 5.0, 1.0) for f in (55.0, 110.0, 130.81, 164.81))                               # dark A-minor piano chord
+    MOOD.add(t0, lp(low, 400), 0.7); MOOD.add(t0, chord * 0.45, 0.8)
 def m_danger(t0, t1):
     d = max(1.0, t1 - t0); x = k(d); pulse = (0.5 + 0.5 * np.sin(2 * np.pi * 1.6 * x)) ** 3
     MOOD.add(t0, lp((np.sin(2 * np.pi * 73.4 * x) + np.sin(2 * np.pi * 77.8 * x)) * pulse * np.minimum(1, x / 1.0), 600), 0.8)
@@ -137,39 +137,27 @@ def rewind_sfx(t0, d):
 if getattr(T, "REW_T", None): rewind_sfx(T.REW_T, T.REWIND)
 
 # ---------- background: felt piano over warm pad, A minor -> F -> C -> G ----------
+# warm, nostalgic major (the 1940s-50s past): C - Am - F - G, same register and level
+PROG_WARM = [[65.41, 130.81, 164.81, 196.0], [55.0, 110.0, 130.81, 164.81], [43.65, 87.31, 110.0, 130.81], [49.0, 98.0, 123.47, 146.83]]
 PROG = [[55.0, 110.0, 130.81, 164.81], [43.65, 87.31, 110.0, 130.81], [65.41, 98.0, 130.81, 164.81], [49.0, 98.0, 123.47, 146.83]]
 q, j = 0.4, 0
 while q < min(END, T.OUTRO + 1.0) - 1.0:
     if T.IDENT_T and T.IDENT_T - 0.6 < q < T.IDENT_T + T.IDENT_DUR - 0.8: q = T.IDENT_T + T.IDENT_DUR - 0.8; continue
     if getattr(T, "REW_T", None) and T.REW_T - 2.0 < q < T.REW_T + T.REWIND: q = T.REW_T + T.REWIND; continue
-    ch = PROG[j % 4]; BED.add(q, pad([c * 2 for c in ch[:3]], 12.4, 4.0, 4.5), 0.30)
+    past = getattr(T, "REW_T", None) and q >= T.REW_T
+    ch = (PROG_WARM if past else PROG)[j % 4]; BED.add(q, pad([c * 2 for c in ch[:3]], 12.4, 4.0, 4.5), 0.30)
     for s_, note in enumerate([ch[2] * 2, ch[3] * 2, ch[2] * 4, ch[3] * 2]):            # meditative: one soft note every ~2.7 s
         BED.add(q + 0.6 + s_ * 2.7, piano(note, 6.0, 0.8 - 0.1 * (s_ % 2)), 0.55, pan=0.2 * np.sin(s_ * 1.7))
     q += 10.8; j += 1
 
 # ---------- element sounds: soft, tonal, quiet (no sound for timeline travel or branch lines) ----------
+# ---------- element entrances: SILENT (owner, 21 Nov): no pops, clicks or whooms when things appear.
+# Only story-driven sound remains: film ambience, mood moments, ident, time travel.
 for e in T.EL:
-    tin, kd = e["tin"], e["kind"]; pan = (e["x"] - 960) / 1800
-    if tin > min(END, T.OUTRO): continue
-    if kd == "cine":
-        BED.add(tin, pad([65.41, 98.0, 130.81], 5.0, 1.5, 2.5), 0.5)      # cinematic shots: a soft low swell, no pop
-        amb = e["pay"].get("amb"); dur_ = e["tout"] - tin
-        if amb == "car": car_pass(tin, dur_, e["pay"].get("passby", 0.75))
-        elif amb == "town": town(tin, dur_)
-        continue
-    if kd in ("cut", "person", "photo", "screen", "place"): SFX.add(tin, pop(440), 0.8, pan=pan)
-    elif kd == "lab": SFX.add(tin, pop(620), 0.45, pan=pan)
-    elif kd == "stamp": SFX.add(tin, thud(), 0.6); SFX.add(tin, pop(330), 0.4)
-    elif kd in ("words", "quote"): SFX.add(tin, piano(784, 1.6, 0.6), 0.35, pan=pan)
-    elif kd == "focus": SFX.add(tin, thud(), 0.6); SFX.add(tin + 0.02, bell(784), 0.35)
-    elif kd == "bars":
-        for j_, tk in enumerate(e["pay"]["t"]): SFX.add(tk, pop(520), 0.6, pan=-0.3 + 0.3 * j_); counter(tk, 0.7, e["pay"]["data"][j_][1] >= 0, 10, 0.3)
-    elif kd == "chain":
-        for j_, it in enumerate(e["pay"]): SFX.add(it[2], pop(500), 0.7, pan=-0.45 + 0.3 * j_)
-    elif kd in ("big", "count"):
-        txt_ = str(e["pay"][0]); SFX.add(tin, pop(480), 0.6)
-        if kd == "count" or T.parse_num(txt_): counter(tin, T.COUNT_DUR, not txt_.startswith(("−", "-")), 18, 0.4)
-    elif kd == "grid": SFX.add(tin, pop(500), 0.5)
+    if e["kind"] == "cine" and e["tin"] < min(END, T.OUTRO):
+        amb = e["pay"].get("amb"); dur_ = e["tout"] - e["tin"]
+        if amb == "car": car_pass(e["tin"], dur_, e["pay"].get("passby", 0.75))
+        elif amb == "town": town(e["tin"], dur_)
 
 # ---------- end screen ----------
 if not getattr(T, "DEMO", False):
