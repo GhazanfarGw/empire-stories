@@ -7,7 +7,7 @@ This document is the single source of truth for running the channel. If the curr
 
 ---
 
-> **APPROVED SYSTEM — locked by the owner on 21 Nov 2026 (20:11 PKT).** Everything in this manual up to and including §5j (sound v3, motion and badges, journey to today + TODAY card, chapters, place photos and big images, time-travel rewind, torn-paper image frame, cinematic `cine` scenes with archive footage and ambience, centre-first layout, sound moments, punchy cold open, vertical centring) is the **approved house style** for every future episode and Short. Reference render: `Ep02 DEMO v8` (+ §5j: `Ep02 DEMO v10`/`v11`). Frozen copy: GitHub branch `approved-2026-11-21`. Do not change any of it without the owner's approval.
+> **APPROVED SYSTEM — locked by the owner on 21 Nov 2026 (final approval 20:33 PKT, incl. §5j moods + slam, Shorts v3).** Everything in this manual up to and including §5j (sound v3, motion and badges, journey to today + TODAY card, chapters, place photos and big images, time-travel rewind, torn-paper image frame, cinematic `cine` scenes with archive footage and ambience, centre-first layout, sound moments, punchy cold open, vertical centring) is the **approved house style** for every future episode and Short. Reference render: `Ep02 DEMO v8` (+ §5j: `Ep02 DEMO v10`/`v11`). Frozen copy: GitHub branch `approved-2026-11-21`. Do not change any of it without the owner's approval.
 
 ## 0. Where everything lives (backup map)
 
@@ -199,7 +199,7 @@ Folder per episode in the repo: `es/epNN/` (copy `es/ep01/` as the template).
 - **Titles + descriptions in 6 priority languages: Hindi (hi), Urdu (ur), Arabic (ar), Chinese Simplified (zh-Hans), Russian (ru), Turkish (tr)** — via Studio Languages page or the API (`PUT videos?part=localizations` with the full localizations map; include `en`).
 - Translate hook paragraph + chapters; point to the English description for sources.
 
-## 10. Content plan — Season 1 slate
+## 10. Content plan — Season 1 slate (full list of 100: `docs/SLATE_TOP_100.md`)
 
 01 Apple (1997 turnaround) ✔ published · 02 McDonald's (burger or property company?) · 03 Nokia (rise and fall) · 04 Toyota (production system) · 05 Coca-Cola vs Pepsi · 06 Tata Group · 07 Engro (Pakistan) · 08 Samsung · 09 Netflix vs Blockbuster · 10 Nike · 11 Alibaba · 12 IKEA. Next season ideas: Reliance, Huawei, BYD, Zara, Toyota vs Tesla, Starbucks, Jazz, HBL, Emirates, Aramco.
 
