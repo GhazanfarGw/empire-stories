@@ -81,7 +81,9 @@ def count_frac(ti): return eo(r(ti, 0.0, COUNT_DUR))
 
 # ---------------- elements ----------------
 EL = []
+YC_SHIFT = 45     # owner rule: content sits on the screen's middle line (timeline scenes were ~45 px too high)
 def el(b, kind, x, y, pay, tin, branch=True, tout=None):
+    if b in YB and kind not in ("cine",): y = y + YC_SHIFT
     EL.append(dict(b=b, kind=kind, x=x, y=y, pay=pay, tin=tin, tout=tout or NEXT_TR[b], branch=branch))
 L, R_ = 600, 1320          # left / right columns of the stage (widened 21 Nov: use the full screen)
 CR = {"hq": "Apple HQ, Cupertino · Photo: Joe Ravi, CC BY-SA 3.0", "next": "NeXTcube · Wikimedia Commons, CC BY-SA 3.0",
@@ -95,45 +97,45 @@ CR.update({"road": "Archive film: Look at Pontiac for 1954 (Jam Handy Organizati
            "downey": "Oldest operating McDonald's, Downey CA · Photo: Northwalker, CC0", "sign": "Speedee sign, Downey CA · Photo: Northwalker, CC0",
            "sbd": "Site of the first McDonald's, San Bernardino · Photo: Cogart Strangehill, CC BY-SA 2.0",
            "desplaines": "McDonald's #1 Store Museum, Des Plaines · Photo: Jerry Huddleston, CC BY 2.0"})
-# --- cold open: a simple question, turned upside down
+# --- cold open: a simple question, turned upside down (tight cut, everything centre-first)
 h = "hook"
-el(h, "cine", 960, 540, dict(img="mcd_downey_museum.jpg", z=(1.0, 1.10), pan=(0.3, 0.5), shade="right", cr=CR["downey"]), st(h, 0, -0.6), False, tout=P(h, 2))
+el(h, "cine", 960, 540, dict(img="mcd_downey_museum.jpg", z=(1.0, 1.12), pan=(0.3, 0.5), shade="right", cr=CR["downey"]), st(h, 0, -0.6), False, tout=P(h, 2))
 el(h, "words", 1500, 470, ("What does McDonald's sell?", 84, "serif", IVORY, (3,), 620), st(h, 0, 0.0), False, tout=P(h, 2))
-el(h, "lab", 1500, 690, ("BURGERS · FRIES · MILKSHAKES", RED), mid(h, 1, 0.3), False, tout=P(h, 2))
-el(h, "big", 580, 500, ("$139.4B", NAVY_US, 150), mid(h, 2, 0.55), False, tout=P(h, 4))
-el(h, "lab", 580, 620, ("SPENT AT McDONALD'S · 2025", INK), mid(h, 2, 0.8), False, tout=P(h, 4))
-el(h, "big", 1360, 500, ("95%", RED, 150), mid(h, 3, 0.6), False, tout=P(h, 4))
-el(h, "lab", 1360, 620, ("RUN BY FRANCHISEES", INK), mid(h, 3, 0.8), False, tout=P(h, 4))
-el(h, "lab", 960, 230, ("WHAT McDONALD'S ITSELF COLLECTED · 2025", INK), st(h, 4, 0.6), False, tout=P(h, 8))
-el(h, "bars", 960, 760, dict(data=[("RENT", 10.442), ("FOOD SALES*", 9.690), ("ROYALTIES", 6.018)], sc=38, bw=230, gap=150,
+el(h, "lab", 1500, 690, ("BURGERS · FRIES · MILKSHAKES", RED), st(h, 1, 0.1), False, tout=P(h, 2))
+el(h, "big", 580, 480, ("$139.4B", NAVY_US, 150), mid(h, 2, 0.55), False, tout=P(h, 5))
+el(h, "lab", 580, 600, ("SPENT AT McDONALD'S · 2025", INK), mid(h, 2, 0.8), False, tout=P(h, 5))
+el(h, "big", 1360, 480, ("95%", RED, 150), mid(h, 3, 0.4), False, tout=P(h, 5))
+el(h, "lab", 1360, 600, ("RUN BY FRANCHISEES", INK), mid(h, 3, 0.7), False, tout=P(h, 5))
+el(h, "stamp", 960, 780, ("THEY PAY RENT", RED), mid(h, 4, 0.7), False, tout=P(h, 5))
+el(h, "lab", 960, 200, ("WHAT McDONALD'S ITSELF COLLECTED · 2025", INK), st(h, 5, 0.1), False, tout=P(h, 7))
+el(h, "bars", 960, 730, dict(data=[("RENT", 10.442), ("FOOD SALES*", 9.690), ("ROYALTIES", 6.018)], sc=38, bw=230, gap=150,
                              labs=["$10.4B", "$9.7B", "$6.0B"], cols=[RED, NAVY_US, NAVY_US],
-                             t=[st(h, 5, 0.1), mid(h, 7, 0.55), mid(h, 7, 0.25)]), st(h, 4, 0.6), False, tout=P(h, 8))
-el(h, "note", 960, 860, "*food sold in the restaurants McDonald's runs itself · source: McDonald's 2025 annual report", mid(h, 7, 0.6), False, tout=P(h, 8))
-el(h, "stamp", 1560, 360, ("RENT", RED), st(h, 5, 0.35), False, tout=P(h, 8))
-el(h, "person", L, 540, ("Harry Sonneborn", "McDonald's first president"), st(h, 8, 0.3), False, tout=P(h, 10))
-el(h, "quote", R_ + 40, 510, ("“We are not technically in the food business. We are in the real estate business.”", "Harry Sonneborn, as recounted in McDonald's: Behind the Arches", 48, (12, 13, 14)), st(h, 9, 0.0), False, tout=P(h, 10))
-el(h, "words", 960, 460, ("A burger company…", 104, "serif", INK, (), 1600), st(h, 10, 0.1), False, tout=P(h, 12))
-el(h, "words", 960, 630, ("…or a landlord that sells burgers?", 80, "serifi", INK, (3,), 1600), st(h, 11, 0.0), False, tout=P(h, 12))
-el(h, "cine", 960, 540, dict(img="sb_valley.jpg", z=(1.0, 1.14), amb="town", pan=(0.45, 0.4), cap="SAN BERNARDINO, CALIFORNIA", sub="the valley today, from the air", cr=CR["valley"]), st(h, 12, 0.1), False)
+                             t=[mid(h, 5, 0.6), mid(h, 6, 0.75), mid(h, 6, 0.3)]), st(h, 5, 0.1), False, tout=P(h, 7))
+el(h, "note", 960, 830, "*food sold in the restaurants McDonald's runs itself · source: McDonald's 2025 annual report", mid(h, 6, 0.8), False, tout=P(h, 7))
+el(h, "person", 560, 500, ("Harry Sonneborn", "McDonald's first president"), st(h, 7, 0.1), False, tout=P(h, 9))
+el(h, "quote", 1280, 480, ("“We are not technically in the food business. We are in the real estate business.”", "Harry Sonneborn, as recounted in McDonald's: Behind the Arches", 50, (12, 13, 14)), st(h, 8, 0.0), False, tout=P(h, 9)); EL[-1]["mw"] = 820
+el(h, "words", 960, 450, ("A burger company…", 104, "serif", INK, (), 1600), st(h, 9, 0.0), False, tout=P(h, 10))
+el(h, "words", 960, 620, ("…or a landlord that sells burgers?", 80, "serifi", INK, (3,), 1600), mid(h, 9, 0.45), False, tout=P(h, 10))
+el(h, "cine", 960, 540, dict(img="sb_valley.jpg", z=(1.0, 1.14), amb="town", pan=(0.45, 0.4), cap="SAN BERNARDINO, CALIFORNIA", sub="the valley today, from the air", cr=CR["valley"]), st(h, 10, 0.0), False)
 # --- 1948: the Speedee Service System
 b = "y0"
-el(b, "place", 960, 420, ("sb_motel66.jpg", 1120, "SAN BERNARDINO · ROUTE 66", "a car town on America's main road", CR["motel"], 0.42), st(b, 0, -0.3), False, tout=mid(b, 0, 0.55))
+el(b, "place", 960, 430, ("sb_motel66.jpg", 1120, "SAN BERNARDINO · ROUTE 66", "a car town on America's main road", CR["motel"], 0.42), st(b, 0, -0.3), False, tout=mid(b, 0, 0.55))
 el(b, "person", L, 420, ("Dick & Mac McDonald", "San Bernardino, 1948"), mid(b, 0, 0.55))
-el(b, "photo", R_ + 20, 380, ("mcd_sanbernardino_site.jpg", 720, CR["sbd"]), mid(b, 0, 0.7), False, tout=P(b, 1))
-el(b, "lab", R_ + 20, 700, ("THE ORIGINAL SITE, TODAY A MUSEUM", MUTE), mid(b, 0, 0.9), False, tout=P(b, 1))
-el(b, "lab", R_ + 20, 230, ("9 MENU ITEMS", NAVY_US), mid(b, 1, 0.45), False, tout=P(b, 2))
-el(b, "lab", R_ + 20, 330, ("NO CARHOPS", RED), mid(b, 1, 0.62), False, tout=P(b, 2))
-el(b, "big", R_ + 20, 480, ("15¢", NAVY_US, 150), mid(b, 1, 0.8), False, tout=P(b, 2))
-el(b, "lab", R_ + 20, 600, ("THE HAMBURGER", INK), mid(b, 1, 0.9), False, tout=P(b, 2))
-el(b, "photo", R_ + 40, 400, ("mcd_downey_sign.jpg", 330, CR["sign"]), st(b, 2, 0.3), False)
-el(b, "lab", R_ + 40, 120, ("THE SPEEDEE SERVICE SYSTEM", RED), st(b, 2, 0.6), False)
+el(b, "photo", R_, 420, ("mcd_sanbernardino_site.jpg", 735, CR["sbd"]), mid(b, 0, 0.7), False, tout=P(b, 1))
+el(b, "lab", R_, 712, ("THE ORIGINAL SITE, TODAY A MUSEUM", MUTE), mid(b, 0, 0.9), False, tout=P(b, 1))
+el(b, "lab", R_, 250, ("9 MENU ITEMS", NAVY_US), mid(b, 1, 0.45), False, tout=P(b, 2))
+el(b, "lab", R_, 330, ("NO CARHOPS", RED), mid(b, 1, 0.62), False, tout=P(b, 2))
+el(b, "big", R_, 465, ("15¢", NAVY_US, 150), mid(b, 1, 0.8), False, tout=P(b, 2))
+el(b, "lab", R_, 590, ("THE HAMBURGER", INK), mid(b, 1, 0.9), False, tout=P(b, 2))
+el(b, "photo", R_, 420, ("mcd_downey_sign.jpg", 327, CR["sign"]), st(b, 2, 0.3), False)
+el(b, "lab", R_, 712, ("THE SPEEDEE SERVICE SYSTEM", RED), st(b, 2, 0.6), False)
 # --- 1954: Ray Kroc
 b = "y1"
 el(b, "person", L, 420, ("Ray Kroc", "Milkshake-machine salesman"), st(b, 0, 0.5))
-el(b, "big", R_, 330, ("8", NAVY_US, 170), mid(b, 0, 0.82), False, tout=P(b, 2))
-el(b, "lab", R_, 460, ("MULTIMIXERS, ONE RESTAURANT", INK), mid(b, 0, 0.9), False, tout=P(b, 2))
-el(b, "cine", 960, 540, dict(vid="fr_road1", n=217, z=(1.0, 1.06), amb="car", passby=0.78, cap="1954 · KROC DRIVES WEST", sub="to see one small restaurant in San Bernardino", cr=CR["road"]), st(b, 1, 0.2), False, tout=P(b, 2) + 0.4)
-el(b, "words", R_ + 20, 420, ("A system that could be copied anywhere.", 62, "serif", INK, (4, 5, 6), 760), st(b, 2, 0.4), False)
+el(b, "big", R_, 370, ("8", NAVY_US, 170), mid(b, 0, 0.82), False, tout=P(b, 2))
+el(b, "lab", R_, 500, ("MULTIMIXERS, ONE RESTAURANT", INK), mid(b, 0, 0.9), False, tout=P(b, 2))
+el(b, "cine", 960, 540, dict(vid="fr_road1", n=217, z=(1.0, 1.06), amb="car", passby=0.80, cap="1954 · KROC DRIVES WEST", sub="to see one small restaurant in San Bernardino", cr=CR["road"]), st(b, 1, -0.2), False, tout=P(b, 2) + 0.3)
+el(b, "words", R_, 420, ("A system that could be copied anywhere.", 62, "serif", INK, (4, 5, 6), 760), st(b, 2, 0.4), False)
 
 
 # ---------------- hero portraits: a new person first fills the centre, big, then slides to their slot ----------------
@@ -367,7 +369,7 @@ def el_draw(im, e, t, a):
     if k == "person":
         hx, hy, hs, he = x, y, 1.0, e.get("hero")
         if he:
-            m = eio(r(t, he, he + 0.6)); cx, cy = 960, (470 if PIN_OF.get(e["b"]) is not None else 540)
+            m = eio(r(t, he, he + 0.6)); cx, cy = 960, (470 + YC_SHIFT if PIN_OF.get(e["b"]) is not None else 540)
             hx, hy, hs = cx + (x - cx) * m, cy + (y - cy) * m, HERO_SCALE + (1 - HERO_SCALE) * m
         c = person_card(*p); place(im, c, hx, hy + (1 - s) * 30, scale=PS * hs * (0.86 + 0.14 * back(a)), alpha=min(1, a * 1.5))
         return y + 185 * PS

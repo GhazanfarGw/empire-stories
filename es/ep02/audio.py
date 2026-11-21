@@ -81,6 +81,13 @@ def car_pass(t0, d, pass_frac=0.75):
 def town(t0, d):
     x = k(d); fade = np.minimum(1, x / 1.0) * np.clip((d - x) / 1.0, 0, 1); AMB.add(t0, lp(brown(d), 220) * 0.25 * fade)
 
+# ---------- cold-open tension: a soft low heartbeat pulse under the hook (stops at the ident) ----------
+if T.IDENT_T:
+    tq = 0.4
+    while tq < T.IDENT_T - 0.8:
+        x_ = k(0.5); hb = np.sin(2 * np.pi * 52 * x_) * np.exp(-x_ * 9) * np.minimum(1, x_ / 0.01)
+        BED.add(tq, lp(hb, 300), 0.9); BED.add(tq + 0.28, lp(hb, 300), 0.55); tq += 1.25
+
 # ---------- time travel (rewind 2026 -> first year): film-reel spin, tonal only, soft arrival ----------
 def rewind_sfx(t0, d):
     x = k(d); u = x / d
