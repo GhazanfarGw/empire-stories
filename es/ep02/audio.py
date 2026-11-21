@@ -24,7 +24,7 @@ class Bus:
         if i < 0 or i >= n: return
         x = sig[: n - i] * g; s.m[i:i + len(x), 0] += x * (1 - max(0, pan)); s.m[i:i + len(x), 1] += x * (1 + min(0, pan))
     def save(s, path, peak=0.9): sf.write(path, s.m / max(1e-3, np.abs(s.m).max()) * peak, SR)
-SFX, BED, AMB = Bus(), Bus(), Bus()      # AMB: ambience/foley under archive film and cinematic shots
+SFX, BED, AMB, MOOD = Bus(), Bus(), Bus(), Bus()      # AMB: ambience/foley under archive film and cinematic shots
 
 # ---------- instruments (all tonal, no noise) ----------
 def piano(f, d=3.0, vel=1.0):
@@ -88,6 +88,38 @@ if T.IDENT_T:
         x_ = k(0.5); hb = np.sin(2 * np.pi * 52 * x_) * np.exp(-x_ * 9) * np.minimum(1, x_ / 0.01)
         BED.add(tq, lp(hb, 300), 0.9); BED.add(tq + 0.28, lp(hb, 300), 0.55); tq += 1.25
 
+# ---------- MOODS: emotion in the sound (tonal only) ----------
+def m_tension(t0, t1):
+    d = max(0.8, t1 - t0); x = k(d); u = x / d
+    dr = (np.sin(2 * np.pi * 55 * x) + 0.7 * np.sin(2 * np.pi * 58.27 * x) + 0.4 * np.sin(2 * np.pi * 110 * x)) * (0.6 + 0.4 * np.sin(2 * np.pi * (2 + 4 * u) * x))
+    rise = np.sin(2 * np.pi * np.cumsum(330 + 330 * u ** 2) / SR) * 0.25 * u ** 2
+    MOOD.add(t0, lp((dr * 0.5 + rise) * u ** 1.3 * np.clip((d - x) / 0.08, 0, 1), 1500), 0.9)
+def m_impact(t0):
+    x = k(3.5); boom = np.sin(2 * np.pi * 42 * x * (1 + 0.6 * np.exp(-x * 14))) * np.exp(-x * 1.6) * np.minimum(1, x / 0.004)
+    cl_ = sum(piano(f, 3.5, 1.0) for f in (27.5 * 2, 41.2 * 2, 55.0 * 2, 58.27 * 2))      # low dark piano cluster
+    MOOD.add(t0, boom, 1.0); MOOD.add(t0, cl_ * 0.5, 0.8); MOOD.add(t0 + 0.02, bell(220, 3.0), 0.25)
+def m_danger(t0, t1):
+    d = max(1.0, t1 - t0); x = k(d); pulse = (0.5 + 0.5 * np.sin(2 * np.pi * 1.6 * x)) ** 3
+    MOOD.add(t0, lp((np.sin(2 * np.pi * 73.4 * x) + np.sin(2 * np.pi * 77.8 * x)) * pulse * np.minimum(1, x / 1.0), 600), 0.8)
+def m_triumph(t0):
+    BED.add(t0, pad([130.81, 164.81, 196.0, 261.63, 329.63], 5.0, 0.6, 2.5), 1.0)
+    for j, f in enumerate([523.25, 659.25, 783.99]): MOOD.add(t0 + 0.15 * j, bell(f, 2.5), 0.4)
+def m_sad(t0):
+    for j, f in enumerate([440.0, 392.0, 349.23, 329.63]): BED.add(t0 + 1.4 * j, piano(f / 2, 4.0, 0.8), 0.6)
+def duck_bed(t0, pre=0.7, post=1.8):                       # music drops out just before a hit, then breathes back
+    i0, i1, i2 = int((t0 - pre) * SR), int(t0 * SR), int((t0 + post) * SR)
+    if i0 < 0 or i2 > n: return
+    env_ = np.ones(i2 - i0); env_[: i1 - i0] = np.linspace(1, 0.08, i1 - i0); env_[i1 - i0:] = np.linspace(0.08, 1, i2 - i1)
+    BED.pend.append((i0, i2, env_))
+BED.pend = []
+for m_ in getattr(T, "MOODS", []):
+    kd_ = m_["kind"]
+    if kd_ == "tension": m_tension(m_["t0"], m_["t1"])
+    elif kd_ == "impact": m_impact(m_["t0"]); duck_bed(m_["t0"])
+    elif kd_ == "danger": m_danger(m_["t0"], m_["t1"])
+    elif kd_ == "triumph": m_triumph(m_["t0"])
+    elif kd_ == "sad": m_sad(m_["t0"])
+
 # ---------- time travel (rewind 2026 -> first year): film-reel spin, tonal only, soft arrival ----------
 def rewind_sfx(t0, d):
     x = k(d); u = x / d
@@ -150,8 +182,9 @@ def room(bus, sec, wet):
     x = k(sec); ir = lp(rng.standard_normal(len(x)), 2500) * np.exp(-x * 6.9 / sec); ir /= np.abs(ir).sum() ** 0.5 * 8
     for c in range(2): bus.m[:, c] = bus.m[:, c] * (1 - wet) + ss.fftconvolve(bus.m[:, c], ir)[:n] * wet * 4
 room(BED, 3.5, 0.45); room(SFX, 1.6, 0.3)
-SFX.m *= fade; BED.m *= fade; AMB.m *= fade
-SFX.save(f"{D}/sfx.wav"); BED.save(f"{D}/bed.wav"); AMB.save(f"{D}/amb.wav")
+for i0, i2, env_ in BED.pend: BED.m[i0:i2] *= env_[:, None]
+SFX.m *= fade; BED.m *= fade; AMB.m *= fade; MOOD.m *= fade
+SFX.save(f"{D}/sfx.wav"); BED.save(f"{D}/bed.wav"); AMB.save(f"{D}/amb.wav"); MOOD.save(f"{D}/mood.wav")
 v = np.zeros(int(END * 24000), np.float32)
 for m in T.META:
     a, _ = sf.read(f"{D}/voice/s{m['i']:03d}.wav"); s0 = int(m["t"] * 24000); v[s0:s0 + len(a)] += a[: max(0, len(v) - s0)]

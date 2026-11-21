@@ -106,7 +106,7 @@ el(h, "big", 580, 480, ("$139.4B", NAVY_US, 150), mid(h, 2, 0.55), False, tout=P
 el(h, "lab", 580, 600, ("SPENT AT McDONALD'S · 2025", INK), mid(h, 2, 0.8), False, tout=P(h, 5))
 el(h, "big", 1360, 480, ("95%", RED, 150), mid(h, 3, 0.4), False, tout=P(h, 5))
 el(h, "lab", 1360, 600, ("RUN BY FRANCHISEES", INK), mid(h, 3, 0.7), False, tout=P(h, 5))
-el(h, "stamp", 960, 780, ("THEY PAY RENT", RED), mid(h, 4, 0.7), False, tout=P(h, 5))
+el(h, "stamp", 960, 780, ("THEY PAY RENT", RED), mid(h, 4, 0.82), False, tout=P(h, 5))
 el(h, "lab", 960, 200, ("WHAT McDONALD'S ITSELF COLLECTED · 2025", INK), st(h, 5, 0.1), False, tout=P(h, 7))
 el(h, "bars", 960, 730, dict(data=[("RENT", 10.442), ("FOOD SALES*", 9.690), ("ROYALTIES", 6.018)], sc=38, bw=230, gap=150,
                              labs=["$10.4B", "$9.7B", "$6.0B"], cols=[RED, NAVY_US, NAVY_US],
@@ -550,7 +550,48 @@ def cam_z(t):
         a = TR[b0]; nx = NEXT_TR.get(b0, 1e9)
         if a <= t < nx: return 1 + 0.035 * eio(r(t, a, nx))
     return 1.0
-def stage(t): im = scene_stage(t); draw_travel(im, t); return zoom(im, cam_z(t))
+
+# ---------------- MOODS (locked 21 Nov, owner): emotional moments are felt in picture AND sound ----------------
+# kinds: tension (slow push-in, darkening; drone + rising tone), impact (music drops out, hit + camera punch + shake),
+#        danger (red-tinted vignette, pulse, low alarm drone), triumph (bright lift, warm swell), sad (desaturate, slow minor piano)
+MOODS = []
+def mood(kind, t0, t1=None): MOODS.append(dict(kind=kind, t0=t0, t1=t1 if t1 is not None else t0 + 1.5))
+mood("tension", st("hook", 3, 0.0), mid("hook", 4, 0.82))
+mood("impact", mid("hook", 4, 0.82))
+mood("impact", mid("hook", 8, 0.92))
+mood("tension", st("hook", 9, 0.0), P("hook", 10))
+def mood_cam(t):
+    """extra zoom factor and (dx, dy) shake from the active moods"""
+    z, dx, dy = 1.0, 0.0, 0.0
+    for m in MOODS:
+        if m["kind"] in ("tension", "danger") and m["t0"] <= t < m["t1"] + 0.6:
+            z *= 1 + 0.05 * eio(r(t, m["t0"], m["t1"])) * (1 - eio(r(t, m["t1"], m["t1"] + 0.6)))
+        if m["kind"] == "impact" and m["t0"] - 0.05 <= t < m["t0"] + 1.4:
+            u = t - m["t0"]; z *= 1 + 0.07 * math.exp(-u * 3.2) * min(1, u / 0.06 + 0.001)
+            amp = 9 * math.exp(-u * 6); dx += amp * math.sin(u * 71); dy += amp * math.cos(u * 53)
+    return z, dx, dy
+def mood_grade(im, t):
+    for m in MOODS:
+        k = m["kind"]
+        if k in ("tension", "danger") and m["t0"] <= t < m["t1"] + 0.6:
+            a = eio(r(t, m["t0"], m["t1"])) * (1 - eio(r(t, m["t1"], m["t1"] + 0.6)))
+            col = (90, 0, 10) if k == "danger" else (6, 10, 24)
+            im.alpha_composite(_mood_vig(col, int(150 if k == "danger" else 110), a))
+        if k == "impact" and m["t0"] <= t < m["t0"] + 0.5:
+            f = math.exp(-(t - m["t0"]) * 9); im.alpha_composite(Image.new("RGBA", (W, H), (255, 250, 240, int(70 * f))))
+    return im
+@functools.lru_cache(maxsize=64)
+def _mood_vig_q(col, amax, q):
+    yy, xx = np.mgrid[0:H:4, 0:W:4]; d = np.sqrt(((xx - W / 2) / (W / 2)) ** 2 + ((yy - H / 2) / (H / 2)) ** 2)
+    g = (np.clip((d - 0.45) / 0.9, 0, 1) ** 1.4 * amax * q / 20).astype(np.uint8)
+    lay = Image.new("RGBA", (W // 4, H // 4), col + (0,)); lay.putalpha(Image.fromarray(g)); return lay.resize((W, H), Image.BILINEAR)
+def _mood_vig(col, amax, a): return _mood_vig_q(col, amax, int(round(a * 20)))
+
+def stage(t):
+    im = scene_stage(t); draw_travel(im, t); mz, dx, dy = mood_cam(t)
+    im = zoom(im, cam_z(t) * mz)
+    if dx or dy: im = im.transform((W, H), Image.AFFINE, (1, 0, -dx, 0, 1, -dy), Image.BILINEAR, fillcolor=(214, 213, 209, 255))
+    return mood_grade(im, t)
 
 # ---------------- brand ident + end screen ----------------
 def ident(t, t0):
