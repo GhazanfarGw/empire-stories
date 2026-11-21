@@ -7,7 +7,7 @@ This document is the single source of truth for running the channel. If the curr
 
 ---
 
-> **APPROVED SYSTEM — locked by the owner on 21 Nov 2026 (20:11 PKT).** Everything in this manual up to and including §5i (sound v3, motion and badges, journey to today + TODAY card, chapters, place photos and big images, time-travel rewind, torn-paper image frame, cinematic `cine` scenes with archive footage and ambience, centre-first layout, sound moments, punchy cold open, vertical centring) is the **approved house style** for every future episode and Short. Reference render: `Ep02 DEMO v8`. Git tag: `approved-2026-11-21`. Do not change any of it without the owner's approval.
+> **APPROVED SYSTEM — locked by the owner on 21 Nov 2026 (20:11 PKT).** Everything in this manual up to and including §5i (sound v3, motion and badges, journey to today + TODAY card, chapters, place photos and big images, time-travel rewind, torn-paper image frame, cinematic `cine` scenes with archive footage and ambience, centre-first layout, sound moments, punchy cold open, vertical centring) is the **approved house style** for every future episode and Short. Reference render: `Ep02 DEMO v8`. Frozen copy: GitHub branch `approved-2026-11-21`. Do not change any of it without the owner's approval.
 
 ## 0. Where everything lives (backup map)
 
