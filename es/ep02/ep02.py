@@ -90,15 +90,16 @@ CR = {"hq": "Apple HQ, Cupertino · Photo: Joe Ravi, CC BY-SA 3.0", "next": "NeX
       "clone": "Power Computing Mac clone · Angelgreat, CC BY-SA 4.0", "pm": "Power Macintosh G3 · Klodo6975, public domain",
       "be": "BeBox · Josh Carlson, CC BY 2.0", "lineup": "iMac G3 colours · Stephen Hackett, CC BY-SA 4.0"}
 
-CR.update({"valley": "San Bernardino Valley · Photo: Doc Searls, CC BY-SA 2.0", "motel": "Route 66, San Bernardino · Photo: John Margolies, Library of Congress (public domain)",
+CR.update({"road": "Archive film: Look at Pontiac for 1954 (Jam Handy Organization) · Prelinger Archives, public domain",
+           "valley": "San Bernardino Valley · Photo: Doc Searls, CC BY-SA 2.0", "motel": "Route 66, San Bernardino · Photo: John Margolies, Library of Congress (public domain)",
            "downey": "Oldest operating McDonald's, Downey CA · Photo: Northwalker, CC0", "sign": "Speedee sign, Downey CA · Photo: Northwalker, CC0",
            "sbd": "Site of the first McDonald's, San Bernardino · Photo: Cogart Strangehill, CC BY-SA 2.0",
            "desplaines": "McDonald's #1 Store Museum, Des Plaines · Photo: Jerry Huddleston, CC BY 2.0"})
 # --- cold open: a simple question, turned upside down
 h = "hook"
-el(h, "photo", L, 540, ("mcd_downey_museum.jpg", 860, CR["downey"]), st(h, 0, 0.0), False, tout=P(h, 2))
-el(h, "words", R_ + 60, 490, ("What does McDonald's sell?", 78, "serif", INK, (3,), 700), st(h, 0, 0.0), False, tout=P(h, 2))
-el(h, "lab", R_ + 60, 690, ("BURGERS · FRIES · MILKSHAKES", INK), mid(h, 1, 0.3), False, tout=P(h, 2))
+el(h, "cine", 960, 540, dict(img="mcd_downey_museum.jpg", z=(1.0, 1.10), pan=(0.3, 0.5), shade="right", cr=CR["downey"]), st(h, 0, -0.6), False, tout=P(h, 2))
+el(h, "words", 1500, 470, ("What does McDonald's sell?", 84, "serif", IVORY, (3,), 620), st(h, 0, 0.0), False, tout=P(h, 2))
+el(h, "lab", 1500, 690, ("BURGERS · FRIES · MILKSHAKES", RED), mid(h, 1, 0.3), False, tout=P(h, 2))
 el(h, "big", 580, 500, ("$139.4B", NAVY_US, 150), mid(h, 2, 0.55), False, tout=P(h, 4))
 el(h, "lab", 580, 620, ("SPENT AT McDONALD'S · 2025", INK), mid(h, 2, 0.8), False, tout=P(h, 4))
 el(h, "big", 1360, 500, ("95%", RED, 150), mid(h, 3, 0.6), False, tout=P(h, 4))
@@ -113,7 +114,7 @@ el(h, "person", L, 540, ("Harry Sonneborn", "McDonald's first president"), st(h,
 el(h, "quote", R_ + 40, 510, ("“We are not technically in the food business. We are in the real estate business.”", "Harry Sonneborn, as recounted in McDonald's: Behind the Arches", 48, (12, 13, 14)), st(h, 9, 0.0), False, tout=P(h, 10))
 el(h, "words", 960, 460, ("A burger company…", 104, "serif", INK, (), 1600), st(h, 10, 0.1), False, tout=P(h, 12))
 el(h, "words", 960, 630, ("…or a landlord that sells burgers?", 80, "serifi", INK, (3,), 1600), st(h, 11, 0.0), False, tout=P(h, 12))
-el(h, "place", 960, 500, ("sb_valley.jpg", 1460, "SAN BERNARDINO, CALIFORNIA", "the valley today, from the air", CR["valley"]), st(h, 12, 0.2), False)
+el(h, "cine", 960, 540, dict(img="sb_valley.jpg", z=(1.0, 1.14), pan=(0.45, 0.4), cap="SAN BERNARDINO, CALIFORNIA", sub="the valley today, from the air", cr=CR["valley"]), st(h, 12, 0.1), False)
 # --- 1948: the Speedee Service System
 b = "y0"
 el(b, "place", 960, 420, ("sb_motel66.jpg", 1120, "SAN BERNARDINO · ROUTE 66", "a car town on America's main road", CR["motel"], 0.42), st(b, 0, -0.3), False, tout=mid(b, 0, 0.55))
@@ -131,7 +132,7 @@ b = "y1"
 el(b, "person", L, 420, ("Ray Kroc", "Milkshake-machine salesman"), st(b, 0, 0.5))
 el(b, "big", R_, 330, ("8", NAVY_US, 170), mid(b, 0, 0.82), False, tout=P(b, 2))
 el(b, "lab", R_, 460, ("MULTIMIXERS, ONE RESTAURANT", INK), mid(b, 0, 0.9), False, tout=P(b, 2))
-el(b, "lab", R_, 560, ("1954 · KROC DRIVES WEST", RED), mid(b, 1, 0.6), False, tout=P(b, 2))
+el(b, "cine", 960, 540, dict(vid="fr_road1", n=217, z=(1.0, 1.06), cap="1954 · KROC DRIVES WEST", sub="to see one small restaurant in San Bernardino", cr=CR["road"]), st(b, 1, 0.2), False, tout=P(b, 2) + 0.4)
 el(b, "words", R_ + 20, 420, ("A system that could be copied anywhere.", 62, "serif", INK, (4, 5, 6), 760), st(b, 2, 0.4), False)
 
 
@@ -241,6 +242,46 @@ def rewind(t):
     fl = math.exp(-((u - 0.86) / 0.035) ** 2)                            # soft flash when we arrive
     if fl > 0.02: im.alpha_composite(Image.new("RGBA", (W, H), (255, 252, 240, int(150 * fl))))
     return im
+
+
+# ---------------- CINE scene (locked 21 Nov): full-screen photo or archive film, slow camera move, lower-third caption ----------------
+FOOT = "/home/claude/es/assets/footage"
+@functools.lru_cache(None)
+def _cine_photo(name, z):
+    im = Image.open(f"/home/claude/es/assets/{name}").convert("RGB"); s = max(W * z / im.width, H * z / im.height)
+    return im.resize((int(im.width * s) + 2, int(im.height * s) + 2), Image.LANCZOS)
+@functools.lru_cache(maxsize=48)
+def _cine_frame(d, i): return Image.open(f"{FOOT}/{d}/{i:04d}.jpg").convert("RGB")
+@functools.lru_cache(None)
+def _shade(kind):
+    g = np.zeros((H, W), np.float32); yy, xx = np.mgrid[0:H, 0:W]
+    if kind == "right": g = np.clip((xx / W - 0.38) / 0.62, 0, 1) ** 1.2 * 200
+    elif kind == "left": g = np.clip((0.62 - xx / W) / 0.62, 0, 1) ** 1.2 * 200
+    g = np.maximum(g, np.clip((yy / H - 0.62) / 0.38, 0, 1) ** 1.5 * 210)          # bottom gradient for the lower third
+    lay = Image.new("RGBA", (W, H), (8, 12, 24, 0)); lay.putalpha(Image.fromarray(g.astype(np.uint8))); return lay
+def cine(im, e, t, a):
+    p = e["pay"]; ti = t - e["tin"]; dur = max(1.0, e["tout"] - e["tin"]); u = cl(ti / dur)
+    z0, z1 = p.get("z", (1.0, 1.08)); z = z0 + (z1 - z0) * eio(u); px, py = p.get("pan", (0.5, 0.5))
+    if "vid" in p:
+        n = p["n"]; fr = _cine_frame(p["vid"], max(1, min(n, 1 + int(ti * 30)))); base = fr
+        if z != 1.0:
+            cw, ch = int(W / z), int(H / z); x0 = int((W - cw) * px); y0 = int((H - ch) * py); base = fr.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.BILINEAR)
+    else:
+        src = _cine_photo(p["img"], 1.0)
+        vw = int(src.width / z); vh = int(vw * H / W)
+        if vh > src.height: vh = src.height; vw = int(vh * W / H)
+        x0 = int((src.width - vw) * px); y0 = int((src.height - vh) * py); base = src.crop((x0, y0, x0 + vw, y0 + vh)).resize((W, H), Image.BILINEAR)
+    lay = base.convert("RGBA"); lay.alpha_composite(_shade(p.get("shade", "bottom")))
+    if p.get("cap"):
+        la = r(ti, 0.5, 1.1) * (1 - r(t, e["tout"] - 0.6, e["tout"] - 0.1)); s_ = eo(la)
+        if la > 0:
+            d = ImageDraw.Draw(lay); yb = 900 + (1 - s_) * 16
+            d.rectangle([110, yb - 4, 118, yb + 78], fill=RED + (int(255 * la),))
+            place(lay, txt(p["cap"], "sansb", 44, IVORY, 4), 140 + txt(p["cap"], "sansb", 44, IVORY, 4).width / 2, yb + 20, alpha=la)
+            if p.get("sub"): t2 = txt(p["sub"], "serifi", 30, SOFT); place(lay, t2, 140 + t2.width / 2, yb + 62, alpha=la)
+    im.alpha_composite(lay_alpha(lay, a))
+    if p.get("cr") and a > 0.5: V.credit(im, p["cr"], a)
+    return 0
 
 # ---------------- drawing ----------------
 def lay_alpha(lay, a):
@@ -359,6 +400,7 @@ def el_draw(im, e, t, a):
         words(im, x, y, (text, size, "serifi", INK, gold, mw), t, e["tin"], a)
         nl = math.ceil(txt(text, "serifi", size).width / mw); place(im, txt("— " + attr, "sansm", 26, MUTE), x, y + nl * size * 0.62 + 30, alpha=a * r(ti, 0.8, 1.2))
         return y + 120
+    if k == "cine": return cine(im, e, t, a)
     if k == "place": return place_el(im, x, y, p, t, e["tin"], a)
     if k == "today": today(im, x, y, p, t, e["tin"], a); return y + 200
     if k == "grid": grid(im, x, y, p, t, e["tin"], a); return y + 200

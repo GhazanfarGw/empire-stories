@@ -37,7 +37,7 @@ This document is the single source of truth for running the channel. If the curr
 - **Promise to the viewer:** a premium, cinematic, accurate explanation of *why* a company became what it is — Netflix-style story, Vox-style visual explanation.
 - **Global coverage:** USA, Europe, China, Japan, Korea, India, Pakistan, the Gulf, Brazil, Africa. Pakistani and Indian companies are a deliberate differentiator.
 - **Every episode answers one central question** and ends with **OUR TAKE**: the business lesson.
-- **Length:** long-form 8–15 min; Shorts 40–60 s.
+- **Length:** long-form as long as the story needs (10–25 min); Shorts 40–60 s.
 
 ## 2. Brand system (locked — do not redesign per episode)
 
@@ -121,6 +121,14 @@ The description always has a CHAPTERS block: first line `00:00`, at least 3 chap
 
 ## 5f. Image frame (locked 21 Nov 2026 — owner: "this is our design")
 **Every image uses the torn-paper frame**: product photos, place photos, founder/illustration cards and any other picture get the thin torn white-paper rim that follows the image's shape, with a soft drop shadow (`paper.torn_image()` / `edge_card()`). **No red outline, no traced red line, no second border around images, ever** (that looked amateur). Founder cards are square-cornered illustrations with the navy name band inside the torn rim; long names shrink to fit. Place cards: photo + navy caption band inside one torn-paper card. Episodes and Shorts use the same frame.
+
+## 5g. Cinematic documentary, not a presentation (locked 21 Nov 2026 — owner feedback #4)
+- **Length follows the story:** 10, 15, 20 or 25 minutes is fine. Cover every turning point properly and comfortably; never rush to hit a length.
+- **Always name the year in narration.** Say "in 2007" / "in twenty twenty-five", never "in a single year", "last year" or "that year" alone. The audio must make complete sense with no picture, because episodes will also be sold/streamed as audio (e.g. Shopify, podcast platforms). Every number gets its year and its owner (who earned it, when).
+- **Netflix-style cinema, not slides:** the paper timeline is the spine, but between data panels the story cuts to **full-screen cinematic shots** (`cine` element): full-bleed photos with a slow camera push/pan, and **real archive film** (public-domain footage) with a lower-third caption (red bar + place/year + one line), soft colour grade, grain and vignette. Every era should have real pictures and, where available, real moving footage. Text panels are kept for numbers only.
+- **Footage sources (licence-safe only):** Prelinger Archives / Internet Archive films marked with the Creative Commons Public Domain dedication; Wikimedia Commons videos marked public domain or CC; US government films (NARA, NASA). Films without a public-domain mark need permission and are not used. Credit every clip on screen and in the description. Archive footage is labelled as archive/illustrative, never passed off as the exact event.
+- Cinematic shots get a soft low swell instead of a pop.
+- **Voice chain:** the locked deep-voice filter (§4) is part of `mix.sh` for every episode.
 
 ## 6. Tools and environment
 

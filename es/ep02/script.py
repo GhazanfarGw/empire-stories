@@ -7,11 +7,11 @@ S = [
  # ---------------- cold open ----------------
   ("hook", "What does McDonald's sell?", None, 0.7, 0.84),
  ("hook", "Burgers, obviously. Fries. Milkshakes.", None, 0.5, 0.88),
- ("hook", "Last year, the world spent one hundred and thirty-nine billion dollars at McDonald's.", "Last year, the world spent $139 billion at McDonald's.", 0.4, 0.86),
+ ("hook", "In twenty twenty-five, the world spent one hundred and thirty-nine billion dollars at McDonald's.", "In 2025, the world spent $139 billion at McDonald's.", 0.4, 0.86),
  ("hook", "But ninety-five percent of those restaurants are run by franchisees, not by McDonald's.", "But 95% of those restaurants are run by franchisees, not by McDonald's.", 0.5, 0.88),
  ("hook", "So of the money McDonald's itself collects, the biggest single line isn't food.", None, 0.6, 0.86),
  ("hook", "It's rent.", None, 0.8, 0.8),
- ("hook", "Ten point four billion dollars of it, in a single year.", "$10.4 billion of it, in a single year.", 0.35, 0.84),
+ ("hook", "Ten point four billion dollars of it, in twenty twenty-five alone.", "$10.4 billion of it, in 2025 alone.", 0.35, 0.84),
  ("hook", "More than all its royalties. More than all the food sold in its own restaurants.", None, 0.6, 0.88),
  ("hook", "Its first president put it bluntly.", None, 0.4, 0.88),
  ("hook", "We are not technically in the food business. We are in the real estate business.", None, 0.9, 0.82),

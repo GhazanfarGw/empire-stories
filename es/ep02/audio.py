@@ -94,6 +94,7 @@ while q < min(END, T.OUTRO + 1.0) - 1.0:
 for e in T.EL:
     tin, kd = e["tin"], e["kind"]; pan = (e["x"] - 960) / 1800
     if tin > min(END, T.OUTRO): continue
+    if kd == "cine": BED.add(tin, pad([65.41, 98.0, 130.81], 5.0, 1.5, 2.5), 0.5); continue      # cinematic shots: a soft low swell, no pop
     if kd in ("cut", "person", "photo", "screen", "place"): SFX.add(tin, pop(440), 0.8, pan=pan)
     elif kd == "lab": SFX.add(tin, pop(620), 0.45, pan=pan)
     elif kd == "stamp": SFX.add(tin, thud(), 0.6); SFX.add(tin, pop(330), 0.4)
