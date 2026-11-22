@@ -156,6 +156,14 @@ The description always has a CHAPTERS block: first line `00:00`, at least 3 chap
 - **SLAM on tension moments (owner feedback #9, reference `Ep02 DEMO v11`):** at the key tension line, the key words (a red stamp, e.g. "THEY PAY RENT") are thrown at the screen like a stone. They fly in ~3× size, land hard in 0.2 s with a tiny bounce, at full strength. **At that exact instant:** a hard low hit sound + the dark impact chord, the music drops out, and the screen gives one short jolt (≈0.35 s), then stillness. `el(..., "stamp", ...); EL[-1].update(slam=True)` + `mood("impact", t); MOODS[-1]["jolt"] = True`.
 - **Keep people awake:** we are telling a big story, not a lullaby. Calm passages stay calm, but every tension/danger/turning point gets motion + sound so viewers feel it and stay active. Ordinary appearances stay silent and smooth; no random zoom-in/zoom-out.
 
+## 5k. Real documentary, not a presentation (locked by the owner 22 Nov 2026, from Episode 03)
+- **Pictures first, every few seconds.** Most of the runtime is full-screen photos and film; paper panels are only for key numbers. Target: a new real picture or clip at least every 8–10 seconds.
+- **Images never touch the timeline.** A picture is either (a) centred in the stage area with its bottom edge above the timeline axis, or (b) full screen (`cine`), with the timeline hidden while it plays. Tall photos are cropped to fit; nothing rises over or overlaps the axis.
+- **Evidence like a news documentary:** period photos, newspaper headlines and documents, the company's own annual-report pages, old adverts, buildings and offices, and the founders' own words (short quotes on screen with the source and year).
+- **Real footage and real voices, only where we are allowed:** public-domain archive film (Prelinger/Internet Archive, NARA, NASA, Library of Congress), Creative Commons video, and licensed free stock (with credit). TV interviews and news clips owned by networks are not downloaded or re-used (copyright claims/strikes would hit the channel); instead their words are quoted briefly on screen with source and year, over a matching picture.
+- **When no real material exists: AI reconstructions.** Scenes are made with image/video AI (Gemini / vidIQ models) — places, crowds, kitchens, streets, objects, moments — always labelled "AI RECONSTRUCTION" in the corner. Real people are never shown as photorealistic AI; people stay as the labelled AI illustrations.
+- Research for every episode includes a visual hunt list per era (photos, film, documents, quotes) before the script is final.
+
 ## 6. Tools and environment
 
 - Python 3.13, numpy, scipy, Pillow, soundfile, onnxruntime, kokoro-onnx; ffmpeg 6.1 with libx264 + libass.
