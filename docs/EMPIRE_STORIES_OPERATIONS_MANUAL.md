@@ -68,14 +68,15 @@ Gold is **retired** (old palette). No dollar-bill watermark. No burnt-in subtitl
 
 **Panels rule:** a beat with many sentences is split into panels; elements leave (fade up) when the narration moves on; nothing ever overlaps. Before every full render, render QC contact sheets of the busiest moment of every panel and fix overlaps.
 
-## 3. Thumbnail standard (locked: "PRO" style, approved 21 Nov 2026)
+## 3. Thumbnail standard (v2, locked by the owner 22 Nov 2026 — replaces the v1 "PRO" style)
 
-File: `es/ep01/thumb_pro.py` (reference output `thumbs/thumb_PRO_A.jpg`).
-- Dark navy gradient background with faint paper grain; strong red glow behind the subject.
-- Large founder **illustration** cut out (background removed), red rim light, small "AI ILLUSTRATION" tag; or a key product cut-out when no person fits.
-- **Two huge words** max (Inter Display Bold ~230 px at 1920 wide): first word ivory, second red (e.g. "ALMOST / FINISHED"). Small ivory pill with "COMPANY · YEAR".
-- A simple data line: red line crashing to a red dot labelled with the low number, then a white line + arrow rising to the high number (or the reverse for "fall" stories).
-- Export 1280×720 JPG < 2 MB. Always make **A** (matches title) and **B** (alternative hook) for YouTube Test & Compare.
+Rule: **a viewer who cannot read must know the company from the thumbnail alone.** Kit: `es/thumbkit/tk.py`; per episode `epNN/thumb_v2.py` (references: `ep01/thumbs/thumb_V2_A.jpg`, `ep02/thumbs/thumb_V2_A.jpg`).
+- **Company icon, top-left, big and clear:** a real, licensed photo of the company's logo/sign (e.g. the Golden Arches pylon, a glowing Apple Store logo), cut out or in a round badge with an ivory rim. Credit the photo in the description. (We use a real photo of the sign, not a redrawn logo.)
+- **The people of the story, right side:** the founder/main leader big in front (AI illustration, red rim light), plus 1–2 other key people of the story smaller behind (e.g. Kroc + the McDonald brothers + Sonneborn; Jobs + Michael Dell). Always the "AI ILLUSTRATION" tag. Nobody hidden behind another face.
+- **One story object, small, bottom-left:** the product that sums up the story (Big Mac, iMac G3, a phone, a car), cut out.
+- **Crunchy headline in the middle-left:** 2 short lines, max ~3 words each, ivory + gold/red, thick outline + shadow (e.g. "BURGERS? / NO. RENT.", "ALMOST / FINISHED"). Small red pill "COMPANY · YEARS" under the icon.
+- Dark navy gradient + red glow behind the people. Nothing overlaps the headline.
+- Export 1280×720 JPG < 2 MB. Always make **A** (matches title) and **B** (alternative hook) for Test & Compare.
 
 ## 4. Narration voice (locked)
 
