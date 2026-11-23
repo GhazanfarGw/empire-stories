@@ -191,13 +191,23 @@ Folder per episode in the repo: `es/epNN/` (copy `es/ep01/` as the template).
 11. **Description** (`description.txt`): hook paragraph, "EMPIRE STORIES · Episode NN · Company", CHAPTERS, SOURCES, PHOTO CREDITS, AI-illustration note, narration note, tagline, 3 hashtags.
 12. **Upload + schedule** (§8), **localize** (§9), copy finals to `E:\…\EpNN…\final\`, commit code to GitHub.
 
-## 8. Publishing standard
+## 8. Publishing standard + search SEO (v2, CEO decision 23 Nov 2026 after Ep01 reached only 38 views)
 
-- Title: curiosity + company, ≤ 60 characters (Ep01: "Apple Was Almost Finished. Here's How It Survived").
-- Category Education (27), not made for kids, Standard licence, embedding on, language en, 12–15 tags (company, founders, "business documentary", "company history", "business case study", topic words, "empire stories").
+**Rule: every title, description, tag and hashtag is built from vidIQ keyword research before upload** (`vidiq_keyword_research`, mode research, on 2–3 seed phrases; then `vidiq_score_title` on the top 1–2 title options; target score ≥ 85). Write down the chosen keywords in the episode folder (`seo.md`).
+
+- **Title (≤ 60 characters if possible, never > 70):** the main search phrase people actually type, plus curiosity. Company name in the first 3 words. Examples now live: "Apple Was 90 Days From Bankruptcy. How Steve Jobs Saved It" (vidIQ score 92), "How McDonald's Really Makes Money (It's Not Burgers)" (97). Pure-curiosity titles with no search phrase ("Apple Was Almost Finished…") are banned; they get no search traffic.
+- **Description, first 2 lines (shown in search):** repeat the main keyword and 2–3 secondary keywords naturally in one or two plain sentences ("This Apple history documentary explains how Steve Jobs saved Apple…"). No keyword lists.
+- **Then 3 link lines:** ▶ WATCH NEXT (the other/related episode), ▶ All business documentaries (playlist `PLN0iZkwpGh0M`), ▶ Subscribe (`https://www.youtube.com/@empirestoriesdocumentary?sub_confirmation=1`).
+- Then chapters, sources, credits, AI disclosure line, brand line.
+- **Hashtags:** exactly 3 at the end; the first 3 show above the title, so they are keywords, not branding: `#<Company or CompanyHistory> #<Founder or Topic> #BusinessDocumentary` (Shorts: last one is `#Shorts`).
+- **Tags (15–20, ≤ 480 characters):** main keyword and its variants first ("apple history", "history of apple", "apple history documentary"), then people, events, business-model terms ("how companies make money", "franchise business model"), then broad ("business documentary", "company history", "business case study"), "empire stories" last.
+- **Shorts:** title = keyword phrase + hook + `#Shorts`; description first line repeats the keyword; links to the full documentary, the Shorts playlist (`PLNp5fbSB4EAs`) and subscribe. In Studio, set each Short's **Related video** to its full episode (not possible through the API).
+- **Playlists:** every long video goes into "Business Documentaries: How Companies Really Make Money" (`PLN0iZkwpGh0M`); every Short into "Business Shorts: Company Stories in 60 Seconds" (`PLNp5fbSB4EAs`). Add topic playlists (e.g. "How Companies Make Money", "Tech History") once there are 3+ videos for each.
+- **Re-optimise:** 48 hours after each upload, check traffic sources (YouTube Analytics API `insightTrafficSourceType`). If browse/suggested impressions are low, test the second-best title/thumbnail.
+- Category Education (27), not made for kids, Standard licence, embedding on, language en.
 - **Publish time: 14:30 UTC** (7:30 PM Pakistan · 9:30 AM New York · 2:30 PM London).
 - **Cadence (CEO decision, 21 Nov 2026): 3 full documentaries per week (Mon / Wed / Fri) + 1 Short every day.** Move to 4–5 per week only once research + fact-check keeps up — accuracy is the brand and YouTube's inauthentic/mass-produced content policy punishes templated volume.
-- After publishing: add end-screen (subscribe + "best for viewer" video), pin a comment with a question, add to a playlist, reply to early comments.
+- After publishing: add end-screen (subscribe + "best for viewer" video), pin a comment with a question, reply to early comments.
 
 ## 9. Localization (every video)
 
