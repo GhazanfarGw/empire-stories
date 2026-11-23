@@ -68,17 +68,15 @@ Gold is **retired** (old palette). No dollar-bill watermark. No burnt-in subtitl
 
 **Panels rule:** a beat with many sentences is split into panels; elements leave (fade up) when the narration moves on; nothing ever overlaps. Before every full render, render QC contact sheets of the busiest moment of every panel and fix overlaps.
 
-## 3. Thumbnail standard v3 "JOURNEY" (locked by the owner 23 Nov 2026; replaces v2)
+## 3. Thumbnail standard v4 "FRESH JOURNEY" (locked by the owner 23 Nov 2026; replaces v2/v3)
 
-The viewer must see in one second: which company, which years, and that it is the full journey.
-- **Background:** a bright, real photo of the company's place (first restaurant, factory, HQ), full bleed, never a dark empty background.
-- **Layout v3.1 (owner 23 Nov 2026):** TEXT COLUMN ON THE LEFT, LEADER ON THE RIGHT. All three text blocks have the same width and sit on one centre line; text is optically centred inside each block.
-- **Right:** the founder or key leader, large, AI illustration (small "AI ILLUSTRATION" tag bottom-right). **Portrait style (owner 23 Nov 2026): clean, friendly, semi-realistic digital illustration with natural skin tones, waist-up, arms crossed, warm expression, on plain #D9D9D9 grey (made in Gemini, then keyed).** Never the old red/navy poster style on thumbnails. Background photo: light blur, +10% brightness, light white wash; no dark veils or gradients.
-- **Left column, top:** company name in a big slab in the company's colours; logo badge (round, real photo, gold ring) sits in the bottom row with the products.
-- **Left column, middle:** the year span, huge: `1940 – 2026` (ivory plate, navy numbers, gold border). The span must match what the video really covers.
-- **Under it:** `THE COMPLETE STORY` (or the episode's honest scope, e.g. `THE COMEBACK STORY`) in gold on navy.
-- **Left column, bottom:** logo badge + 1–2 clean real product cutouts (Big Mac, iMac/iPod/iPhone).
-- Small "EMPIRE STORIES" tag top right. Code: `es/thumbkit/journey2.py` (`make(...)`), examples `es/ep02/thumb_v31.py`, `es/ep01/thumb_v31.py`.
+Goal: the viewer feels fresh and relaxed and understands it in one second: which company, which years, full journey.
+- **Background:** a vibrant HD illustration of the company's place (first restaurant, HQ, factory) with a deep, saturated blue sky and white clouds, made in Gemini (prompt in `es/thumbkit/journey4.py` history). No hazy/washed real photos, no dark veils, no blur.
+- **Right:** the founder/leader, clean semi-realistic illustration, natural skin tones, waist-up, arms crossed, warm expression (made in Gemini on plain grey, keyed). No "AI ILLUSTRATION" tag on the thumbnail (AI disclosure stays in the description and YouTube setting).
+- **Left column, top to bottom, all on one centre line:** 1) company logo (round badge, real photo of the logo, gold ring) 2) company name (slab in company colours) 3) year span, huge (ivory plate, navy numbers) 4) `THE COMPLETE STORY` (gold on navy). Equal block widths, text optically centred.
+- No product cutouts unless they are perfectly clean; never show boxes/halos.
+- Small "EMPIRE STORIES" tag top right. Code: `es/thumbkit/journey4.py` (`make(...)`); examples `es/ep02/thumb_v4.py`, `es/ep01/thumb_v4.py`.
+- Getting Gemini images: open the generated image full-screen in an overlay and capture it with the Chrome zoom screenshot (save_to_disk) — the Downloads folder is not accessible.
 
 **Series title format (fixed):** `The Story of <Company> (<start>–<end>) | <journey line> | Empire Stories`. Only the company, years and journey line change; the channel name always ends the title. Examples: "The Story of McDonald's (1940–2026) | From One Drive-In to a Global Empire | Empire Stories", "The Story of Apple (1985–2007) | How Steve Jobs Saved It From Bankruptcy | Empire Stories". From Episode 03 every documentary covers founding → 2026.
 
