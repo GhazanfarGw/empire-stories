@@ -68,15 +68,18 @@ Gold is **retired** (old palette). No dollar-bill watermark. No burnt-in subtitl
 
 **Panels rule:** a beat with many sentences is split into panels; elements leave (fade up) when the narration moves on; nothing ever overlaps. Before every full render, render QC contact sheets of the busiest moment of every panel and fix overlaps.
 
-## 3. Thumbnail standard (v2, locked by the owner 22 Nov 2026 — replaces the v1 "PRO" style)
+## 3. Thumbnail standard v3 "JOURNEY" (locked by the owner 23 Nov 2026; replaces v2)
 
-Rule: **a viewer who cannot read must know the company from the thumbnail alone.** Kit: `es/thumbkit/tk.py`; per episode `epNN/thumb_v2.py` (references: `ep01/thumbs/thumb_V2_A.jpg`, `ep02/thumbs/thumb_V2_A.jpg`).
-- **Company icon, top-left, big and clear:** a real, licensed photo of the company's logo/sign (e.g. the Golden Arches pylon, a glowing Apple Store logo), cut out or in a round badge with an ivory rim. Credit the photo in the description. (We use a real photo of the sign, not a redrawn logo.)
-- **The people of the story, right side:** the founder/main leader big in front (AI illustration, red rim light), plus 1–2 other key people of the story smaller behind (e.g. Kroc + the McDonald brothers + Sonneborn; Jobs + Michael Dell). Always the "AI ILLUSTRATION" tag. Nobody hidden behind another face.
-- **One story object, small, bottom-left:** the product that sums up the story (Big Mac, iMac G3, a phone, a car), cut out.
-- **Crunchy headline in the middle-left:** 2 short lines, max ~3 words each, ivory + gold/red, thick outline + shadow (e.g. "BURGERS? / NO. RENT.", "ALMOST / FINISHED"). Small red pill "COMPANY · YEARS" under the icon.
-- Dark navy gradient + red glow behind the people. Nothing overlaps the headline.
-- Export 1280×720 JPG < 2 MB. Always make **A** (matches title) and **B** (alternative hook) for Test & Compare.
+The viewer must see in one second: which company, which years, and that it is the full journey.
+- **Background:** a bright, real photo of the company's place (first restaurant, factory, HQ), full bleed, never a dark empty background.
+- **Left:** the founder or key leader, large, AI illustration (small "AI ILLUSTRATION" tag in the corner).
+- **Top right:** company name in a big slab in the company's colours + a round badge with a real photo of its logo/sign (gold ring).
+- **Centre right:** the year span, huge: `1940 – 2026` (ivory plate, navy numbers, gold border). The span must match what the video really covers.
+- **Under it:** `THE COMPLETE STORY` (or the episode's honest scope, e.g. `THE COMEBACK STORY`) in gold on navy.
+- **Bottom right:** 1–3 real product cutouts (Big Mac, iMac/iPod/iPhone).
+- Small "EMPIRE STORIES" tag top left. Code: `es/thumbkit/journey.py`, examples `es/ep02/thumb_v3.py`, `es/ep01/thumb_v3.py`.
+
+**Series title format (fixed):** `The Story of <Company> (<start>–<end>) | <journey line>`. Only the company, years and journey line change. Examples: "The Story of McDonald's (1940–2026) | From One Drive-In to a Global Empire". From Episode 03 every documentary covers founding → 2026.
 
 ## 4. Narration voice (locked)
 
@@ -195,7 +198,7 @@ Folder per episode in the repo: `es/epNN/` (copy `es/ep01/` as the template).
 
 **Rule: every title, description, tag and hashtag is built from vidIQ keyword research before upload** (`vidiq_keyword_research`, mode research, on 2–3 seed phrases; then `vidiq_score_title` on the top 1–2 title options; target score ≥ 85). Write down the chosen keywords in the episode folder (`seo.md`).
 
-- **Title (≤ 60 characters if possible, never > 70):** the main search phrase people actually type, plus curiosity. Company name in the first 3 words. Examples now live: "Apple Was 90 Days From Bankruptcy. How Steve Jobs Saved It" (vidIQ score 92), "How McDonald's Really Makes Money (It's Not Burgers)" (97). Pure-curiosity titles with no search phrase ("Apple Was Almost Finished…") are banned; they get no search traffic.
+- **Title:** always the series format from §3 (`The Story of <Company> (<start>–<end>) | <journey line>`); put the main search phrase in the journey line where natural. Examples now live: "Apple Was 90 Days From Bankruptcy. How Steve Jobs Saved It" (vidIQ score 92), "How McDonald's Really Makes Money (It's Not Burgers)" (97). Pure-curiosity titles with no search phrase ("Apple Was Almost Finished…") are banned; they get no search traffic.
 - **Description, first 2 lines (shown in search):** repeat the main keyword and 2–3 secondary keywords naturally in one or two plain sentences ("This Apple history documentary explains how Steve Jobs saved Apple…"). No keyword lists.
 - **Then 3 link lines:** ▶ WATCH NEXT (the other/related episode), ▶ All business documentaries (playlist `PLN0iZkwpGh0M`), ▶ Subscribe (`https://www.youtube.com/@empirestoriesdocumentary?sub_confirmation=1`).
 - Then chapters, sources, credits, AI disclosure line, brand line.
