@@ -14,12 +14,15 @@ def block(im, s, cx, y, bw, size, bg, fg, k="disp", h=None, stroke=0, sc=(0, 0, 
     d.text((cx - tw / 2 - bb[0], y + (h - th) / 2 - bb[1]), s, font=f, fill=fg, stroke_width=stroke, stroke_fill=sc)
     return y + h
 def make(bg, bgcrop, person, name, namebg, namefg, years, sub, logo, logocrop, products, out, namestroke=0, namesc=(0, 0, 0)):
-    im = cover(bg, crop=bgcrop)
-    # soft dark veil behind the text column so it always reads
-    v = Image.new("L", (W, H), 0); ImageDraw.Draw(v).rectangle([0, 0, 1080, H], fill=120); v = v.filter(ImageFilter.GaussianBlur(120))
-    im.alpha_composite(Image.composite(Image.new("RGBA", (W, H), (3, 12, 30, 255)), Image.new("RGBA", (W, H), (0, 0, 0, 0)), v))
-    p = fit_h(key_flood(Image.open(A + "people/" + person)), 1030)
-    put(im, p, W - p.width + 60, H - p.height + 40, rim=GOLDB)
+    src = Image.open(bg).convert("RGB")
+    if bgcrop: src = src.crop(bgcrop)
+    src = ImageOps.fit(src, (W, H), Image.LANCZOS).filter(ImageFilter.GaussianBlur(2.2))
+    src = ImageEnhance.Brightness(src).enhance(1.10); src = ImageEnhance.Color(src).enhance(1.05); src = ImageEnhance.Contrast(src).enhance(0.95)
+    im = src.convert("RGBA")
+    # very light white wash so it feels clean and airy
+    im.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, 28)))
+    p = fit_h(key_flood(Image.open(A + "people/" + person)), 1000)
+    put(im, p, W - p.width + 20, H - p.height, rim=(255, 255, 255), rimw=9)
     tag(im, W - 290, H - 62)
     cx, bw = 560, 960
     y = block(im, name, cx, 60, bw, 132, namebg, namefg, stroke=namestroke, sc=namesc) + 28

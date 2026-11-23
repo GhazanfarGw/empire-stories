@@ -73,7 +73,7 @@ Gold is **retired** (old palette). No dollar-bill watermark. No burnt-in subtitl
 The viewer must see in one second: which company, which years, and that it is the full journey.
 - **Background:** a bright, real photo of the company's place (first restaurant, factory, HQ), full bleed, never a dark empty background.
 - **Layout v3.1 (owner 23 Nov 2026):** TEXT COLUMN ON THE LEFT, LEADER ON THE RIGHT. All three text blocks have the same width and sit on one centre line; text is optically centred inside each block.
-- **Right:** the founder or key leader, large, AI illustration (small "AI ILLUSTRATION" tag bottom-right).
+- **Right:** the founder or key leader, large, AI illustration (small "AI ILLUSTRATION" tag bottom-right). **Portrait style (owner 23 Nov 2026): clean, friendly, semi-realistic digital illustration with natural skin tones, waist-up, arms crossed, warm expression, on plain #D9D9D9 grey (made in Gemini, then keyed).** Never the old red/navy poster style on thumbnails. Background photo: light blur, +10% brightness, light white wash; no dark veils or gradients.
 - **Left column, top:** company name in a big slab in the company's colours; logo badge (round, real photo, gold ring) sits in the bottom row with the products.
 - **Left column, middle:** the year span, huge: `1940 – 2026` (ivory plate, navy numbers, gold border). The span must match what the video really covers.
 - **Under it:** `THE COMPLETE STORY` (or the episode's honest scope, e.g. `THE COMEBACK STORY`) in gold on navy.
