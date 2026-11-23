@@ -72,14 +72,15 @@ Gold is **retired** (old palette). No dollar-bill watermark. No burnt-in subtitl
 
 The viewer must see in one second: which company, which years, and that it is the full journey.
 - **Background:** a bright, real photo of the company's place (first restaurant, factory, HQ), full bleed, never a dark empty background.
-- **Left:** the founder or key leader, large, AI illustration (small "AI ILLUSTRATION" tag in the corner).
-- **Top right:** company name in a big slab in the company's colours + a round badge with a real photo of its logo/sign (gold ring).
-- **Centre right:** the year span, huge: `1940 – 2026` (ivory plate, navy numbers, gold border). The span must match what the video really covers.
+- **Layout v3.1 (owner 23 Nov 2026):** TEXT COLUMN ON THE LEFT, LEADER ON THE RIGHT. All three text blocks have the same width and sit on one centre line; text is optically centred inside each block.
+- **Right:** the founder or key leader, large, AI illustration (small "AI ILLUSTRATION" tag bottom-right).
+- **Left column, top:** company name in a big slab in the company's colours; logo badge (round, real photo, gold ring) sits in the bottom row with the products.
+- **Left column, middle:** the year span, huge: `1940 – 2026` (ivory plate, navy numbers, gold border). The span must match what the video really covers.
 - **Under it:** `THE COMPLETE STORY` (or the episode's honest scope, e.g. `THE COMEBACK STORY`) in gold on navy.
-- **Bottom right:** 1–3 real product cutouts (Big Mac, iMac/iPod/iPhone).
-- Small "EMPIRE STORIES" tag top left. Code: `es/thumbkit/journey.py`, examples `es/ep02/thumb_v3.py`, `es/ep01/thumb_v3.py`.
+- **Left column, bottom:** logo badge + 1–2 clean real product cutouts (Big Mac, iMac/iPod/iPhone).
+- Small "EMPIRE STORIES" tag top right. Code: `es/thumbkit/journey2.py` (`make(...)`), examples `es/ep02/thumb_v31.py`, `es/ep01/thumb_v31.py`.
 
-**Series title format (fixed):** `The Story of <Company> (<start>–<end>) | <journey line>`. Only the company, years and journey line change. Examples: "The Story of McDonald's (1940–2026) | From One Drive-In to a Global Empire". From Episode 03 every documentary covers founding → 2026.
+**Series title format (fixed):** `The Story of <Company> (<start>–<end>) | <journey line> | Empire Stories`. Only the company, years and journey line change; the channel name always ends the title. Examples: "The Story of McDonald's (1940–2026) | From One Drive-In to a Global Empire | Empire Stories", "The Story of Apple (1985–2007) | How Steve Jobs Saved It From Bankruptcy | Empire Stories". From Episode 03 every documentary covers founding → 2026.
 
 ## 4. Narration voice (locked)
 
@@ -198,7 +199,7 @@ Folder per episode in the repo: `es/epNN/` (copy `es/ep01/` as the template).
 
 **Rule: every title, description, tag and hashtag is built from vidIQ keyword research before upload** (`vidiq_keyword_research`, mode research, on 2–3 seed phrases; then `vidiq_score_title` on the top 1–2 title options; target score ≥ 85). Write down the chosen keywords in the episode folder (`seo.md`).
 
-- **Title:** always the series format from §3 (`The Story of <Company> (<start>–<end>) | <journey line>`); put the main search phrase in the journey line where natural. Examples now live: "Apple Was 90 Days From Bankruptcy. How Steve Jobs Saved It" (vidIQ score 92), "How McDonald's Really Makes Money (It's Not Burgers)" (97). Pure-curiosity titles with no search phrase ("Apple Was Almost Finished…") are banned; they get no search traffic.
+- **Title:** always the series format from §3 (`The Story of <Company> (<start>–<end>) | <journey line> | Empire Stories`); put the main search phrase in the journey line where natural. Examples now live: "Apple Was 90 Days From Bankruptcy. How Steve Jobs Saved It" (vidIQ score 92), "How McDonald's Really Makes Money (It's Not Burgers)" (97). Pure-curiosity titles with no search phrase ("Apple Was Almost Finished…") are banned; they get no search traffic.
 - **Description, first 2 lines (shown in search):** repeat the main keyword and 2–3 secondary keywords naturally in one or two plain sentences ("This Apple history documentary explains how Steve Jobs saved Apple…"). No keyword lists.
 - **Then 3 link lines:** ▶ WATCH NEXT (the other/related episode), ▶ All business documentaries (playlist `PLN0iZkwpGh0M`), ▶ Subscribe (`https://www.youtube.com/@empirestoriesdocumentary?sub_confirmation=1`).
 - Then chapters, sources, credits, AI disclosure line, brand line.
