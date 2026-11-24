@@ -166,6 +166,23 @@ The description always has a CHAPTERS block: first line `00:00`, at least 3 chap
 - **When no real material exists: AI reconstructions.** Scenes are made with image/video AI (Gemini / vidIQ models) — places, crowds, kitchens, streets, objects, moments — shown full screen with no on-screen label (owner decision 22 Nov 2026); disclosed through YouTube's altered/synthetic content setting and a line in the description. All images and footage run full screen, never as bordered cards. No period music under images; keep the normal background bed. Real film sound plays only in narration gaps, with the bed ducked. Real people are never shown as photorealistic AI; people stay as the labelled AI illustrations.
 - Research for every episode includes a visual hunt list per era (photos, film, documents, quotes) before the script is final.
 
+## 5l. Retention pacing (CEO decision 24 Nov 2026, from Episode 03)
+
+Data: Ep01 viewers watched ~1 min 50 s of 10 min on average; half had left by minute 5 (the slow middle).
+- **Length 8–10 minutes.** Cut anything that does not move the story.
+- **Cold open ≤ 30 s:** the biggest surprise + the central question, no logo intro.
+- **A new question, number or reveal every 60–90 s.** Each chapter ends with an open loop ("But there was a problem hidden inside the deal.") that the next chapter answers.
+- **No chapter longer than ~90 s** without a turn (conflict, number, twist). Background/explainer passages ≤ 3 sentences.
+- **Tease the payoff early** ("by the end, you'll see why McDonald's refused to sell its land") and pay it off before the last minute.
+- After the first 48 h of every episode, read the retention curve (YouTube Analytics `audienceWatchRatio` by `elapsedVideoTimeRatio`) and write the biggest drop point into the episode notes.
+- **Uploads at full quality:** ~10 Mbps 1080p (not the old 0.8–1.8 Mbps); the 100 MB GitHub-raw limit is no longer the target.
+
+## 5m. Daily Shorts engine (CEO decision 24 Nov 2026)
+
+- One Short every day at 14:30 UTC, cut from the episodes with `vshort.py <ep_dir> <module> "EPISODE NN"` (`SHORTS_JSON=shorts_v3.json`). Each Short = one self-contained mini story (35–58 s) with a hook title, ending on the open question.
+- Title: `<hook> #Shorts`; description: keyword first line + ▶ Full documentary link + Shorts playlist + subscribe; added to the Shorts playlist.
+- Aim for 8–10 Shorts per episode over time.
+
 ## 6. Tools and environment
 
 - Python 3.13, numpy, scipy, Pillow, soundfile, onnxruntime, kokoro-onnx; ffmpeg 6.1 with libx264 + libass.
