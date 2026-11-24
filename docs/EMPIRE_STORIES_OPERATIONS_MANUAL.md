@@ -166,6 +166,17 @@ The description always has a CHAPTERS block: first line `00:00`, at least 3 chap
 - **When no real material exists: AI reconstructions.** Scenes are made with image/video AI (Gemini / vidIQ models) — places, crowds, kitchens, streets, objects, moments — shown full screen with no on-screen label (owner decision 22 Nov 2026); disclosed through YouTube's altered/synthetic content setting and a line in the description. All images and footage run full screen, never as bordered cards. No period music under images; keep the normal background bed. Real film sound plays only in narration gaps, with the bed ducked. Real people are never shown as photorealistic AI; people stay as the labelled AI illustrations.
 - Research for every episode includes a visual hunt list per era (photos, film, documents, quotes) before the script is final.
 
+## 5S. SEASON 2 CINEMATIC STANDARD (approved by the owner 24 Nov 2026 — OVERRIDES 4, 5, 5b, 5e–5k where they conflict)
+
+Reference: `EMPIRE_STORIES_Season2_DEMO.mp4` (1 min, McDonald's 1948). Code: `es/season2/` (`voice.py` narration, `film.py` picture, `score.py` music + accents). Full analysis: Claude Doc "Empire Stories: Competitor Analysis & Season 2 Cinematic Standard".
+- **Story = a thriller, not a timeline.** Cold open in the crisis; three acts (dream, war, verdict); scenes with a place, a year, a person, a want, an obstacle; an open loop every 60–90 s; 9–11 minutes.
+- **Picture = 100% full screen.** No paper background, no cards, no timeline bar. A new shot every 3–6 s: Gemini cinematic painted scenes in ONE consistent style per episode (warm golden light, teal shadows, "premium Netflix documentary still", no readable text), real licensed photos and public-domain film where they exist. Eased camera moves with 2.5D row parallax; film grade (contrast S-curve, teal shadows / warm highlights, vignette, light grain); crossfades 0.55 s; dip to black for the big turn.
+- **Titles:** large Montserrat ExtraBold white over the picture, gold DM Sans small-caps label above, soft dark backdrop; fade in/out 0.7 s with a small rise. Numbers become giant single words ("15¢", "8").
+- **Narration:** short sentences, speed varied per sentence (0.92 for dramatic lines, 1.1–1.15 for momentum), real pauses after turns. Kokoro voice until the owner decides on ElevenLabs.
+- **Music follows the drama:** act-based score (curious → tense drop → building → mystery → heroic). On the big turn the music stops. Every title gets a soft musical accent (bell + piano note in the act's key). Never ticks, clicks, pops, whooshes or hits.
+- **Mix:** voice on top; music ducked by the voice; accents gently ducked; loudnorm −14 LUFS.
+- **Upload quality:** CRF 21, max 12 Mbps, 1080p30.
+
 ## 5l. Retention pacing (CEO decision 24 Nov 2026, from Episode 03)
 
 Data: Ep01 viewers watched ~1 min 50 s of 10 min on average; half had left by minute 5 (the slow middle).
